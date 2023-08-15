@@ -36,7 +36,6 @@
         var onClickNavigator = settings.onClickNavigator;
         var instance = this;
 
-        // kuhanin ang buwan
         this.getMonthName = function(idx) {
             return settings.months[idx];
         };
@@ -122,12 +121,14 @@
         }
 
         this.on('click', '#myc-prev-week', function() {
-            settings.startDate = settings.startDate.addDays(-7);
-            instance.clearAvailability();
-            render(instance);
+            if (settings.startDate.getTime() >= new Date().getTime()) {
+                    settings.startDate = settings.startDate.addDays(-7);
+                    instance.clearAvailability();
+                    render(instance);
 
-            if ($.isFunction(onClickNavigator)) {
-                onClickNavigator.call(this, ...arguments, instance);
+                if ($.isFunction(onClickNavigator)) {
+                    onClickNavigator.call(this, ...arguments, instance);
+                }
             }
         });
 
