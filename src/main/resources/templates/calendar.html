@@ -14,17 +14,17 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Select Your Groomer!</h1>
             </div>
             <div class="modal-body">
                 <input type="radio" id="groomer1" name="groomer" value="Groomer 1">
-                <label for="groomer1">Groomer 1</label><br>
+                <label for="groomer1">Lorena</label><br>
                 <input type="radio" id="groomer2" name="groomer" value="Groomer 2">
-                <label for="groomer2">Groomer 2</label>
+                <label for="groomer2">Emily</label>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Select</button>
+                <a th:href="@{/}" class="btn btn-secondary">Go Back</a>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Select</button>
             </div>
         </div>
     </div>

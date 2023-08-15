@@ -6,26 +6,26 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
-import java.util.List;
-
 @Entity
-@Table(name = "appointments")
-@NoArgsConstructor
+@Table(name = "dogs")
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
-public class Appointment {
+public class Dog {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "time", nullable = false)
-    private LocalDateTime time;
+    @Column(name = "name", nullable = false)
+    private String name;
+
+    @Column(name = "breed", nullable = false)
+    private String breed;
 
     @ManyToOne
-    @JoinColumn (name = "groomer_id")
-    private Groomer groomer;
+    @JoinColumn (name = "user_id")
+    private User owner;
 
 }
