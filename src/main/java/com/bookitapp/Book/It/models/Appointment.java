@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
 @Table(name = "appointments")
@@ -22,7 +21,7 @@ public class Appointment {
     private Long id;
 
     @Column(name = "time", nullable = false)
-    private LocalDateTime time;
+    private LocalDateTime appointmentTime;
 
     @ManyToOne
     @JoinColumn (name = "groomer_id")
