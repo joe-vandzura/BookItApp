@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/groomers")
@@ -25,42 +26,43 @@ public class GroomerController {
         return null;
     }
 
-    @GetMapping(value = "/getGroomerAvailability/{groomerId}", produces = "application/json")
+    @GetMapping(value = "/{groomerId}/availability", produces = "application/json")
     @ResponseBody
-    public List<List<List<String>>> getGroomerAvailability(@PathVariable("groomerId") Long groomerId) {
-        List<List<List<String>>> availabilityByWeek = new ArrayList<>();
+    public List<List<String>> getGroomerAvailability(@PathVariable("groomerId") Long groomerId) {
+        List<List<String>> availabilityForWeek = new ArrayList<>();
 
         LocalDateTime currentDate = LocalDateTime.now();
-        LocalDateTime dateOfEndOfWeek = currentDate.plusDays(21); // For three weeks
+        LocalDateTime dateOfEndOfWeek = currentDate.plusDays(7); // For one week
 
-        List<Appointment> appointmentsForGroomerBetweenForTheWeek = appointmentRepo.findAppointmentsForGroomerForTheWeek(groomerId, currentDate, dateOfEndOfWeek);
+        List<LocalDateTime> appointmentTimes = appointmentRepo.findAppointmentsForGroomerForTheWeek(groomerId, currentDate, dateOfEndOfWeek).stream()
+                .map(Appointment::getAppointmentTime) // Map Appointment objects to their appointmentTime property
+                .collect(Collectors.toList()); // Collect the LocalDateTime objects into a list
 
-        LocalDateTime currentWeekStart = currentDate;
-        while (currentWeekStart.isBefore(dateOfEndOfWeek)) {
-            List<List<String>> weekAvailability = new ArrayList<>();
+        LocalDateTime currentTimeSlot = currentDate.with(LocalTime.of(9, 0)); // Starting from 9:00 AM
+        while (currentTimeSlot.isBefore(dateOfEndOfWeek)) {
+            List<String> dayOfTimes = new ArrayList<>();
+            for (int i = 0; i < 10; i++) {
 
-            LocalDateTime currentTimeSlot = currentWeekStart.with(LocalTime.of(9, 0)); // Starting from 9:00 AM
-            while (currentTimeSlot.isBefore(currentWeekStart.plusDays(7))) {
-                String dateString = currentTimeSlot.toLocalTime().toString();
-                weekAvailability.add(Collections.singletonList(dateString));
-                currentTimeSlot = currentTimeSlot.plusHours(1); // Increment by 1 hour
-            }
-
-            // Remove already booked time slots for the current week
-            for (Appointment appointment : appointmentsForGroomerBetweenForTheWeek) {
-                LocalDateTime appointmentDateTime = appointment.getAppointmentTime();
-                if (appointmentDateTime.isAfter(currentWeekStart) && appointmentDateTime.isBefore(currentWeekStart.plusDays(7).plusNanos(1))) {
-                    String dateString = appointmentDateTime.toLocalTime().toString();
-                    weekAvailability.get(appointmentDateTime.getDayOfWeek().getValue() - 1).remove(dateString);
+                if (!appointmentTimes.contains(currentTimeSlot)) {
+                    String dateString = currentTimeSlot.toLocalTime().toString();
+                    dayOfTimes.add(dateString);
+                    currentTimeSlot = currentTimeSlot.plusHours(1);
                 }
-            }
 
-            availabilityByWeek.add(weekAvailability);
-            currentWeekStart = currentWeekStart.plusDays(7);
+            }
+            availabilityForWeek.add(dayOfTimes);
+            // if currentTimeSlot is 6:00 PM, change it to 9:00 AM in the next day
+            if (currentTimeSlot.getHour() > 18) {
+                currentTimeSlot = currentTimeSlot.plusHours(14);
+            }
         }
 
-        return availabilityByWeek;
+        System.out.println(appointmentTimes);
+        System.out.println(currentTimeSlot);
+
+        return availabilityForWeek;
     }
+
 
 
 }
