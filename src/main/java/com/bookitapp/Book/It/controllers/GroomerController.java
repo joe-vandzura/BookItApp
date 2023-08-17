@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -31,23 +33,26 @@ public class GroomerController {
     public List<List<String>> getGroomerAvailability(@PathVariable("groomerId") Long groomerId) {
         List<List<String>> availabilityForWeek = new ArrayList<>();
 
-        LocalDateTime currentDate = LocalDateTime.now();
-        LocalDateTime dateOfEndOfWeek = currentDate.plusDays(7); // For one week
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        LocalDateTime dateOfEndOfWeek = currentDateTime.plusDays(7); // For one week
 
-        List<LocalDateTime> appointmentTimes = appointmentRepo.findAppointmentsForGroomerForTheWeek(groomerId, currentDate, dateOfEndOfWeek).stream()
-                .map(Appointment::getAppointmentTime) // Map Appointment objects to their appointmentTime property
-                .collect(Collectors.toList()); // Collect the LocalDateTime objects into a list
+        // get all appointment times for the current week being displayed
+        List<String> appointmentTimes = appointmentRepo.findAppointmentsForGroomerForTheWeek(groomerId, currentDateTime, dateOfEndOfWeek).stream()
+                .map(Appointment::getAppointmentTime)
+                .map(dateTime -> dateTime.plusHours(5))
+                .map(LocalDateTime::toString)
+                .toList();
 
-        LocalDateTime currentTimeSlot = currentDate.with(LocalTime.of(9, 0)); // Starting from 9:00 AM
-        while (currentTimeSlot.isBefore(dateOfEndOfWeek)) {
+        LocalDateTime currentTimeSlot = currentDateTime.with(LocalTime.of(9, 0)); // Starting from 9:00 AM
+
+        // generate the appointment times for the week being displayed
+        for (int i = 0; i < 7; i++) {
             List<String> dayOfTimes = new ArrayList<>();
-            for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
 
-                if (!appointmentTimes.contains(currentTimeSlot)) {
-                    String dateString = currentTimeSlot.toLocalTime().toString();
-                    dayOfTimes.add(dateString);
-                    currentTimeSlot = currentTimeSlot.plusHours(1);
-                }
+                String dateString = currentTimeSlot.toString();
+                dayOfTimes.add(dateString);
+                currentTimeSlot = currentTimeSlot.plusHours(1);
 
             }
             availabilityForWeek.add(dayOfTimes);
@@ -57,8 +62,17 @@ public class GroomerController {
             }
         }
 
-        System.out.println(appointmentTimes);
-        System.out.println(currentTimeSlot);
+        // Print the appointment times and list of available times before removal
+        System.out.println("Appointment Times: " + appointmentTimes);
+        System.out.println("Available Times (Before Removal): " + availabilityForWeek);
+
+        // Remove the appointment times that are already taken from the list of available times
+        availabilityForWeek.forEach(listOfDateTimeStrings ->
+                listOfDateTimeStrings.removeIf(dateTimeString -> appointmentTimes.contains(dateTimeString)));
+
+
+        // Print the list of available times after removal
+        System.out.println("Available Times (After Removal): " + availabilityForWeek);
 
         return availabilityForWeek;
     }
