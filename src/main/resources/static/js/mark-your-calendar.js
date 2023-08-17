@@ -121,8 +121,8 @@
         }
 
         this.on('click', '#myc-prev-week', function() {
-            if (offset >= 7) {
-                offset -= 7;
+            if (amountOfWeekOffset >= 7) {
+                amountOfWeekOffset -= 7;
             }
             if (settings.startDate.getTime() >= new Date().getTime()) {
                     settings.startDate = settings.startDate.addDays(-7);
@@ -136,8 +136,8 @@
         });
 
         this.on('click', '#myc-next-week', async function() {
-            if (offset < 98) {
-                offset += 7;
+            if (amountOfWeekOffset < 98) {
+                amountOfWeekOffset += 7;
             }
             let currentDate = new Date();
             if (settings.startDate.getTime() <= currentDate.setMonth(currentDate.getMonth() + 3)) {
@@ -178,6 +178,7 @@
             if ($.isFunction(onClick)) {
                 onClick.call(this, ...arguments, settings.selectedDates);
             }
+            $("#selectionModal").modal("show");
         });
 
         var render = function() {

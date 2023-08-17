@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <title>BookIt - Calendar</title>
     <th:block th:insert="~{partials/header-links :: header-links}"></th:block>
@@ -31,18 +33,39 @@
 </div>
 
     <div id="picker"></div>
-    <div>
-        <p>Selected date: <span id="selected-date"></span></p>
-        <p>Selected time: <span id="selected-time"></span></p>
+
+<!--    <div>-->
+<!--        <p>Selected date: <span id="selected-date"></span></p>-->
+<!--        <p>Selected time: <span id="selected-time"></span></p>-->
+<!--    </div>-->
+
+<div class="modal fade" id="selectionModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="selectionModalLabel">Select Your Groomer!</h1>
+            </div>
+            <form class="modal-body">
+                <form th:action="@{/appointments}" th:method="POST">
+                    <p>Selected date: <span id="selected-date"></span></p>
+                    <p>Selected time: <span id="selected-time"></span></p>
+                </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button id="appointment-select-btn" type="button" class="btn btn-primary">Make Appointment</button>
+                </div>
+            </form>
+        </div>
     </div>
+</div>
 
 
 <th:block th:insert="~{partials/footer-links :: footer-links}"></th:block>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>-->
     <script type="text/javascript" src="../js/mark-your-calendar.js"></script>
     <script type="text/javascript">
 
-        let offset = 0;
+        let amountOfWeekOffset = 0;
         let groomerId = null;
 
         $(document).ready(function() {
@@ -52,13 +75,11 @@
         $("#groomer1").on("change", function () {
             $("#groomer-select-btn").removeClass("disabled");
             groomerId = 1;
-            console.log(groomerId)
         });
 
         $("#groomer2").on("change", function () {
             $("#groomer-select-btn").removeClass("disabled");
             groomerId = 2;
-            console.log(groomerId)
         });
 
         (function($) {
@@ -66,7 +87,7 @@
                 $("#staticBackdrop").modal('show');
 
                 try {
-                    let response = await fetch("/groomers/" + groomerId + "/availability?offset=" + offset, {
+                    let response = await fetch("/groomers/" + groomerId + "/availability?amountOfWeekOffset=" + amountOfWeekOffset, {
                         method: 'GET',
                         headers: {
                             'Accept': 'application/json',
@@ -103,7 +124,7 @@
                     },
                     onClickNavigator: async function (ev, instance) {
                         try {
-                            let response = await fetch("/groomers/" + groomerId + "/availability?offset=" + offset, {
+                            let response = await fetch("/groomers/" + groomerId + "/availability?amountOfWeekOffset=" + amountOfWeekOffset, {
                                 method: 'GET',
                                 headers: {
                                     'Accept': 'application/json',

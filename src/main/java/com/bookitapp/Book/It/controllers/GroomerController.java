@@ -8,10 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.ZoneId;
-import java.time.ZoneOffset;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/groomers")
@@ -27,18 +24,18 @@ public class GroomerController {
 
     @GetMapping(value = "/{groomerId}/availability", produces = "application/json")
     @ResponseBody
-    public List<List<String>> getGroomerAvailability(@PathVariable("groomerId") Long groomerId, @RequestParam("offset") int offset) {
+    public List<List<String>> getGroomerAvailability(@PathVariable("groomerId") Long groomerId, @RequestParam("amountOfWeekOffset") int amountOfWeekOffset) {
 
         // check if if offset is within 3 month range
-        if (offset < 0) {
-            offset = 0;
-        } else if (offset > 98) {
-            offset = 98;
+        if (amountOfWeekOffset < 0) {
+            amountOfWeekOffset = 0;
+        } else if (amountOfWeekOffset > 98) {
+            amountOfWeekOffset = 98;
         }
 
         List<List<String>> availabilityForWeek = new ArrayList<>();
 
-        LocalDateTime currentDateTime = LocalDateTime.now().plusDays(offset);
+        LocalDateTime currentDateTime = LocalDateTime.now().plusDays(amountOfWeekOffset);
         LocalDateTime dateOfEndOfWeek = currentDateTime.plusDays(7); // For one week
 
         // get all appointment times for the current week being displayed
@@ -71,7 +68,7 @@ public class GroomerController {
         availabilityForWeek.forEach(listOfDateTimeStrings ->
                 listOfDateTimeStrings.removeIf(dateTimeString -> appointmentTimes.contains(dateTimeString)));
 
-        System.out.println(offset);
+        System.out.println(amountOfWeekOffset);
 
         return availabilityForWeek;
     }
