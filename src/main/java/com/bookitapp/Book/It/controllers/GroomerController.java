@@ -68,7 +68,6 @@ public class GroomerController {
         availabilityForWeek.forEach(listOfDateTimeStrings ->
                 listOfDateTimeStrings.removeIf(dateTimeString -> appointmentTimes.contains(dateTimeString)));
 
-        System.out.println(amountOfWeekOffset);
 
         return availabilityForWeek;
     }
