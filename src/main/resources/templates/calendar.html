@@ -21,11 +21,11 @@
                 <label for="groomer1">Lorena</label><br>
                 <input type="radio" id="groomer2" name="groomer" value="2">
                 <label for="groomer2">Kara</label>
+                <div class="modal-footer">
+                    <a th:href="@{/}" class="btn btn-secondary">Go Back</a>
+                    <button id="groomer-select-btn" type="button" class="btn btn-primary disabled" data-bs-dismiss="modal">Select</button>
+                </div>
             </form>
-            <div class="modal-footer">
-                <a th:href="@{/}" class="btn btn-secondary">Go Back</a>
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Select</button>
-            </div>
         </div>
     </div>
 </div>
@@ -43,10 +43,26 @@
     <script type="text/javascript">
 
         let offset = 0;
-        let groomerId = 1;
+        let groomerId = null;
+
+        $(document).ready(function() {
+            $("#staticBackdrop").modal('show');
+        });
+
+        $("#groomer1").on("change", function () {
+            $("#groomer-select-btn").removeClass("disabled");
+            groomerId = 1;
+            console.log(groomerId)
+        });
+
+        $("#groomer2").on("change", function () {
+            $("#groomer-select-btn").removeClass("disabled");
+            groomerId = 2;
+            console.log(groomerId)
+        });
 
         (function($) {
-            $(document).ready(async function() {
+            $("#groomer-select-btn").on("click", async function() {
                 $("#staticBackdrop").modal('show');
 
                 try {
