@@ -4,10 +4,7 @@ import com.bookitapp.Book.It.models.Appointment;
 import com.bookitapp.Book.It.repositories.AppointmentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -30,10 +27,18 @@ public class GroomerController {
 
     @GetMapping(value = "/{groomerId}/availability", produces = "application/json")
     @ResponseBody
-    public List<List<String>> getGroomerAvailability(@PathVariable("groomerId") Long groomerId) {
+    public List<List<String>> getGroomerAvailability(@PathVariable("groomerId") Long groomerId, @RequestParam("offset") int offset) {
+
+        // check if if offset is within 3 month range
+        if (offset < 0) {
+            offset = 0;
+        } else if (offset > 98) {
+            offset = 98;
+        }
+
         List<List<String>> availabilityForWeek = new ArrayList<>();
 
-        LocalDateTime currentDateTime = LocalDateTime.now();
+        LocalDateTime currentDateTime = LocalDateTime.now().plusDays(offset);
         LocalDateTime dateOfEndOfWeek = currentDateTime.plusDays(7); // For one week
 
         // get all appointment times for the current week being displayed
@@ -62,17 +67,11 @@ public class GroomerController {
             }
         }
 
-        // Print the appointment times and list of available times before removal
-        System.out.println("Appointment Times: " + appointmentTimes);
-        System.out.println("Available Times (Before Removal): " + availabilityForWeek);
-
         // Remove the appointment times that are already taken from the list of available times
         availabilityForWeek.forEach(listOfDateTimeStrings ->
                 listOfDateTimeStrings.removeIf(dateTimeString -> appointmentTimes.contains(dateTimeString)));
 
-
-        // Print the list of available times after removal
-        System.out.println("Available Times (After Removal): " + availabilityForWeek);
+        System.out.println(offset);
 
         return availabilityForWeek;
     }

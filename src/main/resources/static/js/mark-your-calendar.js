@@ -121,6 +121,9 @@
         }
 
         this.on('click', '#myc-prev-week', function() {
+            if (offset >= 7) {
+                offset -= 7;
+            }
             if (settings.startDate.getTime() >= new Date().getTime()) {
                     settings.startDate = settings.startDate.addDays(-7);
                     instance.clearAvailability();
@@ -132,13 +135,20 @@
             }
         });
 
-        this.on('click', '#myc-next-week', function() {
-            settings.startDate = settings.startDate.addDays(7);
-            instance.clearAvailability();
-            render(instance);
+        this.on('click', '#myc-next-week', async function() {
+            if (offset < 98) {
+                offset += 7;
+            }
+            let currentDate = new Date();
+            if (settings.startDate.getTime() <= currentDate.setMonth(currentDate.getMonth() + 3)) {
 
-            if ($.isFunction(onClickNavigator)) {
-                onClickNavigator.call(this, ...arguments, instance);
+                settings.startDate = settings.startDate.addDays(7);
+                instance.clearAvailability();
+                render(instance);
+
+                if ($.isFunction(onClickNavigator)) {
+                    onClickNavigator.call(this, ...arguments, instance);
+                }
             }
         });
 

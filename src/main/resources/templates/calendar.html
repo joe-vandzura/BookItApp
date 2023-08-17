@@ -42,14 +42,15 @@
     <script type="text/javascript" src="../js/mark-your-calendar.js"></script>
     <script type="text/javascript">
 
+        let offset = 0;
+        let groomerId = 1;
+
         (function($) {
             $(document).ready(async function() {
                 $("#staticBackdrop").modal('show');
 
-                let groomerId = 1;
-
                 try {
-                    let response = await fetch("/groomers/" + groomerId + "/availability", {
+                    let response = await fetch("/groomers/" + groomerId + "/availability?offset=" + offset, {
                         method: 'GET',
                         headers: {
                             'Accept': 'application/json',
@@ -59,8 +60,12 @@
 
                     if (response.ok) {
                         let availabilityData = await response.json();
+                        for (let i = 0; i < availabilityData.length; i++) {
+                            for (let j = 0; j < availabilityData[i].length; j++) {
+                                availabilityData[i][j] = availabilityData[i][j].substring(11);
+                            }
+                        }
                         setupMarkYourCalendar(availabilityData);
-                        console.log(availabilityData);
                     } else {
                         console.error("Failed to fetch availability data");
                     }
@@ -70,8 +75,6 @@
             });
 
             function setupMarkYourCalendar(availabilityData) {
-
-                let groomerId = 1;
 
                 $('#picker').markyourcalendar({
                     availability: availabilityData,
@@ -84,7 +87,7 @@
                     },
                     onClickNavigator: async function (ev, instance) {
                         try {
-                            let response = await fetch("/groomers/" + groomerId + "/availability", {
+                            let response = await fetch("/groomers/" + groomerId + "/availability?offset=" + offset, {
                                 method: 'GET',
                                 headers: {
                                     'Accept': 'application/json',
@@ -94,8 +97,12 @@
 
                             if (response.ok) {
                                 let availabilityData = await response.json();
-                                var rn = Math.floor(Math.random() * 10) % availabilityData.length;
-                                instance.setAvailability(availabilityData[rn]);
+                                for (let i = 0; i < availabilityData.length; i++) {
+                                    for (let j = 0; j < availabilityData[i].length; j++) {
+                                        availabilityData[i][j] = availabilityData[i][j].substring(11);
+                                    }
+                                }
+                                instance.setAvailability(availabilityData);
                             } else {
                                 console.error("Failed to fetch availability data");
                             }

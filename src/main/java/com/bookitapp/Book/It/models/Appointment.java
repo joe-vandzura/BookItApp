@@ -33,8 +33,4 @@ public class Appointment {
         return String.valueOf(appointmentTime);
     }
 
-//    public List<LocalDateTime> compareAppointmentTimes(LocalDateTime timeToCompare, List<LocalDateTime> appointmentTimes) {
-//
-//    }
-
 }
