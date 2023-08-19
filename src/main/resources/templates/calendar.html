@@ -43,17 +43,21 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="selectionModalLabel">Select Your Groomer!</h1>
+                <h1 class="modal-title fs-5" id="selectionModalLabel">Confirm Appointment</h1>
             </div>
             <form class="modal-body">
                 <form th:action="@{/appointments}" th:method="POST">
+                    <p>Groomer: <span id="span-groomer-name"></span></p>
+                    <input hidden id="groomer-id" name="groomer-id" type="number">
                     <p>Selected date: <span id="selected-date"></span></p>
+                    <input hidden id="selected-date-input" name="selected-date" type="text">
                     <p>Selected time: <span id="selected-time"></span></p>
+                    <input hidden id="selected-time-input" name="selected-time" type="text">
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button id="appointment-select-btn" th:type="submit" class="btn btn-primary">Make Appointment</button>
+                    </div>
                 </form>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button id="appointment-select-btn" type="button" class="btn btn-primary">Make Appointment</button>
-                </div>
             </form>
         </div>
     </div>
@@ -85,6 +89,17 @@
         (function($) {
             $("#groomer-select-btn").on("click", async function() {
                 $("#staticBackdrop").modal('show');
+                // set hidden input values in confirm modal form
+                $("#groomer-id").val(groomerId);
+                $("#selected-date-input").val($("#selected-date").val());
+                $("#selected-time-input").val($("#selected-time").val());
+
+                // display selected groomer name in confirm modal
+                if (groomerId === 1) {
+                    $("#span-groomer-name").text("Lorena");
+                } else if (groomerId === 2) {
+                    $("#span-groomer-name").text("Kara");
+                }
 
                 try {
                     let response = await fetch("/groomers/" + groomerId + "/availability?amountOfWeekOffset=" + amountOfWeekOffset, {

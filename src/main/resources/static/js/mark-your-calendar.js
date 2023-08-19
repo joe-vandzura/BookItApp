@@ -164,13 +164,13 @@
                 }
             } else {
                 if (settings.isMultiple) {
-                    $(this).addClass('selected');
+                    // $(this).addClass('selected');
                     settings.selectedDates.push(tmp);
                 } else {
                     settings.selectedDates.pop();
                     if (!settings.selectedDates.length) {
                         $('.myc-available-time').removeClass('selected');
-                        $(this).addClass('selected');
+                        // $(this).addClass('selected');
                         settings.selectedDates.push(tmp);
                     }
                 }
