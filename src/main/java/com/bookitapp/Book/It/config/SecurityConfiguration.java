@@ -38,9 +38,6 @@ public class SecurityConfiguration {
                 .authorizeRequests(authorizeRequests -> authorizeRequests
                         .requestMatchers("/login").permitAll() // Allow access to login page
                         .requestMatchers("/",
-                                "/calendar/**",
-                                "/appointments/**",
-                                "/groomers/**",
                                 "/css/**",
                                 "/js/**",
                                 "/img/**").permitAll() // Allow access to appointments POST
