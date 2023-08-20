@@ -15,4 +15,6 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
     List<Appointment> findAppointmentsForGroomerForTheWeek(@Param("groomerId")Long groomerId, @Param("currentDate") LocalDateTime currentDate, @Param("dateOfEndOfWeek") LocalDateTime dateOfEndOfWeek);
 
     Appointment findByAppointmentTimeAndAndGroomer(LocalDateTime appointmentTime, Groomer groomer);
+
+    List<Appointment> findByUserId(Long userId);
 }

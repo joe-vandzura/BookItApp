@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+	<meta charset="UTF-8">
+	<title>My Appointments</title>
+	<th:block th:insert="~{partials/header-links :: header-links}"></th:block>
+</head>
+<body>
+<th:block th:insert="~{partials/navbar :: navbar}"></th:block>
+
+<ul>
+	<li th:each="appointment : ${appointments}">
+		<div class="card" style="width: 18rem;">
+			<img src="..." class="card-img-top" alt="...">
+			<div class="card-body">
+				<h5 class="card-title" th:text="${appointment.appointmentTime}"></h5>
+				<p class="card-text" th:text="'Appointment with '+${appointment.groomer.name}"></p>
+				<a href="#" class="btn btn-primary">Go somewhere</a>
+			</div>
+		</div>
+	</li>
+</ul>
+
+<th:block th:insert="~{partials/footer-links :: footer-links}"></th:block>
+</body>
+</html>
