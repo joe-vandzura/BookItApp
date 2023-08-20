@@ -24,7 +24,9 @@ public class GroomerController {
 
     @GetMapping(value = "/{groomerId}/availability", produces = "application/json")
     @ResponseBody
-    public List<List<String>> getGroomerAvailability(@PathVariable("groomerId") Long groomerId, @RequestParam("amountOfWeekOffset") int amountOfWeekOffset) {
+    public List<List<String>> getGroomerAvailability(
+            @PathVariable("groomerId") Long groomerId,
+            @RequestParam("amountOfWeekOffset") int amountOfWeekOffset) {
 
         // check if if offset is within 3 month range
         if (amountOfWeekOffset < 0) {

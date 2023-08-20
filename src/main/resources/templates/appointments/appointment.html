@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <th:block th:insert="~{partials/header-links :: header-links}"></th:block>
+</head>
+<body>
+<th:block th:insert="~{partials/navbar :: navbar}"></th:block>
+
+<h3>This is the page for a single appointment</h3>
+
+<th:block th:insert="~{partials/footer-links :: footer-links}"></th:block>
+</body>
+</html>

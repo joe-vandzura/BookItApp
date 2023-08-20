@@ -1,38 +1,40 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <title>BookIt - Calendar</title>
-    <th:block th:insert="~{partials/header-links :: header-links}"></th:block>
-    <link rel="stylesheet" type="text/css" href="../css/mark-your-calendar.css">
-<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">-->
+	<title>BookIt - Calendar</title>
+	<th:block th:insert="~{partials/header-links :: header-links}"></th:block>
+	<link rel="stylesheet" type="text/css" href="../css/mark-your-calendar.css">
+	<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">-->
 </head>
 <body>
 <th:block th:insert="~{partials/navbar :: navbar}"></th:block>
 
 <!--    Select groomer modal   -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel">Select Your Groomer!</h1>
-            </div>
-            <form class="modal-body">
-                <input type="radio" id="groomer1" name="groomer" value="1">
-                <label for="groomer1">Lorena</label><br>
-                <input type="radio" id="groomer2" name="groomer" value="2">
-                <label for="groomer2">Kara</label>
-                <div class="modal-footer">
-                    <a th:href="@{/}" class="btn btn-secondary">Go Back</a>
-                    <button id="groomer-select-btn" type="button" class="btn btn-primary disabled" data-bs-dismiss="modal">Select</button>
-                </div>
-            </form>
-        </div>
-    </div>
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title fs-5" id="staticBackdropLabel">Select Your Groomer!</h1>
+			</div>
+			<form class="modal-body">
+				<input type="radio" id="groomer1" name="groomer" value="1">
+				<label for="groomer1">Lorena</label><br>
+				<input type="radio" id="groomer2" name="groomer" value="2">
+				<label for="groomer2">Kara</label>
+				<div class="modal-footer">
+					<a th:href="@{/}" class="btn btn-secondary">Go Back</a>
+					<button id="groomer-select-btn" type="button" class="btn btn-primary disabled"
+							data-bs-dismiss="modal">Select
+					</button>
+				</div>
+			</form>
+		</div>
+	</div>
 </div>
 
-    <div id="picker"></div>
+<div id="picker"></div>
 
 <!--    <div>-->
 <!--        <p>Selected date: <span id="selected-date"></span></p>-->
@@ -40,134 +42,132 @@
 <!--    </div>-->
 
 <div class="modal fade" id="selectionModal" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="selectionModalLabel">Confirm Appointment</h1>
-            </div>
-            <form class="modal-body">
-                <form th:action="@{/appointments}" th:method="POST">
-                    <p>Groomer: <span id="span-groomer-name"></span></p>
-                    <input hidden id="groomer-id" name="groomer-id" type="number">
-                    <p>Selected date: <span id="selected-date"></span></p>
-                    <input hidden id="selected-date-input" name="selected-date" type="text">
-                    <p>Selected time: <span id="selected-time"></span></p>
-                    <input hidden id="selected-time-input" name="selected-time" type="text">
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <button id="appointment-select-btn" th:type="submit" class="btn btn-primary">Make Appointment</button>
-                    </div>
-                </form>
-            </form>
-        </div>
-    </div>
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title fs-5" id="selectionModalLabel">Confirm Appointment</h1>
+			</div>
+			<form class="modal-body" id="appointment-form" th:action="@{/appointments}" th:method="POST">
+				<p>Groomer: <span id="span-groomer-name"></span></p>
+				<input hidden id="groomer-id" name="groomer-id" type="number">
+				<p>Selected date: <span id="selected-date"></span></p>
+				<input hidden id="selected-date-input" name="selected-date" type="text">
+				<p>Selected time: <span id="selected-time"></span></p>
+				<input hidden id="selected-time-input" name="selected-time" type="text">
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+					<button id="appointment-select-btn" th:type="submit" class="btn btn-primary">Make Appointment
+					</button>
+				</div>
+			</form>
+		</div>
+	</div>
 </div>
 
 
 <th:block th:insert="~{partials/footer-links :: footer-links}"></th:block>
 <!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>-->
-    <script type="text/javascript" src="../js/mark-your-calendar.js"></script>
-    <script type="text/javascript">
+<script type="text/javascript" src="../js/mark-your-calendar.js"></script>
+<script type="text/javascript">
 
-        let amountOfWeekOffset = 0;
-        let groomerId = null;
+    let amountOfWeekOffset = 0;
+    let groomerId = null;
 
-        $(document).ready(function() {
+    $(document).ready(function () {
+        $("#staticBackdrop").modal('show');
+    });
+
+    $("#groomer1").on("change", function () {
+        $("#groomer-select-btn").removeClass("disabled");
+        groomerId = 1;
+    });
+
+    $("#groomer2").on("change", function () {
+        $("#groomer-select-btn").removeClass("disabled");
+        groomerId = 2;
+    });
+
+    (function ($) {
+        $("#groomer-select-btn").on("click", async function () {
             $("#staticBackdrop").modal('show');
-        });
+            // set hidden input values in confirm modal form
+            $("#groomer-id").val(groomerId);
 
-        $("#groomer1").on("change", function () {
-            $("#groomer-select-btn").removeClass("disabled");
-            groomerId = 1;
-        });
+            // display selected groomer name in confirm modal
+            if (groomerId === 1) {
+                $("#span-groomer-name").text("Lorena");
+            } else if (groomerId === 2) {
+                $("#span-groomer-name").text("Kara");
+            }
 
-        $("#groomer2").on("change", function () {
-            $("#groomer-select-btn").removeClass("disabled");
-            groomerId = 2;
-        });
-
-        (function($) {
-            $("#groomer-select-btn").on("click", async function() {
-                $("#staticBackdrop").modal('show');
-                // set hidden input values in confirm modal form
-                $("#groomer-id").val(groomerId);
-                $("#selected-date-input").val($("#selected-date").val());
-                $("#selected-time-input").val($("#selected-time").val());
-
-                // display selected groomer name in confirm modal
-                if (groomerId === 1) {
-                    $("#span-groomer-name").text("Lorena");
-                } else if (groomerId === 2) {
-                    $("#span-groomer-name").text("Kara");
-                }
-
-                try {
-                    let response = await fetch("/groomers/" + groomerId + "/availability?amountOfWeekOffset=" + amountOfWeekOffset, {
-                        method: 'GET',
-                        headers: {
-                            'Accept': 'application/json',
-                            'Content-Type': 'application/json'
-                        }
-                    });
-
-                    if (response.ok) {
-                        let availabilityData = await response.json();
-                        for (let i = 0; i < availabilityData.length; i++) {
-                            for (let j = 0; j < availabilityData[i].length; j++) {
-                                availabilityData[i][j] = availabilityData[i][j].substring(11);
-                            }
-                        }
-                        setupMarkYourCalendar(availabilityData);
-                    } else {
-                        console.error("Failed to fetch availability data");
-                    }
-                } catch (error) {
-                    console.error("Error fetching availability data:", error);
-                }
-            });
-
-            function setupMarkYourCalendar(availabilityData) {
-
-                $('#picker').markyourcalendar({
-                    availability: availabilityData,
-                    startDate: new Date(),
-                    onClick: function(ev, data) {
-                        var d = data[0].split(' ')[0];
-                        var t = data[0].split(' ')[1];
-                        $('#selected-date').html(d);
-                        $('#selected-time').html(t);
-                    },
-                    onClickNavigator: async function (ev, instance) {
-                        try {
-                            let response = await fetch("/groomers/" + groomerId + "/availability?amountOfWeekOffset=" + amountOfWeekOffset, {
-                                method: 'GET',
-                                headers: {
-                                    'Accept': 'application/json',
-                                    'Content-Type': 'application/json'
-                                }
-                            });
-
-                            if (response.ok) {
-                                let availabilityData = await response.json();
-                                for (let i = 0; i < availabilityData.length; i++) {
-                                    for (let j = 0; j < availabilityData[i].length; j++) {
-                                        availabilityData[i][j] = availabilityData[i][j].substring(11);
-                                    }
-                                }
-                                instance.setAvailability(availabilityData);
-                            } else {
-                                console.error("Failed to fetch availability data");
-                            }
-                        } catch (error) {
-                            console.error("Error fetching availability data:", error);
-                        }
+            try {
+                let response = await fetch("/groomers/" + groomerId + "/availability?amountOfWeekOffset=" + amountOfWeekOffset, {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
                     }
                 });
+
+                if (response.ok) {
+                    let availabilityData = await response.json();
+                    for (let i = 0; i < availabilityData.length; i++) {
+                        for (let j = 0; j < availabilityData[i].length; j++) {
+                            availabilityData[i][j] = availabilityData[i][j].substring(11);
+                        }
+                    }
+                    setupMarkYourCalendar(availabilityData);
+                } else {
+                    console.log("Failed to fetch availability data");
+                }
+            } catch (error) {
+                console.log("Error fetching availability data:", error);
             }
-        })(jQuery);
+        });
+
+        function setupMarkYourCalendar(availabilityData) {
+
+            $('#picker').markyourcalendar({
+                availability: availabilityData,
+                startDate: new Date(),
+                onClick: function (ev, data) {
+                    var d = data[0].split(' ')[0];
+                    var t = data[0].split(' ')[1];
+                    $('#selected-date').html(d);
+                    $('#selected-time').html(t);
+                    $("#selected-date-input").val(d);
+                    $("#selected-time-input").val(t);
+                },
+                onClickNavigator: async function (ev, instance) {
+                    try {
+                        let response = await fetch("/groomers/" + groomerId + "/availability?amountOfWeekOffset=" + amountOfWeekOffset, {
+                            method: 'GET',
+                            headers: {
+                                'Accept': 'application/json',
+                                'Content-Type': 'application/json'
+                            }
+                        });
+
+                        if (response.ok) {
+                            let availabilityData = await response.json();
+                            for (let i = 0; i < availabilityData.length; i++) {
+                                for (let j = 0; j < availabilityData[i].length; j++) {
+                                    availabilityData[i][j] = availabilityData[i][j].substring(11);
+                                }
+                            }
+                            instance.setAvailability(availabilityData);
+                        } else {
+                            console.log("Failed to fetch availability data");
+                        }
+                    } catch (error) {
+                        console.log("Error fetching availability data:", error);
+                    }
+                }
+            });
+        }
+    })(jQuery);
 
 
-
-    </script>
+</script>
 </body>
 </html>
