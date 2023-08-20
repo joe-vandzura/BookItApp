@@ -31,7 +31,7 @@ public class AppointmentController {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @GetMapping("/{appointmentId")
+    @GetMapping("/{appointmentId}")
     public String singleAppointmentPage(
             Model model,
             @PathVariable("appointmentId") Long appointmentId) {
