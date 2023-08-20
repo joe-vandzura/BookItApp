@@ -1,6 +1,7 @@
 package com.bookitapp.Book.It.controllers;
 
 import com.bookitapp.Book.It.models.Appointment;
+import com.bookitapp.Book.It.models.Groomer;
 import com.bookitapp.Book.It.repositories.AppointmentRepository;
 import com.bookitapp.Book.It.repositories.GroomerRepository;
 import lombok.RequiredArgsConstructor;
@@ -49,7 +50,8 @@ public class AppointmentController {
         System.out.println("Made it to createAppointment post mapping");
 
         Appointment newAppointment = new Appointment();
-        newAppointment.setGroomer(groomerRepo.findById(groomerId).get());
+        Groomer selectedGroomer = groomerRepo.findById(groomerId).get();
+        newAppointment.setGroomer(selectedGroomer);
 
         if (dateInput.trim().isEmpty() || timeInput.trim().isEmpty()) {
             System.out.println("dateInput and/pr timeInput is EMPTY!!!");
@@ -59,10 +61,12 @@ public class AppointmentController {
         String dateTimeString = dateInput + "T" + timeInput; // Combine date and time with 'T' separator
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"); // Define custom pattern
         LocalDateTime dateTime = LocalDateTime.parse(dateTimeString, formatter); // Parse with custom pattern
-
+        dateTime = dateTime.minusHours(5);
         newAppointment.setAppointmentTime(dateTime);
         appointmentRepo.save(newAppointment);
-        return "appointments/confirm";
+
+        Long newAppointmentId = appointmentRepo.findByAppointmentTimeAndAndGroomer(dateTime, selectedGroomer).getId();
+        return "redirect:/appointments/" + newAppointmentId;
     }
 
 }
