@@ -29,6 +29,10 @@ public class Appointment {
     @JoinColumn (name = "groomer_id")
     private Groomer groomer;
 
+    @ManyToOne
+    @JoinColumn (name = "user_id")
+    private User user;
+
     public String toString() {
         return String.valueOf(appointmentTime);
     }

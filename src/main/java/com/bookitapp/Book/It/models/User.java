@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Table(name = "users")
 @NoArgsConstructor
@@ -33,6 +35,9 @@ public class User {
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Appointment> appointments;
+
     public User(User copy) {
         id = copy.id; // This line is SUPER important! Many things won't work if it's absent
         username = copy.username;
@@ -40,5 +45,6 @@ public class User {
         password = copy.password;
         firstName = copy.firstName;
         lastName = copy.lastName;
+        appointments = copy.appointments;
     }
 }
