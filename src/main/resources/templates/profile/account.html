@@ -17,24 +17,43 @@
   <h2>Add a Dog</h2>
 
   <label for="name">Name</label>
-  <input type="text" id="name" name="name" th:field="*{name}">
+  <input type="text" id="name" th:field="*{name}">
 
   <label for="breed">Breed</label>
-  <input type="text" id="breed" name th:field="*{breed}">
+  <input type="text" id="breed" th:field="*{breed}">
+
+  <label for="age">Age</label>
+  <input type="number" id="age" th:field="*{age}">
+
+  <label for="sex">Sex</label>
+  <select  id="sex" th:field="*{sex}" required>
+    <option value="M">Male</option>
+    <option value="F">Female</option>
+  </select>
+
+  <label for="rabies-vaccination">Has Rabies Vaccination?</label>
+  <input type="checkbox" id="rabies-vaccination" name th:field="*{rabiesVaccinationStatus}">
 
   <button type="submit" class="btn btn-primary">Add</button>
 </form>
 
 <h3>My Dogs</h3>
 
-<ul th:if="${!dogs.isEmpty()}">
+<ul th:if="${!dogs.isEmpty()}" class="d-flex flex-wrap">
   <li th:each="dog : ${dogs}">
     <div class="card" style="width: 18rem;">
       <div class="card-header">
         <span th:text="${dog.name}"></span>
       </div>
       <ul class="list-group list-group-flush">
-        <li class="list-group-item"><span th:text="${dog.breed}"></span></li>
+        <li class="list-group-item">Breed: <span th:text="${dog.breed}"></span></li>
+        <li class="list-group-item">Age: <span th:text="${dog.age}"></span></li>
+        <li class="list-group-item">Sex: <span th:text="${dog.sex}"></span></li>
+        <li class="list-group-item">Has Rabies Vaccination: <span th:text="${dog.rabiesVaccinationStatus}"></span></li>
+        <form th:method="POST" th:action="@{/dogs/{dogId}(dogId=${dog.id})}">
+          <input hidden th:name="_method" th:value="DELETE">
+          <button th:type="submit" class="btn btn-danger">Remove</button>
+        </form>
       </ul>
     </div>
   </li>

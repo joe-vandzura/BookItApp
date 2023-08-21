@@ -24,6 +24,15 @@ public class Dog {
     @Column(name = "breed", nullable = false)
     private String breed;
 
+    @Column(name = "age", nullable = false)
+    private int age;
+
+    @Column(name = "sex", nullable = false)
+    private char sex;
+
+    @Column(name = "rabies_vaccination", nullable = false)
+    private boolean rabiesVaccinationStatus;
+
     @ManyToOne
     @JoinColumn (name = "user_id")
     private User owner;

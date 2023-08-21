@@ -9,9 +9,7 @@ import com.bookitapp.Book.It.services.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -36,6 +34,19 @@ public class DogController {
         } else {
             return "redirect:/login";
         }
+    }
+
+    @PostMapping("/{dogId}")
+    public String changeDog(
+            @PathVariable("dogId") Long dogId,
+            @RequestParam("_method") String method) {
+
+        if ("DELETE".equals(method)) {
+            dogRepo.deleteById(dogId);
+            return "redirect:/my-profile/account";
+        }
+
+        return "redirect:/my-profile/account";
     }
 
 }
