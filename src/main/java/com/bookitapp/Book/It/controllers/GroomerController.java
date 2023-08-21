@@ -4,12 +4,13 @@ import com.bookitapp.Book.It.models.Appointment;
 import com.bookitapp.Book.It.repositories.AppointmentRepository;
 import com.bookitapp.Book.It.services.AuthService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.time.*;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/groomers")
@@ -34,7 +35,7 @@ public class GroomerController {
         if (userIsAuthenticated) {
 
 
-            // check if if offset is within 3 month range
+            // check if offset is within 3 month range
             if (amountOfWeekOffset < 0) {
                 amountOfWeekOffset = 0;
             } else if (amountOfWeekOffset > 98) {
@@ -43,25 +44,30 @@ public class GroomerController {
 
             List<List<String>> availabilityForWeek = new ArrayList<>();
 
-            LocalDateTime currentDateTime = LocalDateTime.now().plusDays(amountOfWeekOffset);
-            LocalDateTime dateOfEndOfWeek = currentDateTime.plusDays(7); // For one week
+            ZonedDateTime utcCurrentDateTime = ZonedDateTime.now(ZoneId.of("UTC")).plusDays(amountOfWeekOffset);
+            ZonedDateTime dateOfEndOfWeek = utcCurrentDateTime.plusDays(7); // For one week
+
+            List<Appointment> a = appointmentRepo.findAppointmentsForGroomerForTheWeek(groomerId, utcCurrentDateTime, dateOfEndOfWeek);
+
+            System.out.println(a);
 
             // get all appointment times for the current week being displayed
-            List<String> appointmentTimes = appointmentRepo.findAppointmentsForGroomerForTheWeek(groomerId, currentDateTime, dateOfEndOfWeek).stream()
+            List<String> appointmentTimes = appointmentRepo.findAppointmentsForGroomerForTheWeek(groomerId, utcCurrentDateTime, dateOfEndOfWeek).stream()
                     .map(Appointment::getAppointmentTime)
-                    .map(dateTime -> dateTime.plusHours(5))
-                    .map(LocalDateTime::toString)
+                    .map(LocalDateTime::toString) // Convert to LocalDateTime for display
                     .toList();
 
-            LocalDateTime currentTimeSlot = currentDateTime.with(LocalTime.of(9, 0)); // Starting from 9:00 AM
+            LocalDateTime currentTimeSlot = utcCurrentDateTime.toLocalDateTime().with(LocalTime.of(9, 0)); // Starting from 9:00 AM
 
             // generate the appointment times for the week being displayed
             for (int i = 0; i < 7; i++) {
                 List<String> dayOfTimes = new ArrayList<>();
                 for (int j = 0; j < 10; j++) {
 
-                    String dateString = currentTimeSlot.toString();
-                    dayOfTimes.add(dateString);
+                    if (currentTimeSlot.isAfter(LocalDateTime.now().plusHours(2))) {
+                        String dateString = currentTimeSlot.toString();
+                        dayOfTimes.add(dateString);
+                    }
                     currentTimeSlot = currentTimeSlot.plusHours(1);
 
                 }
@@ -74,8 +80,7 @@ public class GroomerController {
 
             // Remove the appointment times that are already taken from the list of available times
             availabilityForWeek.forEach(listOfDateTimeStrings ->
-                    listOfDateTimeStrings.removeIf(dateTimeString -> appointmentTimes.contains(dateTimeString)));
-
+                    listOfDateTimeStrings.removeIf(appointmentTimes::contains));
 
             return availabilityForWeek;
         } else {

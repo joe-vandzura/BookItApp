@@ -8,6 +8,7 @@ import com.bookitapp.Book.It.repositories.GroomerRepository;
 import com.bookitapp.Book.It.repositories.UserRepository;
 import com.bookitapp.Book.It.services.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -54,7 +55,8 @@ public class AppointmentController {
     public String createAppointment(
             @RequestParam("groomer-id") Long groomerId,
             @RequestParam("selected-date") String dateInput,
-            @RequestParam("selected-time") String timeInput) {
+            @RequestParam("selected-time") String timeInput,
+            @RequestParam("change-appointment-id") @Nullable Long changeAppointmentId) {
         boolean userIsAuthenticated = authService.isLoggedIn();
 
         if (userIsAuthenticated) {
@@ -63,22 +65,29 @@ public class AppointmentController {
             Groomer selectedGroomer = groomerRepo.findById(groomerId).get();
             User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             User loggedInUserWithCurrentProps = userRepo.findById(loggedInUser.getId()).get();
-            newAppointment.setGroomer(selectedGroomer);
-            newAppointment.setUser(loggedInUserWithCurrentProps);
-
-            if (dateInput.trim().isEmpty() || timeInput.trim().isEmpty()) {
-                System.out.println("dateInput and/pr timeInput is EMPTY!!!");
-                return "redirect:/calendar";
-            }
 
             String dateTimeString = dateInput + "T" + timeInput; // Combine date and time with 'T' separator
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"); // Define custom pattern
             LocalDateTime dateTime = LocalDateTime.parse(dateTimeString, formatter); // Parse with custom pattern
             dateTime = dateTime.minusHours(5);
-            newAppointment.setAppointmentTime(dateTime);
-            appointmentRepo.save(newAppointment);
+            Long newAppointmentId = 0L;
 
-            Long newAppointmentId = appointmentRepo.findByAppointmentTimeAndAndGroomer(dateTime, selectedGroomer).getId();
+            System.out.println(changeAppointmentId);
+
+            if (changeAppointmentId != null) {
+                Appointment appointmentToChange = appointmentRepo.findById(changeAppointmentId).get();
+                appointmentToChange.setAppointmentTime(dateTime);
+                appointmentToChange.setGroomer(selectedGroomer);
+                appointmentRepo.save(appointmentToChange);
+                return "redirect:/appointments/" + changeAppointmentId;
+            } else {
+                newAppointment.setGroomer(selectedGroomer);
+                newAppointment.setUser(loggedInUserWithCurrentProps);
+                newAppointment.setAppointmentTime(dateTime);
+                appointmentRepo.save(newAppointment);
+                newAppointmentId = appointmentRepo.findByAppointmentTimeAndGroomer(dateTime, selectedGroomer).getId();
+            }
+
             return "redirect:/appointments/" + newAppointmentId;
         } else {
             return "redirect:/login";
