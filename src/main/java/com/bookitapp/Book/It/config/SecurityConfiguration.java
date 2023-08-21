@@ -40,7 +40,8 @@ public class SecurityConfiguration {
                         .requestMatchers("/",
                                 "/css/**",
                                 "/js/**",
-                                "/img/**").permitAll() // Allow access to appointments POST
+                                "/img/**",
+                                "/register").permitAll() // Allow access to appointments POST
                         .anyRequest().authenticated() // Require authentication for other requests
                 )
                 .formLogin(form -> form
