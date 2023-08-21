@@ -38,6 +38,9 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Appointment> appointments;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
+    private List<Dog> dogs;
+
     public User(User copy) {
         id = copy.id; // This line is SUPER important! Many things won't work if it's absent
         username = copy.username;

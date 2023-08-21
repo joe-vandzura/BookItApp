@@ -38,10 +38,7 @@ public class Appointment {
         return String.valueOf(appointmentTime);
     }
 
-    public String formatTime() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM d, uuuu");
-        String formattedDate = this.appointmentTime.format(formatter);
-        return formattedDate;
-    }
+    @OneToOne
+    private Dog dog;
 
 }

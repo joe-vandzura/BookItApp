@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="UTF-8">
+  <title>My Account</title>
+  <th:block th:insert="~{partials/header-links :: header-links}"></th:block>
+</head>
+<body>
+<th:block th:insert="~{partials/navbar :: navbar}"></th:block>
+
+<h3>This is the account page</h3>
+
+<form th:method="POST" th:action="@{/dogs}" th:object="${dog}">
+
+  <h2>Add a Dog</h2>
+
+  <label for="name">Name</label>
+  <input type="text" id="name" name="name" th:field="*{name}">
+
+  <label for="breed">Breed</label>
+  <input type="text" id="breed" name th:field="*{breed}">
+
+  <button type="submit" class="btn btn-primary">Add</button>
+</form>
+
+<h3>My Dogs</h3>
+
+<ul th:if="${!dogs.isEmpty()}">
+  <li th:each="dog : ${dogs}">
+    <div class="card" style="width: 18rem;">
+      <div class="card-header">
+        <span th:text="${dog.name}"></span>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item"><span th:text="${dog.breed}"></span></li>
+      </ul>
+    </div>
+  </li>
+</ul>
+
+<th:block th:insert="~{partials/footer-links :: footer-links}"></th:block>
+</body>
+</html>

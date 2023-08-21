@@ -1,8 +1,10 @@
 package com.bookitapp.Book.It.controllers;
 
 import com.bookitapp.Book.It.models.Appointment;
+import com.bookitapp.Book.It.models.Dog;
 import com.bookitapp.Book.It.models.User;
 import com.bookitapp.Book.It.repositories.AppointmentRepository;
+import com.bookitapp.Book.It.repositories.DogRepository;
 import com.bookitapp.Book.It.services.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -24,12 +26,12 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class MyProfileController {
 
-    private final AuthService authService;
     private final AppointmentRepository appointmentRepo;
+    private final DogRepository dogRepo;
 
     @GetMapping("/appointments")
     public String myAppointmentsPage(Model model) {
-        boolean userIsAuthenticated = authService.isLoggedIn();
+        boolean userIsAuthenticated = AuthService.isLoggedIn();
 
         if (userIsAuthenticated) {
             User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -41,6 +43,22 @@ public class MyProfileController {
             return "redirect:/login";
         }
 
+    }
+
+    @GetMapping("/account")
+    public String accountPage(Model model) {
+        boolean userIsAuthenticated = AuthService.isLoggedIn();
+
+        if (userIsAuthenticated) {
+            User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            model.addAttribute("dog", new Dog());
+            List<Dog> dogs = dogRepo.findByOwnerId(loggedInUser.getId());
+
+            model.addAttribute("dogs", dogs);
+        } else {
+            return "redirect:/login";
+        }
+        return "profile/account";
     }
 
 }
