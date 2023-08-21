@@ -3,7 +3,6 @@ package com.bookitapp.Book.It.controllers;
 import com.bookitapp.Book.It.models.Appointment;
 import com.bookitapp.Book.It.models.User;
 import com.bookitapp.Book.It.repositories.AppointmentRepository;
-import com.bookitapp.Book.It.repositories.UserRepository;
 import com.bookitapp.Book.It.services.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;

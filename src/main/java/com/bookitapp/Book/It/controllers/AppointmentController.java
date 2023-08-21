@@ -85,4 +85,17 @@ public class AppointmentController {
         }
     }
 
+    @PostMapping("/{appointmentId}")
+    public String changeAppointment(
+            @PathVariable("appointmentId") Long appointmentId,
+            @RequestParam("_method") String method) {
+
+        if ("DELETE".equals(method)) {
+            appointmentRepo.deleteById(appointmentId);
+            return "redirect:/my-profile/appointments";
+        }
+
+        return "redirect:/my-profile/appointments";
+    }
+
 }
