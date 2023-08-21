@@ -17,5 +17,6 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
 
     Appointment findByAppointmentTimeAndGroomer(LocalDateTime appointmentTime, Groomer groomer);
 
-    List<Appointment> findByUserId(Long userId);
+    List<Appointment> findByUserIdOrderByAppointmentTimeAsc(Long userId);
+
 }

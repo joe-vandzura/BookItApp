@@ -27,7 +27,7 @@ public class MyProfileController {
 
         if (userIsAuthenticated) {
             User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            List<Appointment> appointments = appointmentRepo.findByUserId(loggedInUser.getId());
+            List<Appointment> appointments = appointmentRepo.findByUserIdOrderByAppointmentTimeAsc(loggedInUser.getId());
             model.addAttribute("appointments", appointments);
             return "profile/appointments";
         } else {
