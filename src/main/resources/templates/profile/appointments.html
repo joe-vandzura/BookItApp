@@ -6,24 +6,26 @@
 	<meta charset="UTF-8">
 	<title>My Appointments</title>
 	<th:block th:insert="~{partials/header-links :: header-links}"></th:block>
+	<link rel="stylesheet" th:href="@{/css/profile-appointments.css}">
 </head>
 <body>
 <th:block th:insert="~{partials/navbar :: navbar}"></th:block>
 
 <h3>My Appointments</h3>
 
-<ul>
-	<li th:each="appointment : ${appointments}">
+<ul class="d-flex flex-wrap">
+	<li th:each="appointment : ${appointments}" class="appointment-list-item m-3">
 		<div class="card" style="width: 18rem;">
-			<img src="..." class="card-img-top" alt="...">
 			<div class="card-body">
-				<h5 class="card-title" th:text="${appointment.appointmentTime.plusHours(5)}"></h5>
+				<h5 class="card-title" th:text="${#temporals.format(appointment.appointmentTime, 'MMMM d, uuuu')}"></h5>
 				<p class="card-text" th:text="${'Appointment with ' + appointment.groomer.name}"></p>
-				<a th:href="@{/calendar/{appointmentId}(appointmentId=${appointment.id})}" class="btn btn-warning">Change</a>
-				<form th:method="POST" th:action="@{/appointments/{appointmentId}(appointmentId=${appointment.id})}">
-					<input hidden th:name="_method" th:value="DELETE">
-					<button th:type="submit" class="btn btn-danger">Cancel</button>
-				</form>
+				<div class="d-flex">
+					<a th:href="@{/calendar/{appointmentId}(appointmentId=${appointment.id})}" class="btn btn-warning">Change</a>
+					<form th:method="POST" th:action="@{/appointments/{appointmentId}(appointmentId=${appointment.id})}">
+						<input hidden th:name="_method" th:value="DELETE">
+						<button th:type="submit" class="btn btn-danger">Cancel</button>
+					</form>
+				</div>
 			</div>
 		</div>
 	</li>

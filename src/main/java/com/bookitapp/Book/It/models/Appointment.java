@@ -8,6 +8,7 @@ import lombok.Setter;
 import org.springframework.cglib.core.Local;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Entity
@@ -35,6 +36,12 @@ public class Appointment {
 
     public String toString() {
         return String.valueOf(appointmentTime);
+    }
+
+    public String formatTime() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM d, uuuu");
+        String formattedDate = this.appointmentTime.format(formatter);
+        return formattedDate;
     }
 
 }

@@ -47,10 +47,6 @@ public class GroomerController {
             ZonedDateTime utcCurrentDateTime = ZonedDateTime.now(ZoneId.of("UTC")).plusDays(amountOfWeekOffset);
             ZonedDateTime dateOfEndOfWeek = utcCurrentDateTime.plusDays(7); // For one week
 
-            List<Appointment> a = appointmentRepo.findAppointmentsForGroomerForTheWeek(groomerId, utcCurrentDateTime, dateOfEndOfWeek);
-
-            System.out.println(a);
-
             // get all appointment times for the current week being displayed
             List<String> appointmentTimes = appointmentRepo.findAppointmentsForGroomerForTheWeek(groomerId, utcCurrentDateTime, dateOfEndOfWeek).stream()
                     .map(Appointment::getAppointmentTime)
