@@ -1,9 +1,11 @@
 package com.bookitapp.Book.It.controllers;
 
 import com.bookitapp.Book.It.models.Appointment;
+import com.bookitapp.Book.It.models.Dog;
 import com.bookitapp.Book.It.models.Groomer;
 import com.bookitapp.Book.It.models.User;
 import com.bookitapp.Book.It.repositories.AppointmentRepository;
+import com.bookitapp.Book.It.repositories.DogRepository;
 import com.bookitapp.Book.It.repositories.GroomerRepository;
 import com.bookitapp.Book.It.repositories.UserRepository;
 import com.bookitapp.Book.It.services.AuthService;
@@ -25,6 +27,7 @@ public class AppointmentController {
     private final GroomerRepository groomerRepo;
     private final AppointmentRepository appointmentRepo;
     private final UserRepository userRepo;
+    private final DogRepository dogRepo;
     private final PasswordEncoder passwordEncoder;
     private final AuthService authService;
 
@@ -33,11 +36,13 @@ public class AppointmentController {
             GroomerRepository groomerRepo,
             AppointmentRepository appointmentRepo,
             UserRepository userRepo,
+            DogRepository dogRepo,
             PasswordEncoder passwordEncoder,
             AuthService authService) {
         this.groomerRepo = groomerRepo;
         this.appointmentRepo = appointmentRepo;
         this.userRepo = userRepo;
+        this.dogRepo =dogRepo;
         this.passwordEncoder = passwordEncoder;
         this.authService = authService;
     }
@@ -56,7 +61,8 @@ public class AppointmentController {
             @RequestParam("groomer-id") Long groomerId,
             @RequestParam("selected-date") String dateInput,
             @RequestParam("selected-time") String timeInput,
-            @RequestParam("change-appointment-id") @Nullable Long changeAppointmentId) {
+            @RequestParam("change-appointment-id") @Nullable Long changeAppointmentId,
+            @RequestParam("dog-id") Long dogId) {
         boolean userIsAuthenticated = authService.isLoggedIn();
 
         if (userIsAuthenticated) {
@@ -65,6 +71,7 @@ public class AppointmentController {
             Groomer selectedGroomer = groomerRepo.findById(groomerId).get();
             User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             User loggedInUserWithCurrentProps = userRepo.findById(loggedInUser.getId()).get();
+            Dog dog = dogRepo.findById(dogId).get();
 
             String dateTimeString = dateInput + "T" + timeInput; // Combine date and time with 'T' separator
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"); // Define custom pattern
@@ -72,18 +79,18 @@ public class AppointmentController {
             dateTime = dateTime.minusHours(5);
             Long newAppointmentId = 0L;
 
-            System.out.println(changeAppointmentId);
-
             if (changeAppointmentId != null) {
                 Appointment appointmentToChange = appointmentRepo.findById(changeAppointmentId).get();
                 appointmentToChange.setAppointmentTime(dateTime);
                 appointmentToChange.setGroomer(selectedGroomer);
+                appointmentToChange.setDog(dog);
                 appointmentRepo.save(appointmentToChange);
                 return "redirect:/appointments/" + changeAppointmentId;
             } else {
                 newAppointment.setGroomer(selectedGroomer);
                 newAppointment.setUser(loggedInUserWithCurrentProps);
                 newAppointment.setAppointmentTime(dateTime);
+                newAppointment.setDog(dog);
                 appointmentRepo.save(newAppointment);
                 newAppointmentId = appointmentRepo.findByAppointmentTimeAndGroomer(dateTime, selectedGroomer).getId();
             }
