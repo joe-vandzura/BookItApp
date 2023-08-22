@@ -1,0 +1,41 @@
+body {
+    background-image: url('../img/login_background.webp');
+    background-size: cover; /* Adjust as needed */
+    background-repeat: no-repeat;
+}
+
+#login-form-container {
+    border: darkgreen 8px solid;
+    border-radius: 3%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+    width: 55%;
+    margin: auto;
+    background-color: #cadfbc;
+    color: #304e18;
+}
+
+#page-container {
+    display: flex;
+    height: 100vh;
+}
+
+#login-img {
+    border-radius: 50%;
+    width: 100px;
+}
+
+#login-header {
+    padding-top: 45px;
+    padding-bottom: 30px;
+}
+
+
+.input-group-text {
+    color: #304e18;
+    background-color: #eeffee;
+}
+

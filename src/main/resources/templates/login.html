@@ -10,41 +10,52 @@
 </head>
 <body>
 
-<div class="container">
+<div id="page-container" class="container">
 
-	<h1>Please Log In</h1>
+	<div id="login-form-container">
+		<img id="login-img" th:src="@{/img/olis_pet_stuff_logo.png}"/>
 
-	<div id="error-toast" th:if="${param.error}" class="toast align-items-center text-bg-danger border-0" role="alert">
-		<div class="d-flex">
-			<div class="toast-body">
-				Invalid username and password.
+		<h1 id="login-header">Oli's Customer Portal</h1>
+
+		<div id="error-toast" th:if="${param.error}" class="toast align-items-center text-bg-danger border-0 mb-3"
+			 role="alert">
+			<div class="d-flex">
+				<div class="toast-body">
+					Invalid username and password.
+				</div>
+				<button type="button" class="close-toast-btn btn-close btn-close-white me-2 m-auto"
+						data-bs-dismiss="toast"></button>
 			</div>
-			<button type="button" class="close-toast-btn btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
 		</div>
-	</div>
 
-	<div id="logout-toast" th:if="${param.logout}" class="toast align-items-center text-bg-success border-0" role="alert">
-		<div class="d-flex">
-			<div class="toast-body">
-				You have been logged out.
+		<div id="logout-toast" th:if="${param.logout}" class="toast align-items-center text-bg-success border-0 mb-3"
+			 role="alert">
+			<div class="d-flex">
+				<div class="toast-body">
+					You have been logged out.
+				</div>
+				<button type="button" class="close-toast-btn btn-close btn-close-white me-2 m-auto"
+						data-bs-dismiss="toast"></button>
 			</div>
-			<button type="button" class="close-toast-btn btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
 		</div>
+
+		<form th:action="@{/login}" method="POST">
+
+			<div class="input-group mb-3">
+				<span class="input-group-text">Username</span>
+				<input type="text" name="username" class="form-control">
+			</div>
+
+			<div class="input-group mb-3">
+				<span class="input-group-text">Password</span>
+				<input type="password" name="password" class="form-control">
+			</div>
+
+			<input class="btn btn-success w-100" type="submit" value="Log in"/>
+
+		</form>
+
 	</div>
-
-	<form th:action="@{/login}" method="POST">
-
-		<div>
-			<input type="text" name="username" placeholder="Username"/>
-		</div>
-
-		<div>
-			<input type="password" name="password" placeholder="Password"/>
-		</div>
-
-		<input type="submit" value="Log in" />
-
-	</form>
 
 </div>
 

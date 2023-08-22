@@ -41,7 +41,8 @@ public class SecurityConfiguration {
                                 "/css/**",
                                 "/js/**",
                                 "/img/**",
-                                "/register").permitAll() // Allow access to appointments POST
+                                "/register",
+                                "/favicon.ico").permitAll() // Allow access to appointments POST
                         .anyRequest().authenticated() // Require authentication for other requests
                 )
                 .formLogin(form -> form
