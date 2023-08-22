@@ -3,7 +3,7 @@
 	  xmlns:th="http://www.thymeleaf.org"
 	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-	<meta charset="UTF-8">
+	<th:block th:insert="~{partials/meta-header :: meta-header}"></th:block>
 	<title>My Appointments</title>
 	<th:block th:insert="~{partials/header-links :: header-links}"></th:block>
 	<link rel="stylesheet" th:href="@{/css/profile-appointments.css}">

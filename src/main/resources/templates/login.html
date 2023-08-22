@@ -3,30 +3,52 @@
 	  xmlns:th="http://www.thymeleaf.org"
 	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-	<meta charset="UTF-8">
+	<th:block th:insert="~{partials/meta-header :: meta-header}"></th:block>
 	<title>BookIt - Login</title>
+	<th:block th:insert="~{partials/header-links :: header-links}"></th:block>
+	<link rel="stylesheet" th:href="@{/css/login.css}">
 </head>
 <body>
 
-<h1>Please Log In</h1>
-<div th:if="${param.error}">
-	Invalid username and password.</div>
-<div th:if="${param.logout}">
-	You have been logged out.</div>
+<div class="container">
 
-<form th:action="@{/login}" method="POST">
+	<h1>Please Log In</h1>
 
-	<div>
-		<input type="text" name="username" placeholder="Username"/>
+	<div id="error-toast" th:if="${param.error}" class="toast align-items-center text-bg-danger border-0" role="alert">
+		<div class="d-flex">
+			<div class="toast-body">
+				Invalid username and password.
+			</div>
+			<button type="button" class="close-toast-btn btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+		</div>
 	</div>
 
-	<div>
-		<input type="password" name="password" placeholder="Password"/>
+	<div id="logout-toast" th:if="${param.logout}" class="toast align-items-center text-bg-success border-0" role="alert">
+		<div class="d-flex">
+			<div class="toast-body">
+				You have been logged out.
+			</div>
+			<button type="button" class="close-toast-btn btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+		</div>
 	</div>
 
-	<input type="submit" value="Log in" />
+	<form th:action="@{/login}" method="POST">
 
-</form>
+		<div>
+			<input type="text" name="username" placeholder="Username"/>
+		</div>
 
+		<div>
+			<input type="password" name="password" placeholder="Password"/>
+		</div>
+
+		<input type="submit" value="Log in" />
+
+	</form>
+
+</div>
+
+<th:block th:insert="~{partials/footer-links :: footer-links}"></th:block>
+<script th:src="@{/js/login.js}"></script>
 </body>
 </html>
