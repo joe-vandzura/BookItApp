@@ -4,14 +4,14 @@ body {
     background-repeat: no-repeat;
 }
 
-#login-form-container {
+#register-form-container {
     border: darkgreen 8px solid;
     border-radius: 3%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 60vh;
+    height: 85vh;
     width: 55%;
     margin: auto;
     background-color: #cadfbc;
@@ -23,12 +23,12 @@ body {
     height: 100vh;
 }
 
-#login-img {
+#register-img {
     border-radius: 50%;
     width: 100px;
 }
 
-#login-header {
+#register-header {
     padding-top: 20px;
     padding-bottom: 30px;
 }

@@ -6,30 +6,54 @@
   <th:block th:insert="~{partials/meta-header :: meta-header}"></th:block>
   <title>BookIt - Register</title>
   <th:block th:insert="~{partials/header-links :: header-links}"></th:block>
+  <link rel="stylesheet" th:href="@{/css/register.css}">
 </head>
 <body>
-<th:block th:insert="~{partials/navbar :: navbar}"></th:block>
 
-<form th:action="@{/register}" th:method="POST" th:object="${new_user}">
+<div id="page-container" class="container">
 
-  <label for="first-name">First Name</label>
-  <input type="text" name="first-name" id="first-name" th:field="*{firstName}">
+  <div id="register-form-container">
+    <a class="m-0" th:href="@{/}"><img id="register-img" th:src="@{/img/olis_pet_stuff_logo.png}"/></a>
 
-  <label for="last-name">Last Name</label>
-  <input type="text" name="last-name" id="last-name" th:field="*{lastName}">
+    <h1 id="register-header">Account Registration</h1>
 
-  <label for="username">Username</label>
-  <input type="text" name="username" id="username" th:field="*{username}">
 
-  <label for="email">Email</label>
-  <input type="text" name="email" id="email" th:field="*{email}">
+    <form th:action="@{/register}" method="POST" th:object="${new_user}">
 
-  <label for="password">Password</label>
-  <input type="password" name="password" id="password" th:field="*{password}">
+      <div class="input-group mb-3">
+        <span class="input-group-text">Username</span>
+        <input type="text" th:field="*{username}" class="form-control">
+      </div>
 
-  <input type="submit" value="Register">
+      <div class="input-group mb-3">
+        <span class="input-group-text">First Name</span>
+        <input type="text" th:field="*{firstName}" class="form-control">
+      </div>
 
-</form>
+      <div class="input-group mb-3">
+        <span class="input-group-text">Last Name</span>
+        <input type="text" th:field="*{lastName}" class="form-control">
+      </div>
+
+      <div class="input-group mb-3">
+        <span class="input-group-text">Email</span>
+        <input type="text" th:field="*{email}" class="form-control">
+      </div>
+
+      <div class="input-group mb-3">
+        <span class="input-group-text">Password</span>
+        <input type="password" th:field="*{password}" class="form-control">
+      </div>
+
+      <input class="btn btn-success w-100" type="submit" value="Log in"/>
+
+    </form>
+
+    <p>Already have an account? <a id="register-anchor" th:href="@{/login}">Log In here</a></p>
+
+  </div>
+
+</div>
 
 <th:block th:insert="~{partials/footer-links :: footer-links}"></th:block>
 </body>

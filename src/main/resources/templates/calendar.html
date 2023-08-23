@@ -55,11 +55,12 @@
 				<input hidden id="selected-date-input" name="selected-date" type="text">
 				<p>Selected time: <span id="selected-time"></span></p>
 				<input hidden id="selected-time-input" name="selected-time" type="text">
-				<select name="dog-id" required>
+				<p>Select your dog:
+				<span><select name="dog-id" required>
 					<option th:each="dog : ${dogs}" th:value="${dog.id}">
 						<span th:text="${dog.name}"></span>
 					</option>
-				</select>
+				</select></span>
 				<input hidden name="change-appointment-id" type="number" th:value="${changeAppointmentId}">
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
