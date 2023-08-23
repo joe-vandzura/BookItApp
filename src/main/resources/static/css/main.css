@@ -1,6 +1,8 @@
 #navbar-img {
-    width: 70px;
+    margin: 1em 0 1em 6em;
+    width: 8em;
     border-radius: 50%;
+    border: #cadfbc 3px solid;
 }
 
 /* Reset some default styles */
@@ -9,10 +11,18 @@ body, h1, p {
     padding: 0;
 }
 
+.nav-item, .nav-link {
+    font-size: large;
+    border-bottom: transparent solid 3px;}
+
+.nav-item:hover {
+    border-bottom: #304e18 solid 3px;
+}
+
 /* Set a background gradient */
 body {
     background: linear-gradient(to bottom, #f5f5f5, #e0e0e0);
-    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-family: 'Poppins', Arial, sans-serif;
 }
 
 /* Create a centered container */
@@ -39,6 +49,7 @@ header h1 {
 nav {
     background-color: #2c3e50;
     padding: 10px 0;
+    box-shadow: 0 0 0 5px #e4ffb5;
 }
 
 nav ul {
@@ -85,5 +96,9 @@ main {
     header h1 {
         font-size: 2rem;
     }
+}
+
+#book-appt-btn {
+
 }
 

@@ -9,49 +9,43 @@
 	<link rel="stylesheet" th:href="@{/css/index.css}">
 </head>
 <body>
+
+<div class="container-flex" id="index-top-bar">
+	<span class="col-4 top-bar-element" id="phone-span">(210) 455-0499</span>
+	<span class="col-4 top-bar-element" id="address-span">18010 Bulverde Rd #104, San Antonio, TX 78259</span>
+	<span class="col-4 top-bar-element" id="hours-span">Mon-Sat: 10AM - 7PM | Sun: 12PM - $4PM</span>
+</div>
+
 <th:block th:insert="~{partials/navbar :: navbar}"></th:block>
 
-<div id="carousel" class="carousel slide">
-	<div class="carousel-inner">
-		<div class="carousel-container carousel-item active">
-			<img th:src="@{/img/olis_birthday.png}" class="carousel-img d-block w-100" alt="...">
-		</div>
-		<div class="carousel-container carousel-item">
-			<img th:src="@{/img/olis_twenty_off.png}" class="carousel-img d-block w-100" alt="...">
-		</div>
-		<div class="carousel-container carousel-item">
-			<img th:src="@{/img/olis_fiesta.png}" class="carousel-img d-block w-100" alt="...">
+<div class="container-flex">
+
+	<div id="image-container">
+		<div id="image-container-text-box">
+			<p class="mt-5">Does your best friend need a cut?</p>
+			<p class="mb-5">Don't worry, we got you covered.</p>
 		</div>
 	</div>
-	<button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
-		<span class="carousel-control-prev-icon"></span>
-		<span class="visually-hidden">Previous</span>
-	</button>
-	<button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
-		<span class="carousel-control-next-icon"></span>
-		<span class="visually-hidden">Next</span>
-	</button>
+
+	<h1>Welcome to Oli's Grooming Services!</h1>
+
+	<h2>Meet Our Staff!</h2>
+
+	<div>
+		<img th:src="@{/img/lorena_pic.png}">
+		<h5>Lorena</h5>
+		<p>Bio:</p>
+	</div>
+
+	<br>
+
+	<div>
+		<img th:src="@{/img/kara_pic.png}">
+		<h5>Kara</h5>
+		<p>Bio:</p>
+	</div>
+
 </div>
-
-<h1>Welcome to Oli's Grooming Services!</h1>
-<h2><a th:href="@{/calendar}">Click here to schedule an appointment</a></h2>
-
-<h2>Meet Our Staff!</h2>
-
-<div>
-	<img th:src="@{/img/lorena_pic.png}">
-	<h5>Lorena</h5>
-	<p>Bio:</p>
-</div>
-
-<br>
-
-<div>
-	<img th:src="@{/img/kara_pic.png}">
-	<h5>Kara</h5>
-	<p>Bio:</p>
-</div>
-
 
 <th:block th:insert="~{partials/footer-links :: footer-links}"></th:block>
 </body>

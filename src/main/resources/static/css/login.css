@@ -1,6 +1,6 @@
 body {
     background-image: url('../img/login_background.webp');
-    background-size: cover; /* Adjust as needed */
+    background-size: cover;
     background-repeat: no-repeat;
 }
 
@@ -29,7 +29,7 @@ body {
 }
 
 #login-header {
-    padding-top: 45px;
+    padding-top: 20px;
     padding-bottom: 30px;
 }
 

@@ -5,3 +5,41 @@
 .carousel-img {
     height: 100%;
 }
+
+#index-top-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: #304e18;
+    text-align: center;
+    border-bottom: #cadfbc solid 1px;
+    overflow: hidden;
+    height: 3.5em;
+}
+
+.top-bar-element {
+    padding: 3px 0 3px 0;
+}
+
+#image-container {
+    height: 40em;
+    background-image: url('../img/dog-haircut.jpeg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#image-container-text-box {
+    font-size: xxx-large;
+    font-weight: bolder;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+
+
