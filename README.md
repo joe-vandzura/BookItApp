@@ -4,6 +4,11 @@ Welcome to the BookIt App! This application allows users to book dog grooming ap
 
 ## :construction: Project Status: STILL IN PROGRESS :construction:
 
+## Here is a demo of my current progress!
+
+![Alt Text](static/img/BookIt_demo.gif)
+
+
 ## Features
 
 - View available appointment slots for a groomer.
