@@ -11,7 +11,7 @@ body, h1, p {
     padding: 0;
 }
 
-.nav-item, .nav-link {
+.nav-item.normal-btn, .nav-link.normal-btn {
     font-size: large;
     border-bottom: transparent solid 3px;}
 
@@ -99,6 +99,16 @@ main {
 }
 
 #book-appt-btn {
+    background-color: #0d9413;
+    color: white;
+    border-radius: 10px;
+}
 
+#book-appt-btn:hover {
+    background-color: #0dbc12;
+}
+
+.nav-item:has(#book-appt-btn):hover {
+    border-bottom: transparent solid 1px;
 }
 
