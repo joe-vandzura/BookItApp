@@ -6,7 +6,7 @@ Welcome to the BookIt App! This application allows users to book dog grooming ap
 
 ## Here is a demo of my current progress!
 
-![Demo Gif](/img/BookIt_demo.gif)
+![Demo Gif](src/main/resources/static/img/BookIt_demo.gif)
 
 
 ## Features
