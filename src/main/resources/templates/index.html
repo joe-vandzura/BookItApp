@@ -27,25 +27,39 @@
 		</div>
 	</div>
 
-	<h1>Welcome to Oli's Grooming Services!</h1>
+	<div id="staff-container">
 
-	<h2>Meet Our Staff!</h2>
+		<h2 id="">Meet Our Staff!</h2>
 
-	<div>
-		<img th:src="@{/img/lorena_pic.png}">
-		<h5>Lorena</h5>
-		<p>Bio:</p>
-	</div>
+		<div id="emp-1-container" class="card">
+			<div id="emp-1-text-div" class="card-body">
+				<h3>Meet Lorena!</h3>
+				<p class="card-text">
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aspernatur commodi consequuntur debitis, dicta dolores eos eveniet expedita fugiat illum in maiores minima nulla, odio officia quae quasi qui repellendus similique vero! Architecto beatae rerum similique tenetur! Cupiditate deserunt dolore doloremque dolores ea ex fuga harum incidunt ipsum itaque labore, libero maiores modi natus nisi perferendis perspiciatis quidem sed sunt totam, vel vero voluptas? Aut, beatae inventore modi sed ut voluptatem. Ab aliquam aliquid amet atque aut blanditiis consectetur cumque delectus dolorum ea enim eos, fugiat id illum incidunt iure iusto magnam magni minu
+				</p>
+				<a th:href="@{/calendar}">Book an Appointment with Lorena</a>
+			</div>
+			<img id="emp-1-img" class="" th:src="@{/img/lorena_pic.png}">
+		</div>
 
-	<br>
+		<br>
 
-	<div>
-		<img th:src="@{/img/kara_pic.png}">
-		<h5>Kara</h5>
-		<p>Bio:</p>
+		<div id="emp-2-container" class="card">
+			<img id="emp-2-img" class="" th:src="@{/img/kara_pic.png}">
+			<div id="emp-2-text-div" class="card-body">
+				<h3>Meet Kara!</h3>
+				<p class="card-text">
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aspernatur commodi consequuntur debitis, dicta dolores eos eveniet expedita fugiat illum in maiores minima nulla, odio officia quae quasi qui repellendus similique vero! Architecto beatae rerum similique tenetur! Cupiditate deserunt dolore doloremque dolores ea ex fuga harum incidunt ipsum itaque labore, libero maiores modi natus nisi perferendis perspiciatis quidem sed sunt totam, vel vero voluptas? Aut, beatae inventore modi sed ut voluptatem. Ab aliquam aliquid amet atque aut blanditiis consectetur cumque delectus dolorum ea enim eos, fugiat id illum incidunt iure iusto magnam magni minu
+				</p>
+				<a th:href="@{/calendar}">Book an Appointment with Kara</a>
+			</div>
+		</div>
+
 	</div>
 
 </div>
+
+<th:block th:insert="~{partials/footer :: footer}"></th:block>
 
 <th:block th:insert="~{partials/footer-links :: footer-links}"></th:block>
 </body>

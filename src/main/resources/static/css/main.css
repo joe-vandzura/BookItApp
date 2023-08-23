@@ -112,3 +112,17 @@ main {
     border-bottom: transparent solid 1px;
 }
 
+footer {
+    margin-top: 5em;
+    color: #304e18;
+    background-color: #cadfbc;
+    border-top: #304e18 solid 1px;
+    min-height: 15em;
+}
+
+#footer-img {
+    margin: 1em 0 1em 6em;
+    width: 12em;
+    border-radius: 50%;
+    border: #304e18 8px solid;
+}
