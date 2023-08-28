@@ -39,11 +39,25 @@ public class DogController {
     @PostMapping("/{dogId}")
     public String changeDog(
             @PathVariable("dogId") Long dogId,
-            @RequestParam("_method") String method) {
+            @RequestParam("_method") String method,
+            @RequestParam("name") String name,
+            @RequestParam("breed") String breed,
+            @RequestParam("age") int age,
+            @RequestParam("sex") char sex,
+            @RequestParam("rabiesVaccinationStatus") boolean rabiesVaccinationStatus
+            ) {
 
         if ("DELETE".equals(method)) {
             dogRepo.deleteById(dogId);
             return "redirect:/my-profile/account";
+        } else {
+            Dog dogToChange = dogRepo.findById(dogId).get();
+            dogToChange.setName(name);
+            dogToChange.setBreed(breed);
+            dogToChange.setAge(age);
+            dogToChange.setSex(sex);
+            dogToChange.setRabiesVaccinationStatus(rabiesVaccinationStatus);
+            dogRepo.save(dogToChange);
         }
 
         return "redirect:/my-profile/account";

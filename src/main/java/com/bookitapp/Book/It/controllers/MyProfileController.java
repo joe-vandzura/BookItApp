@@ -10,8 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -59,6 +58,18 @@ public class MyProfileController {
             return "redirect:/login";
         }
         return "profile/account";
+    }
+
+    @PostMapping("/dogs/{dogId}")
+    public String redirectToChangeDogMapping(
+            @PathVariable("dogId") Long dogId,
+            @RequestParam("name") String name,
+            @RequestParam("breed") String breed,
+            @RequestParam("age") int age,
+            @RequestParam("sex") char sex,
+            @RequestParam("rabiesVaccinationStatus") boolean rabiesVaccinationStatus
+    ) {
+        return "redirect:/dogs/" + dogId +  "?name=" + name + "?breed=" + breed + "?age=" + age + "?sex=" + sex + "?rabiesVaccinationStatus=" + rabiesVaccinationStatus;
     }
 
 }
