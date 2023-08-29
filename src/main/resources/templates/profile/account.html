@@ -34,6 +34,8 @@
 		<!--  my dogs tab  -->
 		<div class="tab-pane fade show active" id="my-dogs" role="tabpanel" tabindex="0">
 			<div class="d-flex align-items-start">
+
+<!--			dog tab buttons	  -->
 				<div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist">
 					<button th:each="dog, iterStat : ${dogs}" th:if="${iterStat.index == 0}" class="nav-link active"
 							data-bs-toggle="pill" th:data-bs-target="'#'+${dog.id}+'-tab'" type="button" role="tab">
@@ -44,10 +46,13 @@
 						<span th:text="${dog.name}"></span>
 					</button>
 				</div>
+
+<!--			dog tab panes  	-->
 				<div class="tab-content" id="v-pills-tabContent">
+
 					<div th:each="dog, iterStat : ${dogs}" th:if="${iterStat.index == 0}"
 						 class="tab-pane fade show active" th:id="${dog.id}+'-tab'" role="tabpanel" tabindex="0">
-						<form th:method="POST" th:action="@{dogs/{dogId}(dogId=${dog.id})}">
+						<form th:method="POST" th:action="@{/dogs/{dogId}(dogId=${dog.id})}">
 							<label for="name">Name</label>
 							<input th:value="${dog.name}" type="text" th:name="name">
 
@@ -59,8 +64,14 @@
 
 							<label for="sex">Sex</label>
 							<select th:name="sex" required>
-								<option value="M">Male</option>
-								<option value="F">Female</option>
+								<div th:if="${dog.sex} == 'M'">
+									<option selected value="M">Male</option>
+									<option value="F">Female</option>
+								</div>
+								<div th:if="${dog.sex} == 'F'">
+									<option value="M">Male</option>
+									<option selected value="F">Female</option>
+								</div>
 							</select>
 
 							<label for="rabies-vaccination">Has Rabies Vaccination?</label>
@@ -71,9 +82,10 @@
 						</form>
 
 					</div>
+
 					<div th:each="dog, iterStat : ${dogs}" th:if="${iterStat.index != 0}" class="tab-pane fade"
 						 th:id="${dog.id}+'-tab'" role="tabpanel" tabindex="0">
-						<form th:method="POST" th:action="@{dogs/{dogId}(dogId=${dog.id})}">
+						<form th:method="POS" th:action="@{/dogs/{dogId}(dogId=${dog.id})}">
 							<label for="name">Name</label>
 							<input th:value="${dog.name}" type="text" th:name="name">
 
@@ -85,9 +97,16 @@
 
 							<label for="sex">Sex</label>
 							<select th:name="sex" required>
-								<option value="M">Male</option>
-								<option value="F">Female</option>
+								<div th:if="${dog.sex} == 'M'">
+									<option selected value="M">Male</option>
+									<option value="F">Female</option>
+								</div>
+								<div th:if="${dog.sex} == 'F'">
+									<option value="M">Male</option>
+									<option selected value="F">Female</option>
+								</div>
 							</select>
+
 
 							<label for="rabies-vaccination">Has Rabies Vaccination?</label>
 							<input th:value="${dog.rabiesVaccinationStatus}" th:checked="${dog.rabiesVaccinationStatus} ? 'checked' : ''" type="checkbox" th:name="rabiesVaccinationStatus">
@@ -95,7 +114,9 @@
 							<button type="submit" class="btn btn-success">Save</button>
 						</form>
 					</div>
+
 				</div>
+
 			</div>
 		</div>
 
