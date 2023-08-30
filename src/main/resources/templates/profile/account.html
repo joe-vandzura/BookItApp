@@ -37,6 +37,10 @@
 
 <!--			dog tab buttons	  -->
 				<div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist">
+					<button class="btn btn-success"
+							data-bs-toggle="modal" data-bs-target="#addDogModal" type="button" role="tab">
+						<span>Add Dog</span>
+					</button>
 					<button th:each="dog, iterStat : ${dogs}" th:if="${iterStat.index == 0}" class="nav-link active"
 							data-bs-toggle="pill" th:data-bs-target="'#'+${dog.id}+'-tab'" type="button" role="tab">
 						<span th:text="${dog.name}"></span>
@@ -57,7 +61,11 @@
 							<input th:value="${dog.name}" type="text" th:name="name">
 
 							<label for="breed">Breed</label>
-							<input th:value="${dog.breed}" type="text" th:name="breed">
+							<select th:value="${dog.breed}" th:name="breed">
+								<option th:each="breed : ${dogBreeds}" th:value="${#strings.capitalize(breed.toString())}"         th:selected="${dog.breed == #strings.capitalize(breed.toString())}">
+									<span th:text="${#strings.capitalize(breed.toString())}"></span>
+								</option>
+							</select>
 
 							<label for="age">Age</label>
 							<input th:value="${dog.age}" type="number" th:name="age">
@@ -90,7 +98,11 @@
 							<input th:value="${dog.name}" type="text" th:name="name">
 
 							<label for="breed">Breed</label>
-							<input th:value="${dog.breed}" type="text" th:name="breed">
+							<select th:value="${dog.breed}" th:name="breed">
+								<option th:each="breed : ${dogBreeds}" th:value="${#strings.capitalize(breed.toString())}"         th:selected="${dog.breed == #strings.capitalize(breed.toString())}">
+									<span th:text="${#strings.capitalize(breed.toString())}"></span>
+								</option>
+							</select>
 
 							<label for="age">Age</label>
 							<input th:value="${dog.age}" type="number" th:name="age">
@@ -146,7 +158,11 @@
 					<input type="text" id="name" th:field="*{name}">
 
 					<label for="breed">Breed</label>
-					<input type="text" id="breed" th:field="*{breed}">
+					<select id="breed" th:field="*{breed}">
+						<option th:each="breed : ${dogBreeds}" th:value="${#strings.capitalize(breed.toString())}">
+							<span th:text="${#strings.capitalize(breed.toString())}"></span>
+						</option>
+					</select>
 
 					<label for="age">Age</label>
 					<input type="number" id="age" th:field="*{age}">
