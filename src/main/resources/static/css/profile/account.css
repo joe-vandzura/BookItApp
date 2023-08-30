@@ -8,3 +8,7 @@
     margin: 1em;
 }
 
+.dog-form {
+    display: flex;
+    flex-direction: column;
+}

@@ -9,7 +9,7 @@
 	<link rel="stylesheet" th:href="@{/css/profile/account.css}">
 </head>
 <body>
-<th:block th:insert="~{partials/navbar :: navbar}"></th:block>
+<th:block th:insert="~{partials/big-navbar :: big-navbar}"></th:block>
 
 <div id="tab-container">
 	<ul class="nav nav-tabs mb-3 justify-content-center" id="pills-tab" role="tablist">
@@ -52,7 +52,7 @@
 
 					<div th:each="dog, iterStat : ${dogs}" th:if="${iterStat.index == 0}"
 						 class="tab-pane fade show active" th:id="${dog.id}+'-tab'" role="tabpanel" tabindex="0">
-						<form th:method="POST" th:action="@{/dogs/{dogId}(dogId=${dog.id})}">
+						<form class="dog-form" th:method="POST" th:action="@{/dogs/{dogId}(dogId=${dog.id})}">
 							<label for="name">Name</label>
 							<input th:value="${dog.name}" type="text" th:name="name">
 
@@ -85,7 +85,7 @@
 
 					<div th:each="dog, iterStat : ${dogs}" th:if="${iterStat.index != 0}" class="tab-pane fade"
 						 th:id="${dog.id}+'-tab'" role="tabpanel" tabindex="0">
-						<form th:method="POS" th:action="@{/dogs/{dogId}(dogId=${dog.id})}">
+						<form class="dog-form" th:method="POS" th:action="@{/dogs/{dogId}(dogId=${dog.id})}">
 							<label for="name">Name</label>
 							<input th:value="${dog.name}" type="text" th:name="name">
 

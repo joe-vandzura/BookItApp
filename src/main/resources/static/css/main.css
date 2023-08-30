@@ -5,6 +5,13 @@
     border: #cadfbc 3px solid;
 }
 
+#small-navbar-img {
+    margin: 1em 0 1em 3em;
+    width: 3em;
+    border-radius: 50%;
+    border: #cadfbc 3px solid;
+}
+
 /* Reset some default styles */
 body, h1, p {
     margin: 0;
