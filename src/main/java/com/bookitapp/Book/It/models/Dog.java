@@ -31,7 +31,7 @@ public class Dog {
     private char sex;
 
     @Column(name = "rabies_vaccination", nullable = false)
-    private boolean rabiesVaccinationStatus;
+    private Boolean rabiesVaccinationStatus;
 
     @ManyToOne
     @JoinColumn (name = "user_id")

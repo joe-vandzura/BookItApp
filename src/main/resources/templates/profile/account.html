@@ -83,12 +83,10 @@
 							</select>
 
 							<label for="rabies-vaccination">Has Rabies Vaccination?</label>
-							<input th:checked="${dog.rabiesVaccinationStatus} ? 'checked' : ''"
-								   type="checkbox" th:name="rabiesVaccinationStatus">
+							<input th:type="checkbox" th:checked="${dog.rabiesVaccinationStatus}" th:name="rabiesVaccinationStatus">
 
 							<button type="submit" class="btn btn-success">Save</button>
 						</form>
-
 					</div>
 
 					<div th:each="dog, iterStat : ${dogs}" th:if="${iterStat.index != 0}" class="tab-pane fade"
@@ -119,9 +117,8 @@
 								</div>
 							</select>
 
-
 							<label for="rabies-vaccination">Has Rabies Vaccination?</label>
-							<input th:value="${dog.rabiesVaccinationStatus}" th:checked="${dog.rabiesVaccinationStatus} ? 'checked' : ''" type="checkbox" th:name="rabiesVaccinationStatus">
+							<input th:type="checkbox" th:value="${dog.rabiesVaccinationStatus}" th:checked="${dog.rabiesVaccinationStatus}" th:name="rabiesVaccinationStatus">
 
 							<button type="submit" class="btn btn-success">Save</button>
 						</form>
@@ -174,7 +171,7 @@
 					</select>
 
 					<label for="rabies-vaccination">Has Rabies Vaccination?</label>
-					<input type="checkbox" id="rabies-vaccination" name th:field="*{rabiesVaccinationStatus}">
+					<input th:type="checkbox" id="rabies-vaccination" th:field="*{rabiesVaccinationStatus}" th:checked="${dog.rabiesVaccinationStatus}">
 
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>

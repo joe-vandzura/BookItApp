@@ -20,13 +20,20 @@ public class DogController {
     private final UserRepository userRepo;
 
     @PostMapping
-    public String addDog(@ModelAttribute Dog dog) {
+    public String addDog(
+            @ModelAttribute Dog dog
+//            @RequestParam("rabies-vaccination") @Nullable Boolean hasRabiesVaccination
+    ) {
         boolean userIsAuthenticated = AuthService.isLoggedIn();
 
         if (userIsAuthenticated) {
             User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             User owner = userRepo.findById(loggedInUser.getId()).get();
             dog.setOwner(owner);
+//            if (hasRabiesVaccination == null) {
+//                hasRabiesVaccination = false;
+//            }
+//            dog.setRabiesVaccinationStatus(hasRabiesVaccination);
             dogRepo.save(dog);
             return "redirect:/my-profile/account";
         } else {
