@@ -11,7 +11,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 60vh;
+    min-height: 60vh;
     width: 55%;
     margin: auto;
     background-color: #cadfbc;
@@ -30,7 +30,7 @@ body {
 
 #login-header {
     padding-top: 20px;
-    padding-bottom: 30px;
+    padding-bottom: 60px;
 }
 
 
@@ -48,4 +48,8 @@ body {
 #register-anchor:hover {
     color: #0d9413;
     text-decoration: underline;
+}
+
+.toast {
+    z-index: 1000;
 }

@@ -17,18 +17,18 @@
 
 		<h1 id="login-header">Oli's Customer Portal</h1>
 
-		<div id="error-toast" th:if="${param.error}" class="toast align-items-center text-bg-danger border-0 mb-3"
+		<div id="error-toast" th:if="${param.error}" class="toast text-bg-danger border-0 mb-3 me-1 position-fixed top-40 left-50 p-0"
 			 role="alert">
 			<div class="d-flex">
 				<div class="toast-body">
-					Invalid username and password.
+					Invalid username and/or password.
 				</div>
 				<button type="button" class="close-toast-btn btn-close btn-close-white me-2 m-auto"
 						data-bs-dismiss="toast"></button>
 			</div>
 		</div>
 
-		<div id="logout-toast" th:if="${param.logout}" class="toast align-items-center text-bg-success border-0 mb-3"
+		<div id="logout-toast" th:if="${param.logout}" class="toast text-bg-success border-0 mb-3 me-1 position-fixed top-40 left-50 p-0"
 			 role="alert">
 			<div class="d-flex">
 				<div class="toast-body">

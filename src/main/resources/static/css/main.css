@@ -26,6 +26,11 @@ body, h1, p {
     border-bottom: #304e18 solid 3px;
 }
 
+.dropdown-item:active {
+    color: #0dbc12;
+    background-color: transparent;
+}
+
 /* Set a background gradient */
 body {
     background: linear-gradient(to bottom, #f5f5f5, #e0e0e0);
