@@ -21,19 +21,13 @@ public class DogController {
 
     @PostMapping
     public String addDog(
-            @ModelAttribute Dog dog
-//            @RequestParam("rabies-vaccination") @Nullable Boolean hasRabiesVaccination
-    ) {
+            @ModelAttribute Dog dog) {
         boolean userIsAuthenticated = AuthService.isLoggedIn();
 
         if (userIsAuthenticated) {
             User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             User owner = userRepo.findById(loggedInUser.getId()).get();
             dog.setOwner(owner);
-//            if (hasRabiesVaccination == null) {
-//                hasRabiesVaccination = false;
-//            }
-//            dog.setRabiesVaccinationStatus(hasRabiesVaccination);
             dogRepo.save(dog);
             return "redirect:/my-profile/account";
         } else {
@@ -49,7 +43,7 @@ public class DogController {
             @RequestParam("breed") String breed,
             @RequestParam("age") int age,
             @RequestParam("sex") char sex,
-            @RequestParam("rabiesVaccinationStatus") boolean rabiesVaccinationStatus
+            @RequestParam("rabiesVaccinationStatus") @Nullable Boolean rabiesVaccinationStatus
             ) {
 
         if ("DELETE".equals(method)) {
@@ -61,6 +55,9 @@ public class DogController {
             dogToChange.setBreed(breed);
             dogToChange.setAge(age);
             dogToChange.setSex(sex);
+            if (rabiesVaccinationStatus == null) {
+                rabiesVaccinationStatus = false;
+            }
             dogToChange.setRabiesVaccinationStatus(rabiesVaccinationStatus);
             dogRepo.save(dogToChange);
         }

@@ -87,11 +87,22 @@
 
 							<button type="submit" class="btn btn-success">Save</button>
 						</form>
+						<form th:method="POST" th:action="@{/dogs/{dogId}(dogId=${dog.id})}">
+							<input hidden th:name="_method" th:value="DELETE">
+							<input hidden th:value="${dog.id}" type="number" th:name="dogId">
+							<input hidden th:value="${dog.name}" type="text" th:name="name">
+							<input hidden th:value="${dog.breed}" type="text" th:name="breed">
+							<input hidden th:value="${dog.age}" type="text" th:name="age">
+							<input hidden th:value="${dog.sex}" type="text" th:name="sex">
+							<input hidden th:value="${dog.rabiesVaccinationStatus}" type="checkbox" th:name="rabiesVaccinationStatus">
+
+							<button th:type="submit" class="btn btn-danger">Delete</button>
+						</form>
 					</div>
 
 					<div th:each="dog, iterStat : ${dogs}" th:if="${iterStat.index != 0}" class="tab-pane fade"
 						 th:id="${dog.id}+'-tab'" role="tabpanel" tabindex="0">
-						<form class="dog-form" th:method="POS" th:action="@{/dogs/{dogId}(dogId=${dog.id})}">
+						<form class="dog-form" th:method="POST" th:action="@{/dogs/{dogId}(dogId=${dog.id})}">
 							<label for="name">Name</label>
 							<input th:value="${dog.name}" type="text" th:name="name">
 
@@ -121,6 +132,17 @@
 							<input th:type="checkbox" th:value="${dog.rabiesVaccinationStatus}" th:checked="${dog.rabiesVaccinationStatus}" th:name="rabiesVaccinationStatus">
 
 							<button type="submit" class="btn btn-success">Save</button>
+						</form>
+						<form th:method="POST" th:action="@{/dogs/{dogId}(dogId=${dog.id})}">
+							<input hidden th:name="_method" th:value="DELETE">
+							<input hidden th:value="${dog.id}" type="number" th:name="dogId">
+							<input hidden th:value="${dog.name}" type="text" th:name="name">
+							<input hidden th:value="${dog.breed}" type="text" th:name="breed">
+							<input hidden th:value="${dog.age}" type="text" th:name="age">
+							<input hidden th:value="${dog.sex}" type="text" th:name="sex">
+							<input hidden th:value="${dog.rabiesVaccinationStatus}" type="checkbox" th:name="rabiesVaccinationStatus">
+
+							<button th:type="submit" class="btn btn-danger">Delete</button>
 						</form>
 					</div>
 
