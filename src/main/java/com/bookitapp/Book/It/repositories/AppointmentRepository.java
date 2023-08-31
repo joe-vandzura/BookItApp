@@ -19,4 +19,9 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
 
     List<Appointment> findByUserIdOrderByAppointmentTimeAsc(Long userId);
 
+    @Query(nativeQuery = true, value = "SELECT * FROM appointments WHERE user_id = :userId AND time > :currentDate ORDER BY time ASC")
+    List<Appointment> getFutureAppointmentsByUserId(@Param("userId") Long id, @Param("currentDate") ZonedDateTime currentDate);
+
+    @Query(nativeQuery = true, value = "SELECT * FROM appointments WHERE user_id = :userId AND time < :currentDate ORDER BY time ASC")
+    List<Appointment> getPastAppointmentsByUserId(@Param("userId") Long id, @Param("currentDate") ZonedDateTime currentDate);
 }

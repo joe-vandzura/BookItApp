@@ -18,8 +18,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/my-profile")
@@ -35,9 +39,11 @@ public class MyProfileController {
 
         if (userIsAuthenticated) {
             User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            List<Appointment> appointments = appointmentRepo.findByUserIdOrderByAppointmentTimeAsc(loggedInUser.getId());
+            List<Appointment> upcomingAppointments = appointmentRepo.getFutureAppointmentsByUserId(loggedInUser.getId(), ZonedDateTime.now(ZoneId.of("UTC")));
+            List<Appointment> prevAppointments = appointmentRepo.getPastAppointmentsByUserId(loggedInUser.getId(), ZonedDateTime.now(ZoneId.of("UTC")));
 
-            model.addAttribute("appointments", appointments);
+            model.addAttribute("upcomingAppointments", upcomingAppointments);
+            model.addAttribute("prevAppointments", prevAppointments);
             return "profile/appointments";
         } else {
             return "redirect:/login";
