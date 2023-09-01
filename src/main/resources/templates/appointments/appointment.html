@@ -1,16 +1,45 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-  <th:block th:insert="~{partials/header-links :: header-links}"></th:block>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<th:block th:insert="~{partials/header-links :: header-links}"></th:block>
+	<link rel="stylesheet" th:href="@{/css/appointments/appointment.css}">
 </head>
 <body>
 <th:block th:insert="~{partials/big-navbar :: big-navbar}"></th:block>
 
-<h3>This is the page for a single appointment</h3>
+<div id="page-container">
+
+	<div id="content-container">
+
+		<div id="img-box">
+			<img id="appt-confirm-img" th:src="@{/img/dog_grooming.jpeg}"/>
+		</div>
+
+		<div id="appointment-box">
+
+			<h5 class="m-3"><span th:text="${user.firstName}"></span>, we've got you confirmed for your appointment.
+			</h5>
+
+			<h3 class="m-3"><span th:text="${#temporals.format(appointment.appointmentTime, 'h:mm a')}"></span> | <span
+					th:text="${appointment.groomer.name}"></span></h3>
+
+			<p class="m-2"><span th:text="${#temporals.format(appointment.appointmentTime, 'MMMM d, uuuu')}"></span></p>
+			<p class="mb-2">18010 Bulverde Rd #104 | San Antonio, TX</p>
+
+			<a th:href="@{/calendar/{appointmentId}(appointmentId=${appointment.id})}"
+			   class="btn btn-warning rounded-pill m-2">Edit Appointment</a>
+			<a th:href="@{/my-profile/appointments}" class="btn btn-success rounded-pill m-2">My Appointments</a>
+
+		</div>
+
+	</div>
+
+</div>
+
 
 <th:block th:insert="~{partials/footer :: footer}"></th:block>
 

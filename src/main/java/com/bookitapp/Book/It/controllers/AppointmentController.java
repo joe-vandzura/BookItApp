@@ -54,6 +54,9 @@ public class AppointmentController {
             Model model,
             @PathVariable("appointmentId") Long appointmentId) {
         Appointment appointment = appointmentRepo.findById(appointmentId).get();
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User loggedInUserObject = userRepo.findById(loggedInUser.getId()).get();
+        model.addAttribute("user", loggedInUserObject);
         model.addAttribute("appointment", appointment);
         return "appointments/appointment";
     }

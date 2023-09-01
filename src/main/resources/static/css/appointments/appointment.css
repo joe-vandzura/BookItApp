@@ -1,0 +1,27 @@
+#page-container {
+    min-height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('../../img/bones_background.jpeg');
+    background-repeat: repeat;
+}
+
+#content-container {
+    display: flex;
+    border: #e4ffb5 5px solid;
+}
+
+#img-box {
+    background-image: url('../../img/dog_grooming.jpeg');
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+
+#appointment-box {
+    min-width: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+}
