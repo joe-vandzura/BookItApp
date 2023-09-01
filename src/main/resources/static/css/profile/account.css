@@ -1,6 +1,12 @@
-#tab-container {
+#page-container {
     border: solid 1px #304e18;
-    margin: 2em;
+    padding: 2em;
+    background-image: url('../../img/bones_background.jpeg');
+    background-repeat: repeat;
+}
+
+#tab-container {
+    background-color: white;
 }
 
 .tab-pane {

@@ -18,7 +18,7 @@
 
 <th:block th:insert="~{partials/big-navbar :: big-navbar}"></th:block>
 
-<div class="container-flex">
+<div id="page-container" class="container-flex">
 
 	<div id="image-container">
 		<div id="image-container-text-box">
@@ -39,13 +39,13 @@
 				</p>
 				<a th:href="@{/calendar}">Book an Appointment with Lorena</a>
 			</div>
-			<img id="emp-1-img" class="" th:src="@{/img/lorena_pic.png}">
+			<img id="emp-1-img" class="emp-img" th:src="@{/img/lorena_pic.png}">
 		</div>
 
 		<br>
 
 		<div id="emp-2-container" class="card">
-			<img id="emp-2-img" class="" th:src="@{/img/kara_pic.png}">
+			<img id="emp-2-img" class="emp-img" th:src="@{/img/kara_pic.png}">
 			<div id="emp-2-text-div" class="card-body">
 				<h3>Meet Kara!</h3>
 				<p class="card-text">

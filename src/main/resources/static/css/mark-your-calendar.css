@@ -1,9 +1,13 @@
+#picker {
+    background-color: white;
+}
 
 #myc-container {
     width: inherit;
 }
 
 #myc-nav-container {
+    padding-top: 5px;
     margin-bottom: 15px;
     width: inherit;
 }

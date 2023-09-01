@@ -11,152 +11,163 @@
 <body>
 <th:block th:insert="~{partials/big-navbar :: big-navbar}"></th:block>
 
-<div id="tab-container">
-	<ul class="nav nav-tabs mb-3 justify-content-center" id="pills-tab" role="tablist">
-		<li class="nav-item" role="presentation">
-			<button class="nav-link active" data-bs-toggle="pill" data-bs-target="#my-dogs" type="button" role="tab">My
-				Dogs
-			</button>
-		</li>
-		<li class="nav-item" role="presentation">
-			<button class="nav-link" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab">
-				Profile
-			</button>
-		</li>
-		<li class="nav-item" role="presentation">
-			<button class="nav-link" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab">
-				Settings
-			</button>
-		</li>
-	</ul>
-	<div class="tab-content" id="pills-tabContent">
+<div id="page-container">
+	<div id="tab-container">
+		<ul class="nav nav-tabs mb-3 justify-content-center" id="pills-tab" role="tablist">
+			<li class="nav-item" role="presentation">
+				<button class="nav-link active" data-bs-toggle="pill" data-bs-target="#my-dogs" type="button"
+						role="tab">My
+					Dogs
+				</button>
+			</li>
+			<li class="nav-item" role="presentation">
+				<button class="nav-link" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab">
+					Profile
+				</button>
+			</li>
+			<li class="nav-item" role="presentation">
+				<button class="nav-link" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab">
+					Settings
+				</button>
+			</li>
+		</ul>
+		<div class="tab-content" id="pills-tabContent">
 
-		<!--  my dogs tab  -->
-		<div class="tab-pane fade show active" id="my-dogs" role="tabpanel" tabindex="0">
-			<div class="d-flex align-items-start">
+			<!--  my dogs tab  -->
+			<div class="tab-pane fade show active" id="my-dogs" role="tabpanel" tabindex="0">
+				<div class="d-flex align-items-start">
 
-<!--			dog tab buttons	  -->
-				<div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist">
-					<button class="btn btn-success"
-							data-bs-toggle="modal" data-bs-target="#addDogModal" type="button" role="tab">
-						<span>Add Dog</span>
-					</button>
-					<button th:each="dog, iterStat : ${dogs}" th:if="${iterStat.index == 0}" class="nav-link active"
-							data-bs-toggle="pill" th:data-bs-target="'#'+${dog.id}+'-tab'" type="button" role="tab">
-						<span th:text="${dog.name}"></span>
-					</button>
-					<button th:each="dog, iterStat : ${dogs}" th:if="${iterStat.index != 0}" class="nav-link"
-							data-bs-toggle="pill" th:data-bs-target="'#'+${dog.id}+'-tab'" type="button" role="tab">
-						<span th:text="${dog.name}"></span>
-					</button>
-				</div>
-
-<!--			dog tab panes  	-->
-				<div class="tab-content" id="v-pills-tabContent">
-
-					<div th:each="dog, iterStat : ${dogs}" th:if="${iterStat.index == 0}"
-						 class="tab-pane fade show active" th:id="${dog.id}+'-tab'" role="tabpanel" tabindex="0">
-						<form class="dog-form" th:method="POST" th:action="@{/dogs/{dogId}(dogId=${dog.id})}">
-							<label for="name">Name</label>
-							<input th:value="${dog.name}" type="text" th:name="name">
-
-							<label for="breed">Breed</label>
-							<select th:value="${dog.breed}" th:name="breed">
-								<option th:each="breed : ${dogBreeds}" th:value="${#strings.capitalize(breed.toString())}"         th:selected="${dog.breed == #strings.capitalize(breed.toString())}">
-									<span th:text="${#strings.capitalize(breed.toString())}"></span>
-								</option>
-							</select>
-
-							<label for="age">Age</label>
-							<input th:value="${dog.age}" type="number" th:name="age">
-
-							<label for="sex">Sex</label>
-							<select th:name="sex" required>
-								<div th:if="${dog.sex} == 'M'">
-									<option selected value="M">Male</option>
-									<option value="F">Female</option>
-								</div>
-								<div th:if="${dog.sex} == 'F'">
-									<option value="M">Male</option>
-									<option selected value="F">Female</option>
-								</div>
-							</select>
-
-							<label for="rabies-vaccination">Has Rabies Vaccination?</label>
-							<input th:type="checkbox" th:checked="${dog.rabiesVaccinationStatus}" th:name="rabiesVaccinationStatus">
-
-							<button type="submit" class="btn btn-success">Save</button>
-						</form>
-						<form th:method="POST" th:action="@{/dogs/{dogId}(dogId=${dog.id})}">
-							<input hidden th:name="_method" th:value="DELETE">
-							<input hidden th:value="${dog.id}" type="number" th:name="dogId">
-							<input hidden th:value="${dog.name}" type="text" th:name="name">
-							<input hidden th:value="${dog.breed}" type="text" th:name="breed">
-							<input hidden th:value="${dog.age}" type="text" th:name="age">
-							<input hidden th:value="${dog.sex}" type="text" th:name="sex">
-							<input hidden th:value="${dog.rabiesVaccinationStatus}" type="checkbox" th:name="rabiesVaccinationStatus">
-
-							<button th:type="submit" class="btn btn-danger">Delete</button>
-						</form>
+					<!--			dog tab buttons	  -->
+					<div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist">
+						<button class="btn btn-success"
+								data-bs-toggle="modal" data-bs-target="#addDogModal" type="button" role="tab">
+							<span>Add Dog</span>
+						</button>
+						<button th:each="dog, iterStat : ${dogs}" th:if="${iterStat.index == 0}" class="nav-link active"
+								data-bs-toggle="pill" th:data-bs-target="'#'+${dog.id}+'-tab'" type="button" role="tab">
+							<span th:text="${dog.name}"></span>
+						</button>
+						<button th:each="dog, iterStat : ${dogs}" th:if="${iterStat.index != 0}" class="nav-link"
+								data-bs-toggle="pill" th:data-bs-target="'#'+${dog.id}+'-tab'" type="button" role="tab">
+							<span th:text="${dog.name}"></span>
+						</button>
 					</div>
 
-					<div th:each="dog, iterStat : ${dogs}" th:if="${iterStat.index != 0}" class="tab-pane fade"
-						 th:id="${dog.id}+'-tab'" role="tabpanel" tabindex="0">
-						<form class="dog-form" th:method="POST" th:action="@{/dogs/{dogId}(dogId=${dog.id})}">
-							<label for="name">Name</label>
-							<input th:value="${dog.name}" type="text" th:name="name">
+					<!--			dog tab panes  	-->
+					<div class="tab-content" id="v-pills-tabContent">
 
-							<label for="breed">Breed</label>
-							<select th:value="${dog.breed}" th:name="breed">
-								<option th:each="breed : ${dogBreeds}" th:value="${#strings.capitalize(breed.toString())}"         th:selected="${dog.breed == #strings.capitalize(breed.toString())}">
-									<span th:text="${#strings.capitalize(breed.toString())}"></span>
-								</option>
-							</select>
+						<div th:each="dog, iterStat : ${dogs}" th:if="${iterStat.index == 0}"
+							 class="tab-pane fade show active" th:id="${dog.id}+'-tab'" role="tabpanel" tabindex="0">
+							<form class="dog-form" th:method="POST" th:action="@{/dogs/{dogId}(dogId=${dog.id})}">
+								<label for="name">Name</label>
+								<input th:value="${dog.name}" type="text" th:name="name">
 
-							<label for="age">Age</label>
-							<input th:value="${dog.age}" type="number" th:name="age">
+								<label for="breed">Breed</label>
+								<select th:value="${dog.breed}" th:name="breed">
+									<option th:each="breed : ${dogBreeds}"
+											th:value="${#strings.capitalize(breed.toString())}"
+											th:selected="${dog.breed == #strings.capitalize(breed.toString())}">
+										<span th:text="${#strings.capitalize(breed.toString())}"></span>
+									</option>
+								</select>
 
-							<label for="sex">Sex</label>
-							<select th:name="sex" required>
-								<div th:if="${dog.sex} == 'M'">
-									<option selected value="M">Male</option>
-									<option value="F">Female</option>
-								</div>
-								<div th:if="${dog.sex} == 'F'">
-									<option value="M">Male</option>
-									<option selected value="F">Female</option>
-								</div>
-							</select>
+								<label for="age">Age</label>
+								<input th:value="${dog.age}" type="number" th:name="age">
 
-							<label for="rabies-vaccination">Has Rabies Vaccination?</label>
-							<input th:type="checkbox" th:checked="${dog.rabiesVaccinationStatus}" th:name="rabiesVaccinationStatus">
+								<label for="sex">Sex</label>
+								<select th:name="sex" required>
+									<div th:if="${dog.sex} == 'M'">
+										<option selected value="M">Male</option>
+										<option value="F">Female</option>
+									</div>
+									<div th:if="${dog.sex} == 'F'">
+										<option value="M">Male</option>
+										<option selected value="F">Female</option>
+									</div>
+								</select>
 
-							<button type="submit" class="btn btn-success">Save</button>
-						</form>
-						<form th:method="POST" th:action="@{/dogs/{dogId}(dogId=${dog.id})}">
-							<input hidden th:name="_method" th:value="DELETE">
-							<input hidden th:value="${dog.id}" type="number" th:name="dogId">
-							<input hidden th:value="${dog.name}" type="text" th:name="name">
-							<input hidden th:value="${dog.breed}" type="text" th:name="breed">
-							<input hidden th:value="${dog.age}" type="text" th:name="age">
-							<input hidden th:value="${dog.sex}" type="text" th:name="sex">
-							<input hidden th:value="${dog.rabiesVaccinationStatus}" type="checkbox" th:name="rabiesVaccinationStatus">
+								<label for="rabies-vaccination">Has Rabies Vaccination?</label>
+								<input th:type="checkbox" th:checked="${dog.rabiesVaccinationStatus}"
+									   th:name="rabiesVaccinationStatus">
 
-							<button th:type="submit" class="btn btn-danger">Delete</button>
-						</form>
+								<button type="submit" class="btn btn-success">Save</button>
+							</form>
+							<form th:method="POST" th:action="@{/dogs/{dogId}(dogId=${dog.id})}">
+								<input hidden th:name="_method" th:value="DELETE">
+								<input hidden th:value="${dog.id}" type="number" th:name="dogId">
+								<input hidden th:value="${dog.name}" type="text" th:name="name">
+								<input hidden th:value="${dog.breed}" type="text" th:name="breed">
+								<input hidden th:value="${dog.age}" type="text" th:name="age">
+								<input hidden th:value="${dog.sex}" type="text" th:name="sex">
+								<input hidden th:value="${dog.rabiesVaccinationStatus}" type="checkbox"
+									   th:name="rabiesVaccinationStatus">
+
+								<button th:type="submit" class="btn btn-danger">Delete</button>
+							</form>
+						</div>
+
+						<div th:each="dog, iterStat : ${dogs}" th:if="${iterStat.index != 0}" class="tab-pane fade"
+							 th:id="${dog.id}+'-tab'" role="tabpanel" tabindex="0">
+							<form class="dog-form" th:method="POST" th:action="@{/dogs/{dogId}(dogId=${dog.id})}">
+								<label for="name">Name</label>
+								<input th:value="${dog.name}" type="text" th:name="name">
+
+								<label for="breed">Breed</label>
+								<select th:value="${dog.breed}" th:name="breed">
+									<option th:each="breed : ${dogBreeds}"
+											th:value="${#strings.capitalize(breed.toString())}"
+											th:selected="${dog.breed == #strings.capitalize(breed.toString())}">
+										<span th:text="${#strings.capitalize(breed.toString())}"></span>
+									</option>
+								</select>
+
+								<label for="age">Age</label>
+								<input th:value="${dog.age}" type="number" th:name="age">
+
+								<label for="sex">Sex</label>
+								<select th:name="sex" required>
+									<div th:if="${dog.sex} == 'M'">
+										<option selected value="M">Male</option>
+										<option value="F">Female</option>
+									</div>
+									<div th:if="${dog.sex} == 'F'">
+										<option value="M">Male</option>
+										<option selected value="F">Female</option>
+									</div>
+								</select>
+
+								<label for="rabies-vaccination">Has Rabies Vaccination?</label>
+								<input th:type="checkbox" th:checked="${dog.rabiesVaccinationStatus}"
+									   th:name="rabiesVaccinationStatus">
+
+								<button type="submit" class="btn btn-success">Save</button>
+							</form>
+							<form th:method="POST" th:action="@{/dogs/{dogId}(dogId=${dog.id})}">
+								<input hidden th:name="_method" th:value="DELETE">
+								<input hidden th:value="${dog.id}" type="number" th:name="dogId">
+								<input hidden th:value="${dog.name}" type="text" th:name="name">
+								<input hidden th:value="${dog.breed}" type="text" th:name="breed">
+								<input hidden th:value="${dog.age}" type="text" th:name="age">
+								<input hidden th:value="${dog.sex}" type="text" th:name="sex">
+								<input hidden th:value="${dog.rabiesVaccinationStatus}" type="checkbox"
+									   th:name="rabiesVaccinationStatus">
+
+								<button th:type="submit" class="btn btn-danger">Delete</button>
+							</form>
+						</div>
+
 					</div>
 
 				</div>
-
 			</div>
+
+			<!--  profile tab  -->
+			<div class="tab-pane fade" id="pills-profile" role="tabpanel" tabindex="0">...</div>
+
+			<!--  settings tab  -->
+			<div class="tab-pane fade" id="pills-contact" role="tabpanel" tabindex="0">...</div>
+
 		</div>
-
-		<!--  profile tab  -->
-		<div class="tab-pane fade" id="pills-profile" role="tabpanel" tabindex="0">...</div>
-
-		<!--  settings tab  -->
-		<div class="tab-pane fade" id="pills-contact" role="tabpanel" tabindex="0">...</div>
-
 	</div>
 </div>
 
@@ -193,7 +204,8 @@
 					</select>
 
 					<label for="rabies-vaccination">Has Rabies Vaccination?</label>
-					<input th:type="checkbox" id="rabies-vaccination" th:field="*{rabiesVaccinationStatus}" th:checked="${dog.rabiesVaccinationStatus}">
+					<input th:type="checkbox" id="rabies-vaccination" th:field="*{rabiesVaccinationStatus}"
+						   th:checked="${dog.rabiesVaccinationStatus}">
 
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>

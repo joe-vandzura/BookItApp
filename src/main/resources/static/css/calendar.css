@@ -1,4 +1,6 @@
 #picker-container {
     min-height: 90vh;
-    margin: 2em;
+    padding: 2em;
+    background-image: url('../img/bones_background.jpeg');
+    background-repeat: repeat;
 }
