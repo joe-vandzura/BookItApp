@@ -23,6 +23,7 @@
 							th:text="${#temporals.format(appointment.appointmentTime, 'MMMM d, uuuu')}"></h5>
 						<h4 th:text="${'Time: '+appointment.appointmentTime}"></h4>
 						<p class="card-text" th:text="${'Appointment with ' + appointment.groomer.name}"></p>
+						<p class="card-text" th:text="${'For ' + appointment.dog.name}"></p>
 						<div class="d-flex">
 							<a th:href="@{/calendar/{appointmentId}(appointmentId=${appointment.id})}"
 							   class="btn btn-warning">Change</a>
@@ -49,6 +50,7 @@
 							th:text="${#temporals.format(appointment.appointmentTime, 'MMMM d, uuuu')}"></h5>
 						<h4 th:text="${'Time: '+appointment.appointmentTime}"></h4>
 						<p class="card-text" th:text="${'Appointment with ' + appointment.groomer.name}"></p>
+						<p class="card-text" th:text="${'For ' + appointment.dog.name}"></p>
 					</div>
 				</div>
 			</li>

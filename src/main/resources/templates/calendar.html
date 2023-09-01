@@ -55,7 +55,7 @@
 				<input hidden id="selected-time-input" name="selected-time" type="text">
 				<p>Select your dog:
 					<span><select name="dog-id" required>
-					<option th:each="dog : ${dogs}" th:value="${dog.id}">
+					<option th:each="dog : ${dogs}" th:value="${dog.id}" th:selected="${selectedDog != null} and ${dog.id} == ${selectedDog.id}">
 						<span th:text="${dog.name}"></span>
 					</option>
 				</select></span>

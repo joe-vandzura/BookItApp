@@ -2,6 +2,7 @@ package com.bookitapp.Book.It.controllers;
 
 import com.bookitapp.Book.It.models.Dog;
 import com.bookitapp.Book.It.models.User;
+import com.bookitapp.Book.It.repositories.AppointmentRepository;
 import com.bookitapp.Book.It.repositories.DogRepository;
 import com.bookitapp.Book.It.services.AuthService;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +22,7 @@ import java.util.List;
 public class CalendarController {
 
     private final DogRepository dogRepo;
+    private final AppointmentRepository appointmentRepo;
 
     @GetMapping
     String calendarPage(Model model) {
@@ -40,8 +42,16 @@ public class CalendarController {
     String calendarPage(
             @PathVariable("changeAppointmentId") @Nullable Long changeAppointmentId,
             Model model) {
+        boolean userIsAuthenticated = AuthService.isLoggedIn();
 
-        model.addAttribute("changeAppointmentId", changeAppointmentId);
+        if (userIsAuthenticated) {
+            User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            List<Dog> dogs = dogRepo.findByOwnerId(loggedInUser.getId());
+            Dog selectedDog = appointmentRepo.findById(changeAppointmentId).get().getDog();
+            model.addAttribute("dogs", dogs);
+            model.addAttribute("selectedDog", selectedDog);
+            model.addAttribute("changeAppointmentId", changeAppointmentId);
+        }
 
         return "calendar";
     }
