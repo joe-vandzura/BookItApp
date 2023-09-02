@@ -150,7 +150,7 @@
 
         $("#submit-edit-button").on('click', async function () {
 
-            let hasRabiesVaccination = $("#edit-rabies-input").val() === "on";
+            let hasRabiesVaccination = $("#edit-rabies-input").prop('checked');
 
             let dataToUpdate = {
                 name: $("#edit-name-input").val(),
