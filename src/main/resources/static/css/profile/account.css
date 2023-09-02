@@ -3,10 +3,15 @@
     padding: 2em;
     background-image: url('../../img/bones_background.jpeg');
     background-repeat: repeat;
+    min-height: 80vh;;
 }
 
 #tab-container {
     background-color: white;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 2em;
+    border: #e4ffb5 5px solid;
 }
 
 .tab-pane {
@@ -17,4 +22,12 @@
 .dog-form {
     display: flex;
     flex-direction: column;
+}
+
+#dogs-list-group {
+    max-width: 30%;
+}
+
+#my-dogs-group {
+    min-width: 50%;
 }

@@ -83,7 +83,6 @@ public class MyProfileController {
                     messageNode.fieldNames().forEachRemaining(breeds::add);
 
                     model.addAttribute("dogBreeds", breeds);
-                    System.out.println(breeds);
                 } else {
                     System.out.println("API request failed with response code: " + responseCode);
                 }

@@ -15,4 +15,20 @@
 
 .appointment-list-item {
     list-style: none;
+    border: transparent solid 5px;
+
+}
+
+.appointment-list-item:hover {
+    list-style: none;
+    border: #e4ffb5 solid 5px;
+}
+
+.appointment-a {
+    color: black;
+    text-decoration: none;
+}
+
+.appointment-a:hover {
+    color: #0d9413;
 }
