@@ -126,6 +126,7 @@
     margin-bottom: 15px;
     padding: 10px 0px 10px 0px;
     text-align: center;
+    text-decoration: none;
 }
 
 .myc-available-time.selected, .myc-available-time:hover {
