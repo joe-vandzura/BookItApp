@@ -19,10 +19,10 @@
 			<li th:each="appointment : ${upcomingAppointments}" class="appointment-list-item m-3">
 				<div class="card" style="width: 18rem;">
 					<div class="card-body">
-						<a class="appointment-a" th:href="@{/appointments/{appointmentId}(appointmnetId=${appointment.id})}">
+						<a class="appointment-a" th:href="@{/appointments/{appointmentId}(appointmentId=${appointment.id})}">
 							<h5 class="card-title"
 								th:text="${#temporals.format(appointment.appointmentTime, 'MMMM d, uuuu')}"></h5>
-							<h4 th:text="${'Time: '+appointment.appointmentTime}"></h4>
+							<h4 th:text="${#temporals.format(appointment.appointmentTime, 'h:mm a')}"></h4>
 							<p class="card-text" th:text="${'Appointment with ' + appointment.groomer.name}"></p>
 							<p class="card-text" th:text="${'For ' + appointment.dog.name}"></p>
 						</a>
@@ -50,7 +50,7 @@
 					<div class="card-body">
 						<h5 class="card-title"
 							th:text="${#temporals.format(appointment.appointmentTime, 'MMMM d, uuuu')}"></h5>
-						<h4 th:text="${'Time: '+appointment.appointmentTime}"></h4>
+						<h4 th:text="${#temporals.format(appointment.appointmentTime, 'h:mm a')}"></h4>
 						<p class="card-text" th:text="${'Appointment with ' + appointment.groomer.name}"></p>
 						<p class="card-text" th:text="${'For ' + appointment.dog.name}"></p>
 					</div>
