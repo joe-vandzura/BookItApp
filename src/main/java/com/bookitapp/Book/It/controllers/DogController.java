@@ -72,10 +72,10 @@ public class DogController {
     public String changeDog(
             @PathVariable("dogId") Long dogId,
             @RequestParam("_method") @Nullable String method,
-            @RequestParam("name") String name,
-            @RequestParam("breed") String breed,
-            @RequestParam("age") int age,
-            @RequestParam("sex") char sex,
+            @RequestParam("name") @Nullable String name,
+            @RequestParam("breed") @Nullable String breed,
+            @RequestParam("age") @Nullable Integer age,
+            @RequestParam("sex") @Nullable Character sex,
             @RequestParam("rabiesVaccinationStatus") @Nullable Boolean rabiesVaccinationStatus
             ) {
 

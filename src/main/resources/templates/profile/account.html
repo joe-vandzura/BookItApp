@@ -46,6 +46,10 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<h1 class="modal-title fs-5">Edit Dog</h1>
+				<form id="delete-dog-form" th:method="POST">
+					<input hidden th:name="_method" th:value="DELETE">
+					<button type="submit">Delete</button>
+				</form>
 				<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 			</div>
 			<div class="modal-body">
@@ -123,6 +127,7 @@
                         $("#edit-age-input").val(data.age);
                         $("#edit-sex-input").val(data.sex);
                         $("#edit-rabies-input").prop('checked', data.hasRabiesVaccination);
+                        $("#delete-dog-form").prop("action", "/dogs/" + data.id);
                         $("#editDogModal").modal('show');
                     } else {
                         console.log("Failed to fetch availability data");
