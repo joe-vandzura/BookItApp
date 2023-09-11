@@ -15,7 +15,9 @@
 	<div class="appointment-box">
 		<h3>Upcoming Appointments</h3>
 
-		<ul class="d-flex flex-wrap">
+		<h4 th:if="${upcomingAppointments.isEmpty()}">No upcoming appointments.</h4>
+
+		<ul th:if="${!upcomingAppointments.isEmpty()}" class="d-flex flex-wrap">
 			<li th:each="appointment : ${upcomingAppointments}" class="appointment-list-item m-3">
 				<div class="card" style="width: 18rem;">
 					<div class="card-body">
@@ -44,7 +46,9 @@
 	<div class="appointment-box">
 		<h3>Past Appointments</h3>
 
-		<ul class="d-flex flex-wrap">
+		<h4 th:if="${prevAppointments.isEmpty()}">No past appointments.</h4>
+
+		<ul th:if="${!prevAppointments.isEmpty()}" class="d-flex flex-wrap">
 			<li th:each="appointment : ${prevAppointments}" class="appointment-list-item m-3">
 				<div class="card" style="width: 18rem;">
 					<div class="card-body">
