@@ -92,20 +92,24 @@
         this.getAvailableTimes = function() {
             var tmp = ``;
             for (i = 0; i < 7; i++) {
-                var tmpAvailTimes = ``;
-                $.each(settings.availability[i], function() {
-                    tmpAvailTimes += `
+                if (settings.availability[i].length === 0) {
+                    tmp += "<h4>No available times.</h4>";
+                } else {
+                    var tmpAvailTimes = ``;
+                    $.each(settings.availability[i], function() {
+                        tmpAvailTimes += `
                         <a href="javascript:;" class="myc-available-time" data-time="` + this + `" data-date="` + formatDate(settings.startDate.addDays(i)) + `">
                             ` + this + `
                         </a>
                     `;
-                });
-                tmp += `
+                    });
+                    tmp += `
                     <div class="myc-day-time-container" id="myc-day-time-container-` + i + `">
                         ` + tmpAvailTimes + `
                         <div style="clear:both;"></div>
                     </div>
                 `;
+                }
             }
             return tmp
         }
