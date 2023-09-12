@@ -93,7 +93,12 @@
             var tmp = ``;
             for (i = 0; i < 7; i++) {
                 if (settings.availability[i].length === 0) {
-                    tmp += "<h4>No available times.</h4>";
+                    tmp += `
+                    <div class="myc-day-time-container" id="myc-day-time-container-` + i + `">
+                        <h4>No available times.</h4>
+                        <div style="clear:both;"></div>
+                    </div>
+                `;
                 } else {
                     var tmpAvailTimes = ``;
                     $.each(settings.availability[i], function() {

@@ -76,6 +76,11 @@ public class AppointmentController {
             User loggedInUserWithCurrentProps = userRepo.findById(loggedInUser.getId()).get();
             Dog dog = dogRepo.findById(dogId).get();
 
+            if (timeInput.length() == 4 && Integer.parseInt(timeInput.substring(0, 1)) < 9) {
+                int hour = Integer.parseInt(timeInput.substring(0, 1)) + 12;
+                timeInput = hour + timeInput.substring(1);
+            }
+
             String dateTimeString = dateInput + "T" + timeInput;
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
             LocalDateTime dateTime = LocalDateTime.parse(dateTimeString, formatter);
