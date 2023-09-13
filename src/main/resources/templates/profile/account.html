@@ -14,27 +14,47 @@
 <div id="page-container">
 	<div id="tab-container">
 
-		<div id="my-dogs-group">
-			<div class="d-flex">
-			<h3>My Dogs</h3>
-				<button type="button" class="btn btn-success rounded-pill" data-bs-toggle="modal" data-bs-target="#addDogModal">
+		<div id="my-dogs-group" class="settings-container">
+			<div id="dogs-group-header" class="d-flex">
+				<h3>My Dogs</h3>
+				<button id="add-dog-button" type="button" data-bs-toggle="modal"
+						data-bs-target="#addDogModal">
 					+
 				</button>
 			</div>
 			<div id="dogs-list-group" class="list-group">
-				<button th:id="${dog.id}" th:each="dog : ${dogs}" type="button" class="dog-button btn btn-success m-1">
+				<button th:if="${!dogs.isEmpty()}" th:id="${dog.id}" th:each="dog : ${dogs}" type="button" class="dog-button btn btn-success m-1">
 					<span th:text="${dog.name}"></span>
 				</button>
-
+				<h4 th:if="${dogs.isEmpty()}">No dogs to display.</h4>
 			</div>
 		</div>
 
-		<div id="profile-info-group">
-			<h3>Profile Info</h3>
-		</div>
+		<div id="profile-info-group" class="settings-container">
+			<h3>Profile Info <span id="save-param" th:if="${param.saved}">Profile saved!</span></h3>
+			<form id="profile-form" th:method="POST" th:action="@{/my-profile/account}">
+				<div class="profile-form-input">
+					<label>First Name</label>
+					<input th:name="first-name" type="text" th:value="${user.firstName}">
+				</div>
 
-		<div>
-			<h3>Settings</h3>
+				<div class="profile-form-input">
+					<label>Last Name</label>
+					<input th:name="last-name" type="text" th:value="${user.lastName}">
+				</div>
+
+				<div class="profile-form-input">
+					<label>Username</label>
+					<input th:name="username" type="text" th:value="${user.username}">
+				</div>
+
+				<div class="profile-form-input">
+					<label>Email</label>
+					<input th:name="email" type="text" th:value="${user.email}">
+				</div>
+
+				<button class="btn btn-success" type="submit">Save</button>
+			</form>
 		</div>
 
 	</div>
@@ -132,7 +152,7 @@
                     } else {
                         console.log("Failed to fetch availability data");
                     }
-				});
+                });
 
             } catch (error) {
                 console.log("Error fetching availability data:", error);
@@ -146,10 +166,10 @@
             let dataToUpdate = {
                 name: $("#edit-name-input").val(),
                 breed: $("#edit-breed-input").val(),
-				age: $("#edit-age-input").val(),
-				sex: $("#edit-sex-input").val(),
-				hasRabiesVaccination: hasRabiesVaccination
-			};
+                age: $("#edit-age-input").val(),
+                sex: $("#edit-sex-input").val(),
+                hasRabiesVaccination: hasRabiesVaccination
+            };
 
 
             try {

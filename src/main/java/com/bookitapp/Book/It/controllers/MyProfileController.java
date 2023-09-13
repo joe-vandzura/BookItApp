@@ -5,6 +5,7 @@ import com.bookitapp.Book.It.models.Dog;
 import com.bookitapp.Book.It.models.User;
 import com.bookitapp.Book.It.repositories.AppointmentRepository;
 import com.bookitapp.Book.It.repositories.DogRepository;
+import com.bookitapp.Book.It.repositories.UserRepository;
 import com.bookitapp.Book.It.services.AuthService;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -18,12 +19,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/my-profile")
@@ -31,6 +30,7 @@ import java.util.stream.Collectors;
 public class MyProfileController {
 
     private final AppointmentRepository appointmentRepo;
+    private final UserRepository userRepo;
     private final DogRepository dogRepo;
 
     @GetMapping("/appointments")
@@ -57,6 +57,8 @@ public class MyProfileController {
 
         if (userIsAuthenticated) {
             User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            User actualLoggedInUser = userRepo.findById(loggedInUser.getId()).get();
+            model.addAttribute("user", actualLoggedInUser);
             model.addAttribute("dog", new Dog());
             List<Dog> dogs = dogRepo.findByOwnerId(loggedInUser.getId());
 
@@ -95,6 +97,25 @@ public class MyProfileController {
             return "redirect:/login";
         }
         return "profile/account";
+    }
+
+    @PostMapping("/account")
+    public String editProfile(
+            @RequestParam("first-name") String firstName,
+            @RequestParam("last-name") String lastName,
+            @RequestParam("username") String username,
+            @RequestParam("email") String email
+    ) {
+        System.out.println("INSIDE OF POST MAPPING");
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User actualUser = userRepo.findById(loggedInUser.getId()).get();
+        actualUser.setFirstName(firstName);
+        actualUser.setLastName(lastName);
+        actualUser.setUsername(username);
+        actualUser.setEmail(email);
+        userRepo.save(actualUser);
+
+        return "redirect:/my-profile/account?saved";
     }
 
 }

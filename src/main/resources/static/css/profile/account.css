@@ -12,6 +12,7 @@
     justify-content: space-evenly;
     padding: 2em;
     border: #e4ffb5 5px solid;
+    width: 100%;
 }
 
 .tab-pane {
@@ -25,9 +26,40 @@
 }
 
 #dogs-list-group {
-    max-width: 30%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 
-#my-dogs-group {
-    min-width: 30%;
+#dogs-group-header {
+    align-items: center;
+}
+
+.settings-container {
+    max-width: 50%;
+}
+
+#profile-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-form-input {
+    margin: 10px;
+}
+
+#save-param {
+    font-size: small;
+    font-style: italic;
+}
+
+#add-dog-button {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    background-color: #0d9413;
+    color: white;
+    border: none;
+    border-radius: 20%;
+    margin-left: 10px;
 }
