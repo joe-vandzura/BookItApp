@@ -11,7 +11,7 @@ public class DataSourceConfig {
 
     @Bean
     public DataSource dataSource() {
-        String dbUrl = System.getenv("CLEARDB_GRAY_URL");
+        String dbUrl = "jdbc:" + System.getenv("CLEARDB_GRAY_URL");
         String dbUsername = System.getenv("PROD_DB_USERNAME");
         String dbPassword = System.getenv("PROD_DB_PASSWORD");
 
