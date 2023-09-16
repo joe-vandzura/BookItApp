@@ -4,13 +4,10 @@ import com.bookitapp.Book.It.models.Appointment;
 import com.bookitapp.Book.It.repositories.AppointmentRepository;
 import com.bookitapp.Book.It.services.AuthService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
 import java.time.*;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/groomers")
