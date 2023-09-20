@@ -1,74 +1,169 @@
-.carousel-container {
-    height: 30em;
+/* SMALL VIEW */
+@media screen and (max-width: 480px) {
+
+    #index-top-bar {
+        font-size: x-small;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        background-color: #304e18;
+        text-align: center;
+        border-bottom: #cadfbc solid 1px;
+        overflow: hidden;
+        height: 3.5em;
+    }
+
+    #page-container {
+        background-image: url('../img/bones_background.jpeg');
+        background-repeat: repeat;
+    }
+
+    #address-span {
+        display: none;
+    }
+
+    #hours-span {
+        min-width: 50%;
+        max-width: 75%;
+        display: flex;
+        justify-content: center;
+        flex-wrap: nowrap;
+    }
+
+    #image-container {
+        min-height: 172px;
+        max-height: 250px;
+        flex-grow: 1;
+        background-image: url('../img/dog-haircut.jpeg');
+        background-size: 100%;
+        background-repeat: no-repeat;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border-bottom: solid 5px #e4ffb5;
+        width: 100%;
+    }
+
+    #image-container-text-box {
+        font-size: small;
+        font-weight: bolder;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 159px;
+        padding-top: 10px;
+    }
+
+    #staff-container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 2em 0 2em 0;
+    }
+
+    #emp-1-container {
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+        border: #e4ffb5 solid 5px;
+    }
+
+    #emp-2-container {
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+        border: #e4ffb5 solid 5px;
+    }
+
+    .emp-img {
+        width: 60%;
+        border-radius: 10%;
+        align-self: center;
+        margin: 10px 0 10px 0;
+        border: #e4ffb5 3px solid;
+    }
+
 }
 
-.carousel-img {
-    height: 100%;
-}
 
-#page-container {
-    background-image: url('../img/bones_background.jpeg');
-    background-repeat: repeat;
-}
+@media screen and (min-width: 1025px) {
 
-#index-top-bar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    background-color: #304e18;
-    text-align: center;
-    border-bottom: #cadfbc solid 1px;
-    overflow: hidden;
-    height: 3.5em;
-}
+    .carousel-container {
+        height: 30em;
+    }
 
-.top-bar-element {
-    padding: 3px 0 3px 0;
-}
+    .carousel-img {
+        height: 100%;
+    }
 
-#image-container {
-    height: 40em;
-    background-image: url('../img/dog-haircut.jpeg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border-bottom: solid 5px #e4ffb5;
-}
+    #page-container {
+        background-image: url('../img/bones_background.jpeg');
+        background-repeat: repeat;
+    }
 
-#image-container-text-box {
-    font-size: xxx-large;
-    font-weight: bolder;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
-}
+    #index-top-bar {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        background-color: #304e18;
+        text-align: center;
+        border-bottom: #cadfbc solid 1px;
+        overflow: hidden;
+        height: 3.5em;
+    }
 
-#staff-container {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 2em 0 2em 0;
-}
+    .top-bar-element {
+        padding: 3px 0 3px 0;
+    }
 
-#emp-1-container {
-    display: flex;
-    flex-direction: row;
-    width: 80%;
-    border: #e4ffb5 solid 5px;
-}
+    #image-container {
+        height: 40em;
+        background-image: url('../img/dog-haircut.jpeg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border-bottom: solid 5px #e4ffb5;
+    }
 
-#emp-2-container {
-    display: flex;
-    flex-direction: row;
-    width: 80%;
-    border: #e4ffb5 solid 5px;
-}
+    #image-container-text-box {
+        font-size: xxx-large;
+        font-weight: bolder;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
 
-.emp-img {
-    height: 60vh;
+    #staff-container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 2em 0 2em 0;
+    }
+
+    #emp-1-container {
+        display: flex;
+        flex-direction: row;
+        width: 80%;
+        border: #e4ffb5 solid 5px;
+    }
+
+    #emp-2-container {
+        display: flex;
+        flex-direction: row;
+        width: 80%;
+        border: #e4ffb5 solid 5px;
+    }
+
+    .emp-img {
+        height: 60vh;
+    }
 }
