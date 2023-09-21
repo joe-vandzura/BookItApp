@@ -6,7 +6,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-
 import javax.sql.DataSource;
 
 @Configuration
@@ -19,7 +18,6 @@ public class DataSourceConfig {
     @Profile("heroku")
     @Bean
     public DataSource herokuDataSource() {
-        System.out.println("INSIDE THE HEROKU DATASOURCE CONFIGURATION");
         String dbURL = System.getenv("CLEARDB_GRAY_URL");
         String dbUsername = System.getenv("PROD_DB_USERNAME");
         String dbPassword = System.getenv("PROD_DB_PASSWORD");
@@ -36,7 +34,6 @@ public class DataSourceConfig {
     @Profile("local")
     @Bean
     public DataSource localDataSource() {
-        System.out.println("INSIDE THE LOCAL DATASOURCE CONFIGURATION");
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
         dataSource.setUrl(localDatasourceProperties.getUrl());
