@@ -1,10 +1,11 @@
 package com.bookitapp.Book.It.config;
 
-import com.bookitapp.Book.It.DatabaseKeys;
 import lombok.AllArgsConstructor;
-import org.springframework.boot.jdbc.DataSourceBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import javax.sql.DataSource;
 
@@ -12,40 +13,34 @@ import javax.sql.DataSource;
 @AllArgsConstructor
 public class DataSourceConfig {
 
-    private DatabaseKeys databaseKeys;
+    @Autowired
+    private LocalDatasourceProperties localDatasourceProperties;
 
+    @Profile("heroku")
     @Bean
-    public DataSource dataSource() {
-        System.out.println("HERE");
+    public DataSource herokuDataSource() {
+        String dbURL = System.getenv("CLEARDB_GRAY_URL");
+        String dbUsername = System.getenv("PROD_DB_USERNAME");
+        String dbPassword = System.getenv("PROD_DB_PASSWORD");
 
-        String dbURL;
-        String dbUsername;
-        String dbPassword;
+        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
+        dataSource.setUrl(dbURL);
+        dataSource.setUsername(dbUsername);
+        dataSource.setPassword(dbPassword);
 
-        if (System.getenv("CLEARDB_GRAY_URL") == null) {
-            dbURL = databaseKeys.databaseURL;
-        } else {
-            dbURL = System.getenv("CLEARDB_GRAY_URL");
-        }
+        return dataSource;
+    }
 
-        if (System.getenv("PROD_DB_USERNAME") == null) {
-            dbUsername = databaseKeys.databaseUsername;
-        } else {
-            dbUsername = System.getenv("PROD_DB_USERNAME");
-        }
+    @Profile("local")
+    @Bean
+    public DataSource localDataSource() {
+        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
+        dataSource.setUrl(localDatasourceProperties.getUrl());
+        dataSource.setUsername(localDatasourceProperties.getUsername());
+        dataSource.setPassword(localDatasourceProperties.getPassword());
 
-        if (System.getenv("PROD_DB_PASSWORD") == null) {
-            dbPassword = databaseKeys.databasePassword;
-        } else {
-            dbPassword = System.getenv("PROD_DB_PASSWORD");
-        }
-
-
-        return DataSourceBuilder
-                .create()
-                .url(dbURL)
-                .username(dbUsername)
-                .password(dbPassword)
-                .build();
+        return dataSource;
     }
 }
