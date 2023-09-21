@@ -15,10 +15,10 @@ public class DataSourceConfig {
     @Autowired
     private LocalDatasourceProperties localDatasourceProperties;
 
-    @Profile("heroku")
+    @Profile({"heroku"})
     @Bean
     public DataSource herokuDataSource() {
-        String dbURL = System.getenv("CLEARDB_GRAY_URL");
+        String dbURL = "jdbc:" + System.getenv("CLEARDB_GRAY_URL");
         String dbUsername = System.getenv("PROD_DB_USERNAME");
         String dbPassword = System.getenv("PROD_DB_PASSWORD");
 
