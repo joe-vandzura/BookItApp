@@ -15,7 +15,6 @@ public class DataSourceConfig {
     @Autowired
     private LocalDatasourceProperties localDatasourceProperties;
 
-    @Profile({"heroku"})
     @Bean
     public DataSource herokuDataSource() {
         String dbURL = "jdbc:" + System.getenv("CLEARDB_GRAY_URL");
