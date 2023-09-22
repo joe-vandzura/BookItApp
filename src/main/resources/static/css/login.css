@@ -16,7 +16,7 @@ body {
     margin: auto;
     background-color: #cadfbc;
     color: #304e18;
-    padding-bottom: 20px;
+    padding: 20px 20px 20px 20px;
 }
 
 #page-container {
@@ -32,6 +32,7 @@ body {
 #login-header {
     padding-top: 20px;
     padding-bottom: 20px;
+    text-align: center;
 }
 
 
