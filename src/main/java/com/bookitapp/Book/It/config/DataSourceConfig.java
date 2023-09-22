@@ -15,20 +15,20 @@ public class DataSourceConfig {
     @Autowired
     private LocalDatasourceProperties localDatasourceProperties;
 
-//    @Bean
-//    public DataSource herokuDataSource() {
-//        String dbURL = "jdbc:" + System.getenv("CLEARDB_GRAY_URL");
-//        String dbUsername = System.getenv("PROD_DB_USERNAME");
-//        String dbPassword = System.getenv("PROD_DB_PASSWORD");
-//
-//        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-//        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-//        dataSource.setUrl(dbURL);
-//        dataSource.setUsername(dbUsername);
-//        dataSource.setPassword(dbPassword);
-//
-//        return dataSource;
-//    }
+    @Bean
+    public DataSource herokuDataSource() {
+        String dbURL = "jdbc:" + System.getenv("CLEARDB_GRAY_URL");
+        String dbUsername = System.getenv("PROD_DB_USERNAME");
+        String dbPassword = System.getenv("PROD_DB_PASSWORD");
+
+        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
+        dataSource.setUrl(dbURL);
+        dataSource.setUsername(dbUsername);
+        dataSource.setPassword(dbPassword);
+
+        return dataSource;
+    }
 
     @Profile("local")
     @Bean
