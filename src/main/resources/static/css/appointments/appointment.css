@@ -25,3 +25,11 @@
     align-items: center;
     background-color: white;
 }
+
+#google-calendar-link {
+    color: #0dbc12;
+}
+
+#google-calendar-link:hover {
+    color: #304e18;
+}

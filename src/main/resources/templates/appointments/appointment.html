@@ -27,6 +27,8 @@
 			<h3 class="m-3"><span th:text="${#temporals.format(appointment.appointmentTime, 'h:mm a')}"></span> | <span
 					th:text="${appointment.groomer.name}"></span></h3>
 
+			<a id="google-calendar-link" target="_blank" th:href="@{'https://www.google.com/calendar/render?action=TEMPLATE&text=Grooming%20Appointment%20With%20' + ${appointment.groomer.name} + '&dates=' + ${#temporals.format(appointment.appointmentTime, 'yyyyMMdd')} + 'T' + ${#temporals.format(appointment.appointmentTime.plusHours(5), 'HHmmss')} + 'Z/' + ${#temporals.format(appointment.appointmentTime, 'yyyyMMdd')} + 'T' + ${#temporals.format(appointment.appointmentTime.plusHours(6), 'HHmmss')} + 'Z&details=Grooming%20appointment%20with%20' + ${appointment.groomer.name} + '%20for%20' + ${appointment.dog.name} + '.&location=Event+Location&sf=true&output=xml'}">Add to Google Calendar</a>
+
 			<p class="m-2"><span th:text="${#temporals.format(appointment.appointmentTime, 'MMMM d, uuuu')}"></span></p>
 			<p class="mb-2">18010 Bulverde Rd #104 | San Antonio, TX</p>
 

@@ -32,3 +32,11 @@
 .appointment-a:hover {
     color: #0d9413;
 }
+
+#google-calendar-link {
+    color: #0dbc12;
+}
+
+#google-calendar-link:hover {
+    color: #304e18;
+}
