@@ -1,42 +1,108 @@
-#appointments-container {
-    padding: 1.5em;
-    min-height: 80vh;
-    background-image: url('../../img/bones_background.jpeg');
-    background-repeat: repeat;
+@media screen and (max-width: 480px) {
+
+
+    #appointments-container {
+        padding: 1.5em;
+        min-height: 80vh;
+        background-image: url('../../img/bones_background.jpeg');
+        background-repeat: repeat;
+    }
+
+    .appointment-box {
+        background-color: white;
+        border: #e4ffb5 5px solid;
+        min-height: 35vh;
+        padding: 1em;
+        margin: 1em;
+    }
+
+    .appointment-list-item {
+        list-style: none;
+        border: transparent solid 5px;
+        width: 80%;
+        overflow: clip;
+    }
+
+    .appointment-list-item:hover {
+        list-style: none;
+        border: #e4ffb5 solid 5px;
+    }
+
+    .appointment-a {
+        color: black;
+        text-decoration: none;
+    }
+
+    .appointment-a:hover {
+        color: #0d9413;
+    }
+
+    #google-calendar-link {
+        color: #0dbc12;
+    }
+
+    #google-calendar-link:hover {
+        color: #304e18;
+    }
+
+    #card-btn-group {
+        flex-direction: column;
+    }
+
+    #cancel-btn {
+        color: white;
+        margin-bottom: 10px;
+    }
+
 }
 
-.appointment-box {
-    background-color: white;
-    border: #e4ffb5 5px solid;
-    min-height: 35vh;
-    padding: 1em;
-    margin: 1em;
-}
+@media screen and (min-width: 481px) {
 
-.appointment-list-item {
-    list-style: none;
-    border: transparent solid 5px;
+    #appointments-container {
+        padding: 1.5em;
+        min-height: 80vh;
+        background-image: url('../../img/bones_background.jpeg');
+        background-repeat: repeat;
+    }
 
-}
+    .appointment-box {
+        background-color: white;
+        border: #e4ffb5 5px solid;
+        min-height: 35vh;
+        padding: 1em;
+        margin: 1em;
+    }
 
-.appointment-list-item:hover {
-    list-style: none;
-    border: #e4ffb5 solid 5px;
-}
+    .appointment-list-item {
+        list-style: none;
+        border: transparent solid 5px;
 
-.appointment-a {
-    color: black;
-    text-decoration: none;
-}
+    }
 
-.appointment-a:hover {
-    color: #0d9413;
-}
+    .appointment-list-item:hover {
+        list-style: none;
+        border: #e4ffb5 solid 5px;
+    }
 
-#google-calendar-link {
-    color: #0dbc12;
-}
+    .appointment-a {
+        color: black;
+        text-decoration: none;
+    }
 
-#google-calendar-link:hover {
-    color: #304e18;
+    .appointment-a:hover {
+        color: #0d9413;
+    }
+
+    #google-calendar-link {
+        color: #0dbc12;
+    }
+
+    #google-calendar-link:hover {
+        color: #304e18;
+    }
+
+    #card {
+        width: 18em;
+    }
+
 }
