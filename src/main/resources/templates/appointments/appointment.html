@@ -3,7 +3,7 @@
 	  xmlns:th="http://www.thymeleaf.org"
 	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-	<meta charset="UTF-8">
+	<th:block th:insert="~{partials/meta-header :: meta-header}"></th:block>
 	<title>Title</title>
 	<th:block th:insert="~{partials/header-links :: header-links}"></th:block>
 	<link rel="stylesheet" th:href="@{/css/appointments/appointment.css}">
@@ -21,7 +21,7 @@
 
 		<div id="appointment-box">
 
-			<h5 class="m-3"><span th:text="${user.firstName}"></span>, we've got you confirmed for your appointment.
+			<h5 id="appointment-header" class="m-3"><span th:text="${user.firstName}"></span>, we've got you confirmed for your appointment.
 			</h5>
 
 			<h3 class="m-3"><span th:text="${#temporals.format(appointment.appointmentTime, 'h:mm a')}"></span> | <span

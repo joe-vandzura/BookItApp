@@ -1,35 +1,85 @@
-#page-container {
-    min-height: 80vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-image: url('../../img/bones_background.jpeg');
-    background-repeat: repeat;
+
+@media screen and (max-width: 674px) {
+
+    #page-container {
+        min-height: 80vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-image: url('../../img/bones_background.jpeg');
+        background-repeat: repeat;
+    }
+
+    #content-container {
+        display: flex;
+        flex-direction: column;
+        border: #e4ffb5 5px solid;
+        width: 80%;
+    }
+
+    #img-box {
+        background-image: url('../../img/dog_grooming.jpeg');
+        background-repeat: no-repeat;
+        overflow: hidden;
+    }
+
+    #appointment-box {
+        min-width: 20%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: white;
+        text-align: center;
+    }
+
+    #google-calendar-link {
+        color: #0dbc12;
+    }
+
+    #google-calendar-link:hover {
+        color: #304e18;
+    }
+
 }
 
-#content-container {
-    display: flex;
-    border: #e4ffb5 5px solid;
-}
+@media screen and (min-width: 675px) {
 
-#img-box {
-    background-image: url('../../img/dog_grooming.jpeg');
-    background-repeat: no-repeat;
-    overflow: hidden;
-}
+    #page-container {
+        min-height: 80vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-image: url('../../img/bones_background.jpeg');
+        background-repeat: repeat;
+    }
 
-#appointment-box {
-    min-width: 20%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: white;
-}
+    #content-container {
+        display: flex;
+        border: #e4ffb5 5px solid;
+        width: 80%;
+    }
 
-#google-calendar-link {
-    color: #0dbc12;
-}
+    #img-box {
+        background-image: url('../../img/dog_grooming.jpeg');
+        background-repeat: no-repeat;
+        overflow: hidden;
+    }
 
-#google-calendar-link:hover {
-    color: #304e18;
+    #appointment-box {
+        min-width: 20%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: white;
+        text-align: center;
+    }
+
+    #google-calendar-link {
+        color: #0dbc12;
+    }
+
+    #google-calendar-link:hover {
+        color: #304e18;
+    }
+
 }
