@@ -17,6 +17,7 @@ body {
     background-color: #cadfbc;
     color: #304e18;
     padding: 20px;
+    overflow: hidden;
 }
 
 #page-container {

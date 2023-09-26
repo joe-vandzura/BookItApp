@@ -51,7 +51,11 @@
         <input id="password-input" type="password" th:field="*{password}" class="form-control" required>
       </div>
       <div id="password-invalid-div" class="invalid-feedback">
-        Password needs <span id="password-characters-span">to be at least 8 characters |</span> <span id="password-capital-span">at least one capital letter |</span> <span id="password-number-span">at least one number |</span> <span id="password-symbol-span">at least one symbol |</span>
+        Password needs:
+        <p id="password-characters-p">- to be at least 8 characters |</p>
+        <p id="password-capital-p">- at least one capital letter |</p>
+        <p id="password-number-p">- at least one number |</p>
+        <p id="password-symbol-p">- at least one symbol |</p>
       </div>
 
       <input id="register-btn" class="btn btn-success w-100 disabled" type="submit" value="Register"/>

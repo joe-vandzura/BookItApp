@@ -247,4 +247,16 @@
     .emp-img {
         height: 60vh;
     }
+
+    #book-with-anchor-1 {
+        position: absolute;
+        bottom: 30px;
+        left: 30px;
+    }
+
+    #book-with-anchor-2 {
+        position: absolute;
+        bottom: 30px;
+        right: 30px;
+    }
 }

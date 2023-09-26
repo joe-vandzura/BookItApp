@@ -41,9 +41,11 @@ usernameInput.on("input", async function() {
             if (await response.json()) {
                 usernameInput.addClass("is-invalid");
                 usernameInvalidFeedbackDiv.show();
+                usernameInvalidFeedbackDiv.prev().removeClass("mb-3");
             } else {
                 usernameInput.removeClass("is-invalid");
                 usernameInvalidFeedbackDiv.hide();
+                usernameInvalidFeedbackDiv.prev().addClass("mb-3");
             }
         }
     }
@@ -69,9 +71,11 @@ emailInput.on("input", async function() {
             if (await response.json()) {
                 emailInput.addClass("is-invalid");
                 emailInvalidFeedbackDiv.show();
+                emailInvalidFeedbackDiv.prev().removeClass("mb-3");
             } else {
                 emailInput.removeClass("is-invalid");
                 emailInvalidFeedbackDiv.hide();
+                emailInvalidFeedbackDiv.prev().addClass("mb-3");
             }
         }
 
@@ -92,29 +96,31 @@ passwordInput.on("input", function() {
     if (password.length < 8 || !hasCapitalLetter || !hasNumber || !hasSymbol) {
         passwordInput.addClass("is-invalid");
         if (password.length < 8) {
-            $("#password-characters-span").show();
+            $("#password-characters-p").show();
         } else {
-            $("#password-characters-span").hide();
+            $("#password-characters-p").hide();
         }
         if (!hasCapitalLetter) {
-            $("#password-capital-span").show();
+            $("#password-capital-p").show();
         } else {
-            $("#password-capital-span").hide();
+            $("#password-capital-p").hide();
         }
         if (!hasNumber) {
-            $("#password-number-span").show();
+            $("#password-number-p").show();
         } else {
-            $("#password-number-span").hide();
+            $("#password-number-p").hide();
         }
         if (!hasSymbol) {
-            $("#password-symbol-span").show();
+            $("#password-symbol-p").show();
         } else {
-            $("#password-symbol-span").hide();
+            $("#password-symbol-p").hide();
         }
         passwordInvalidDiv.show();
+        passwordInvalidDiv.prev().removeClass("mb-3");
     } else {
         passwordInput.removeClass("is-invalid");
         passwordInvalidDiv.hide();
+        passwordInvalidDiv.prev().addClass("mb-3");
     }
     formIsValid();
 });
