@@ -78,9 +78,9 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<h1 class="modal-title fs-5">Edit Dog</h1>
-				<form id="delete-dog-form" th:method="POST">
+				<form class="btn btn-danger" id="delete-dog-form" th:method="POST">
 					<input hidden th:name="_method" th:value="DELETE">
-					<button type="submit">Delete</button>
+					<button id="delete-dog-btn" type="submit">Delete Dog</button>
 				</form>
 				<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 			</div>

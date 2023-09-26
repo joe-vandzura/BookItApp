@@ -71,3 +71,14 @@
 #warning-icon {
     width: 20px;
 }
+
+#delete-dog-form {
+    margin-left: 3px;
+    padding: 3px;
+}
+
+#delete-dog-btn {
+    background: none;
+    border: none;
+    color: white;
+}
