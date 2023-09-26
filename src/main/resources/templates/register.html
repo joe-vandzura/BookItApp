@@ -24,6 +24,9 @@
         <span class="input-group-text">Username</span>
         <input id="username-input" type="text" th:field="*{username}" class="form-control" required>
       </div>
+      <div id="username-exists-div" class="invalid-feedback">
+        <span>Username already exists.</span>
+      </div>
 
       <div class="input-group mb-3">
         <span class="input-group-text">First Name</span>
@@ -39,10 +42,16 @@
         <span class="input-group-text">Email</span>
         <input id="email-input" type="text" th:field="*{email}" class="form-control" required>
       </div>
+      <div id="email-exists-div" class="invalid-feedback">
+        Email already used.
+      </div>
 
       <div class="input-group mb-3">
         <span class="input-group-text">Password</span>
         <input id="password-input" type="password" th:field="*{password}" class="form-control" required>
+      </div>
+      <div id="password-invalid-div" class="invalid-feedback">
+        Password needs <span id="password-characters-span">to be at least 8 characters |</span> <span id="password-capital-span">at least one capital letter |</span> <span id="password-number-span">at least one number |</span> <span id="password-symbol-span">at least one symbol |</span>
       </div>
 
       <input id="register-btn" class="btn btn-success w-100 disabled" type="submit" value="Register"/>
@@ -57,55 +66,5 @@
 
 <th:block th:insert="~{partials/footer-links :: footer-links}"></th:block>
 <script type="text/javascript" src="../js/register.js"></script>
-<script>
-
-  let usernameInput = $("#username-input");
-  let firstNameInput = $("#first-name-input");
-  let lastNameInput = $("#last-name-input");
-  let emailInput = $("#email-input");
-  let passwordInput = $("#password-input");
-  let registerButton = $("#register-btn");
-
-  function formIsValid() {
-    if (passwordInput.hasClass("is-invalid") || emailInput.hasClass("is-invalid")) {
-      registerButton.addClass("disabled");
-    } else {
-      registerButton.removeClass("disabled");
-    }
-  }
-
-  function isValidEmail(email) {
-    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-    return emailRegex.test(email);
-  }
-
-  emailInput.on("input", function() {
-    const email = emailInput.val();
-
-    if (isValidEmail(email)) {
-      emailInput.removeClass("is-invalid");
-    } else {
-      emailInput.addClass("is-invalid");
-    }
-    formIsValid();
-  });
-
-
-  passwordInput.on("input", function() {
-    let password = $(this).val();
-    let hasCapitalLetter = /[A-Z]/.test(password);
-    let hasNumber = /[0-9]/.test(password);
-    let hasSymbol = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\-]/.test(password);
-
-    if (password.length < 8 || !hasCapitalLetter || !hasNumber || !hasSymbol) {
-      passwordInput.addClass("is-invalid");
-    } else {
-      passwordInput.removeClass("is-invalid");
-    }
-    formIsValid();
-  });
-
-
-</script>
 </body>
 </html>

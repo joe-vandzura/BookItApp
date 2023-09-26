@@ -16,7 +16,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -84,9 +83,6 @@ public class AppointmentController {
             String dateTimeString = dateInput + "T" + timeInput;
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
             LocalDateTime dateTime = LocalDateTime.parse(dateTimeString, formatter);
-//            ZonedDateTime utcDateTime = dateTime.atZone(ZoneId.of("UTC"));
-
-//            dateTime = dateTime.minusHours(5);
             Long newAppointmentId = 0L;
 
             if (changeAppointmentId != null) {

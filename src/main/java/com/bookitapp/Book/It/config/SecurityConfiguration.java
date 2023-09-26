@@ -43,7 +43,9 @@ public class SecurityConfiguration {
                                 "/js/**",
                                 "/img/**",
                                 "/register",
-                                "/favicon.ico").permitAll() // Allow access to appointments POST
+                                "/favicon.ico",
+                                "/username-check/{usernameInput}",
+                                "email-check/{emailInput}").permitAll() // Allow access to appointments POST
                         .anyRequest().authenticated() // Require authentication for other requests
                 )
                 .csrf(AbstractHttpConfigurer::disable)

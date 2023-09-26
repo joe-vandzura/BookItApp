@@ -4,7 +4,6 @@ import com.bookitapp.Book.It.models.Dog;
 import com.bookitapp.Book.It.models.User;
 import com.bookitapp.Book.It.repositories.AppointmentRepository;
 import com.bookitapp.Book.It.repositories.DogRepository;
-import com.bookitapp.Book.It.repositories.UserRepository;
 import com.bookitapp.Book.It.services.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.lang.Nullable;
@@ -23,7 +22,6 @@ public class CalendarController {
 
     private final DogRepository dogRepo;
     private final AppointmentRepository appointmentRepo;
-    private final UserRepository userRepo;
 
     @GetMapping
     String calendarPage(Model model) {

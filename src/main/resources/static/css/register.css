@@ -26,7 +26,8 @@ body {
 
 #register-img {
     border-radius: 50%;
-    width: 100px;
+    width: 110px;
+    border: solid 3px #e4ffb5;
 }
 
 #register-header {
