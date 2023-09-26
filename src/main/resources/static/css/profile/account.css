@@ -63,3 +63,11 @@
     border-radius: 20%;
     margin-left: 10px;
 }
+
+.toast {
+    z-index: 1000;
+}
+
+#warning-icon {
+    width: 20px;
+}

@@ -11,6 +11,18 @@
 <body>
 <th:block th:insert="~{partials/big-navbar :: big-navbar}"></th:block>
 
+<div id="dogless-toast" th:if="${param.dogless}" class="toast text-bg-warning position-fixed bottom-0 end-0 p-1 me-2 mb-2" style="z-index: 11"
+	 role="alert">
+	<div class="d-flex">
+		<div type="button" class="ms-2 m-auto"><i id="warning-icon" class="fa-solid fa-circle-exclamation"></i></div>
+		<div class="toast-body">
+			Add a dog before making an appointment.
+		</div>
+		<button type="button" class="close-toast-btn btn-close btn-close-white me-2 m-auto"
+				data-bs-dismiss="toast"></button>
+	</div>
+</div>
+
 <div id="page-container">
 	<div id="tab-container">
 
@@ -120,7 +132,7 @@
 
 <th:block th:insert="~{partials/footer-links :: footer-links}"></th:block>
 <script type="text/javascript" th:src="@{/js/profile/account.js}"></script>
-
+<script src="https://kit.fontawesome.com/556c276549.js" crossorigin="anonymous"></script>
 <script>
 
     (function ($) {
