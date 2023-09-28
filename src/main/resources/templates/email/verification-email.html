@@ -2,7 +2,7 @@
 <html lang="en"
 	  xmlns:th="http://www.thymeleaf.org">
 <head>
-	<title>Email Template</title>
+	<title>Verification Email</title>
 	<style>
 
         #email-container {
@@ -39,7 +39,7 @@
 
 <!--	<p>Please verify your email by clicking <a th:href="@{'http://localhost:8080/email-verified/' + ${message}}">here.</a></p>-->
 
-	<p>Please verify your email by clicking <a th:href="@{'https://book-it-app-58bb29028f24.herokuapp.com/email-verified/' + ${message}}">here.</a></p>
+	<p>Please verify your email by clicking <a th:href="@{'https://book-it-app-58bb29028f24.herokuapp.com/email-verified/' + ${userId}}">here.</a></p>
 
 </div>
 
