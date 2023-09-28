@@ -48,7 +48,8 @@ public class SecurityConfiguration {
                                 "/favicon.ico",
                                 "/username-check/{usernameInput}",
                                 "/email-check/{emailInput}",
-                                "/sendMail",
+                                "/sendVerificationEmail",
+                                "/sendConfirmationEmail",
                                 "/email-verified/{userId}")
                         .permitAll()
                         .anyRequest().authenticated()
