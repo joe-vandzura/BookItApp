@@ -90,6 +90,13 @@ public class AppointmentController {
                 appointmentToChange.setGroomer(selectedGroomer);
                 appointmentToChange.setDog(dog);
                 appointmentRepo.save(appointmentToChange);
+                EmailDetails details = new EmailDetails();
+                details.setRecipient(loggedInUserWithCurrentProps.getEmail());
+                details.setAppointmentTime(dateTime);
+                details.setGroomerName(selectedGroomer.getName());
+                details.setDogName(dog.getName());
+                details.setSubject("Change of Appointment Confirmation");
+                emailController.sendChangeAppointmentConfirmationEmail(details);
                 return "redirect:/appointments/" + changeAppointmentId;
             } else {
                 newAppointment.setGroomer(selectedGroomer);

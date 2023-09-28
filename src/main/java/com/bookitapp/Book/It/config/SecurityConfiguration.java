@@ -50,7 +50,8 @@ public class SecurityConfiguration {
                                 "/email-check/{emailInput}",
                                 "/sendVerificationEmail",
                                 "/sendConfirmationEmail",
-                                "/email-verified/{userId}")
+                                "/email-verified/{userId}",
+                                "sendChangeAppointmentConfirmationEmail")
                         .permitAll()
                         .anyRequest().authenticated()
                 )

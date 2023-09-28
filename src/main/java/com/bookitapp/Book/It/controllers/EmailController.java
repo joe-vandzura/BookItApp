@@ -42,6 +42,15 @@ public class EmailController {
         emailService.sendEmailWithHtmlTemplate(details, "email/confirmation-email", context);
     }
 
+    @PostMapping("/sendChangeAppointmentConfirmationEmail")
+    public void sendChangeAppointmentConfirmationEmail(@RequestBody EmailDetails details) {
+        Context context = new Context();
+        context.setVariable("appointmentTime", details.getAppointmentTime());
+        context.setVariable("groomerName", details.getGroomerName());
+        context.setVariable("dogName", details.getDogName());
+        emailService.sendEmailWithHtmlTemplate(details, "email/appointment-change-email", context);
+    }
+
     @GetMapping("/email-verified/{userId}")
     public String emailVerifiedPage(@PathVariable(name = "userId") Long userId) {
         User actualUser = userRepo.findById(userId).get();
