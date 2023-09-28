@@ -28,7 +28,7 @@ public class EmailController {
     @PostMapping("/sendVerificationEmail")
     public void sendVerificationEmail(@RequestBody EmailDetails details) {
         Context context = new Context();
-        context.setVariable("userId", details.getMsgBody());
+        context.setVariable("userId", details.getUserId());
 
         emailService.sendEmailWithHtmlTemplate(details, "email/verification-email", context);
     }
