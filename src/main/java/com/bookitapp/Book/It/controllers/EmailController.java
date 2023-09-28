@@ -25,12 +25,21 @@ public class EmailController {
     }
 
 
-    @PostMapping("/sendMail")
-    public void sendEmail(@RequestBody EmailDetails details) {
+    @PostMapping("/sendVerificationEmail")
+    public void sendVerificationEmail(@RequestBody EmailDetails details) {
         Context context = new Context();
-        context.setVariable("message", details.getMsgBody());
+        context.setVariable("userId", details.getMsgBody());
 
-        emailService.sendEmailWithHtmlTemplate(details, "email/email-template", context);
+        emailService.sendEmailWithHtmlTemplate(details, "email/verification-email", context);
+    }
+
+    @PostMapping("/sendConfirmationEmail")
+    public void sendConfirmationEmail(@RequestBody EmailDetails details) {
+        Context context = new Context();
+        context.setVariable("appointmentTime", details.getAppointmentTime());
+        context.setVariable("groomerName", details.getGroomerName());
+        context.setVariable("dogName", details.getDogName());
+        emailService.sendEmailWithHtmlTemplate(details, "email/confirmation-email", context);
     }
 
     @GetMapping("/email-verified/{userId}")

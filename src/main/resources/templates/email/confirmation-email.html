@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Confirmation Email</title>
+  <style>
+
+    #email-container {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border: darkgreen 8px solid;
+      border-radius: 3%;
+      background-color: #e4ffb5;
+      width: 40%;
+      height: 80vh;
+    }
+
+    p {
+      color: black;
+      font-size: xx-large;
+      align-self: center;
+      margin: 10px;
+    }
+
+    h1 {
+      align-self: center;
+    }
+  </style>
+</head>
+<body>
+
+<div id="email-container">
+
+  <h1>Oli's Pet Stuff Grooming</h1>
+
+
+  <p>You have scheduled an appointment with <span th:text="${groomerName}"></span> for <span th:text="${dogName}"></span> on <span th:text="${#temporals.format(appointmentTime, 'MMMM d, uuuu')}"></span> at <span th:text="${#temporals.format(appointmentTime, 'h:mm a')}"></span></p>
+
+</div>
+
+</body>
+</html>

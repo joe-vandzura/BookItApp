@@ -1,9 +1,6 @@
 package com.bookitapp.Book.It.controllers;
 
-import com.bookitapp.Book.It.models.Appointment;
-import com.bookitapp.Book.It.models.Dog;
-import com.bookitapp.Book.It.models.Groomer;
-import com.bookitapp.Book.It.models.User;
+import com.bookitapp.Book.It.models.*;
 import com.bookitapp.Book.It.repositories.AppointmentRepository;
 import com.bookitapp.Book.It.repositories.DogRepository;
 import com.bookitapp.Book.It.repositories.GroomerRepository;
@@ -27,8 +24,9 @@ public class AppointmentController {
     private final AppointmentRepository appointmentRepo;
     private final UserRepository userRepo;
     private final DogRepository dogRepo;
-    private final PasswordEncoder passwordEncoder;
     private final AuthService authService;
+    private final EmailController emailController;
+
 
     @Autowired
     public AppointmentController(
@@ -37,13 +35,14 @@ public class AppointmentController {
             UserRepository userRepo,
             DogRepository dogRepo,
             PasswordEncoder passwordEncoder,
-            AuthService authService) {
+            AuthService authService,
+            EmailController emailController) {
         this.groomerRepo = groomerRepo;
         this.appointmentRepo = appointmentRepo;
         this.userRepo = userRepo;
         this.dogRepo =dogRepo;
-        this.passwordEncoder = passwordEncoder;
         this.authService = authService;
+        this.emailController = emailController;
     }
 
     @GetMapping("/{appointmentId}")
@@ -98,6 +97,13 @@ public class AppointmentController {
                 newAppointment.setAppointmentTime(dateTime);
                 newAppointment.setDog(dog);
                 appointmentRepo.save(newAppointment);
+                EmailDetails details = new EmailDetails();
+                details.setRecipient(loggedInUserWithCurrentProps.getEmail());
+                details.setAppointmentTime(dateTime);
+                details.setGroomerName(selectedGroomer.getName());
+                details.setDogName(dog.getName());
+                details.setSubject("Appointment Confirmation");
+                emailController.sendConfirmationEmail(details);
                 newAppointmentId = appointmentRepo.findByAppointmentTimeAndGroomer(dateTime, selectedGroomer).getId();
             }
 

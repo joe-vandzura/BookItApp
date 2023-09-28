@@ -35,9 +35,9 @@ public class RegisterController {
         User actualNewUser = userRepo.findByUsername(newUser.getUsername());
         EmailDetails details = new EmailDetails();
         details.setRecipient(newUser.getEmail());
-        details.setMsgBody(String.valueOf(actualNewUser.getId()));
+        details.setUserId((actualNewUser.getId()));
         details.setSubject("Verify Your Email");
-        emailController.sendEmail(details);
+        emailController.sendVerificationEmail(details);
         return "login";
     }
 
