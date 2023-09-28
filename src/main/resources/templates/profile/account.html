@@ -65,7 +65,7 @@
 					<input class="profile-input" th:name="email" type="text" th:value="${user.email}">
 				</div>
 				<div th:if="${!user.emailVerified}">
-					<span>Email has not been verified yet. <a id="resend-email-verification-a" href="#">Resend verification email</a>.</span>
+					<span>Email has not been verified yet. <span id="resend-email-verification-span">Resend verification email</span>.</span>
 				</div>
 
 				<button class="btn btn-success" type="submit">Save</button>
@@ -140,7 +140,20 @@
 
     (function ($) {
         //resend email verification
-		$("#resend-email-verification-a").attr("href", "https://book-it-app-58bb29028f24.herokuapp.com/resendVerificationEmail");
+		$("#resend-email-verification-span").on("click", function() {
+            try {
+				fetch("/resendVerificationEmail", {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+            } catch (error) {
+                console.log("Error sending verification email");
+            }
+		});
 
         // get current dog info
         let currentDogButton;
