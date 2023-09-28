@@ -41,6 +41,9 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
     private List<Dog> dogs;
 
+    @Column(name = "email_verified")
+    private boolean emailVerified;
+
     public User(User copy) {
         id = copy.id; // This line is SUPER important! Many things won't work if it's absent
         username = copy.username;
@@ -49,5 +52,6 @@ public class User {
         firstName = copy.firstName;
         lastName = copy.lastName;
         appointments = copy.appointments;
+        emailVerified = copy.emailVerified;
     }
 }

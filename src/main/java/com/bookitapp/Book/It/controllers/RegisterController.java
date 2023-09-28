@@ -1,5 +1,6 @@
 package com.bookitapp.Book.It.controllers;
 
+import com.bookitapp.Book.It.models.EmailDetails;
 import com.bookitapp.Book.It.models.User;
 import com.bookitapp.Book.It.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +18,7 @@ public class RegisterController {
 
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepo;
+    private final EmailController emailController;
 
     @GetMapping
     String registerPage(Model model) {
@@ -28,7 +30,14 @@ public class RegisterController {
     String register(User newUser) {
         String hash = passwordEncoder.encode(newUser.getPassword());
         newUser.setPassword(hash);
+        newUser.setEmailVerified(false);
         userRepo.save(newUser);
+        User actualNewUser = userRepo.findByUsername(newUser.getUsername());
+        EmailDetails details = new EmailDetails();
+        details.setRecipient(newUser.getEmail());
+        details.setMsgBody(String.valueOf(actualNewUser.getId()));
+        details.setSubject("Verify Your Email");
+        emailController.sendEmail(details);
         return "login";
     }
 

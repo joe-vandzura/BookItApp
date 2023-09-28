@@ -37,7 +37,11 @@ public class SecurityConfiguration {
 
         http
                 .authorizeRequests(authorizeRequests -> authorizeRequests
-                        .requestMatchers("/login").permitAll() // Allow access to login page
+                        .requestMatchers(
+                                "/login",
+                                "/sendMail",
+                                "/email-verified/{userId}")
+                        .permitAll() // Allow access to login page
                         .requestMatchers("/",
                                 "/css/**",
                                 "/js/**",

@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Email Template</title>
+</head>
+<body>
+<p>Please verify your email by clicking <a th:href="@{'http://localhost:8080/email-verified/' + ${message}}">here.</a></p>
+</body>
+</html>
