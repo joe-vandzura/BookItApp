@@ -34,3 +34,5 @@ build/
 
 application.properties
 application-local.properties
+MailConfig.java
+DataSourceConfig.java
