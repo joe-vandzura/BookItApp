@@ -46,23 +46,26 @@
 			<h3>Profile Info <span id="save-param" th:if="${param.saved}">Profile saved!</span></h3>
 			<form id="profile-form" th:method="POST" th:action="@{/my-profile/account}">
 				<div class="profile-form-input">
-					<label>First Name</label>
-					<input th:name="first-name" type="text" th:value="${user.firstName}">
+					<label class="profile-label">First Name</label>
+					<input class="profile-input" th:name="first-name" type="text" th:value="${user.firstName}">
 				</div>
 
 				<div class="profile-form-input">
-					<label>Last Name</label>
-					<input th:name="last-name" type="text" th:value="${user.lastName}">
+					<label class="profile-label">Last Name</label>
+					<input class="profile-input" th:name="last-name" type="text" th:value="${user.lastName}">
 				</div>
 
 				<div class="profile-form-input">
-					<label>Username</label>
-					<input th:name="username" type="text" th:value="${user.username}">
+					<label class="profile-label">Username</label>
+					<input class="profile-input" th:name="username" type="text" th:value="${user.username}">
 				</div>
 
 				<div class="profile-form-input">
-					<label>Email</label>
-					<input th:name="email" type="text" th:value="${user.email}">
+					<label class="profile-label">Email</label>
+					<input class="profile-input" th:name="email" type="text" th:value="${user.email}">
+				</div>
+				<div th:if="${!user.emailVerified}" class="invalid-feedback">
+					<span>Email has not been verified yet. <a id="resend-email-verification-a" href="#">Resend verification email</a>.</span>
 				</div>
 
 				<button class="btn btn-success" type="submit">Save</button>
@@ -136,7 +139,10 @@
 <script>
 
     (function ($) {
+        //resend email verification
+		$("#resend-email-verification-a").setAttribute("href", "https://book-it-app-58bb29028f24.herokuapp.com/");
 
+        // get current dog info
         let currentDogButton;
 
         $(".dog-button").on("click", async function () {

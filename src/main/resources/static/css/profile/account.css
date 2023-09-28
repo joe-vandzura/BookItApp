@@ -36,7 +36,7 @@
 }
 
 .settings-container {
-    max-width: 50%;
+    width: 50%;
 }
 
 #profile-form {
@@ -81,4 +81,12 @@
     background: none;
     border: none;
     color: white;
+}
+
+.profile-label {
+    min-width: 87px;
+}
+
+.profile-input {
+    min-width: 275px;
 }

@@ -5,6 +5,7 @@ import com.bookitapp.Book.It.models.User;
 import com.bookitapp.Book.It.repositories.UserRepository;
 import com.bookitapp.Book.It.services.EmailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,6 +31,19 @@ public class EmailController {
         Context context = new Context();
         context.setVariable("userId", details.getUserId());
 
+        emailService.sendEmailWithHtmlTemplate(details, "email/verification-email", context);
+    }
+
+    @PostMapping("/resendVerificationEmail/{userId}")
+    public void resendVerificationEmail(@PathVariable(name = "userId") Long userId) {
+        Context context = new Context();
+        context.setVariable("userId", userId);
+
+        User loggedInUser = userRepo.findById(userId).get();
+
+        EmailDetails details = new EmailDetails();
+        details.setRecipient(loggedInUser.getEmail());
+        details.setSubject("Verify Your Email");
         emailService.sendEmailWithHtmlTemplate(details, "email/verification-email", context);
     }
 
