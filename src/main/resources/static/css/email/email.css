@@ -1,0 +1,39 @@
+body {
+    background-image: url('/static/img/login_background.webp');
+    background-size: auto;
+    background-attachment: inherit;
+    background-position: center center;
+}
+
+#email-container {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: darkgreen 8px solid;
+    border-radius: 3%;
+    background-color: #e4ffb5;
+    width: 40%;
+    height: 80vh;
+}
+
+#email-logo-a {
+    align-self: center;
+}
+
+#email-logo-img {
+    width: 225px;
+    height: 225px;
+    border-radius: 50%;
+    align-self: center;
+    margin: 10px;
+}
+
+p {
+    color: black;
+    font-size: xx-large;
+    align-self: center;
+    margin: 10px;
+}

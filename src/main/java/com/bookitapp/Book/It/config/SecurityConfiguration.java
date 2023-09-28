@@ -38,10 +38,8 @@ public class SecurityConfiguration {
         http
                 .authorizeRequests(authorizeRequests -> authorizeRequests
                         .requestMatchers(
-                                "/login",
-                                "/sendMail",
-                                "/email-verified/{userId}")
-                        .permitAll() // Allow access to login page
+                                "/login")
+                        .permitAll()
                         .requestMatchers("/",
                                 "/css/**",
                                 "/js/**",
@@ -49,8 +47,11 @@ public class SecurityConfiguration {
                                 "/register",
                                 "/favicon.ico",
                                 "/username-check/{usernameInput}",
-                                "email-check/{emailInput}").permitAll() // Allow access to appointments POST
-                        .anyRequest().authenticated() // Require authentication for other requests
+                                "/email-check/{emailInput}",
+                                "/sendMail",
+                                "/email-verified/{userId}")
+                        .permitAll()
+                        .anyRequest().authenticated()
                 )
                 .csrf(AbstractHttpConfigurer::disable)
                 .formLogin(form -> form

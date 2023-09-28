@@ -1,14 +1,21 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="http://www.thymeleaf.org">
+	  xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>Email Template</title>
+	<title>Email Template</title>
+	<link rel="stylesheet" href="../../static/css/email/email.css">
 </head>
 <body>
 
-<!--<p>Please verify your email by clicking <a th:href="@{'http://localhost:8080/email-verified/' + ${message}}">here.</a></p>-->
+<div id="email-container">
 
-<p>Please verify your email by clicking <a th:href="@{'https://book-it-app-58bb29028f24.herokuapp.com/email-verified/' + ${message}}">here.</a></p>
+	<a target="_blank" id="email-logo-a" href="http://localhost:8080/"><img id="email-logo-img" src="../../static/img/olis_pet_stuff_logo.png"/></a>
+
+<!--	<p>Please verify your email by clicking <a th:href="@{'http://localhost:8080/email-verified/' + ${message}}">here.</a></p>-->
+
+	<p>Please verify your email by clicking <a th:href="@{'https://book-it-app-58bb29028f24.herokuapp.com/email-verified/' + ${message}}">here.</a></p>
+
+</div>
 
 </body>
 </html>
