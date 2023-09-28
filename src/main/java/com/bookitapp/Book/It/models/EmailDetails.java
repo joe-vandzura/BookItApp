@@ -18,4 +18,5 @@ public class EmailDetails {
     private LocalDateTime appointmentTime;
     private String groomerName;
     private String dogName;
+    private int viewCount;
 }

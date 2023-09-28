@@ -59,4 +59,11 @@ public class EmailController {
         return "email-verification";
     }
 
+    @PostMapping("/bookItAppViewNotificiation")
+    public void sendBookItAppViewNotificiation(@RequestBody EmailDetails details) {
+        Context context = new Context();
+        context.setVariable("viewCount", details.getViewCount());
+        emailService.sendEmailWithHtmlTemplate(details, "email/view-notification-email", context);
+    }
+
 }
