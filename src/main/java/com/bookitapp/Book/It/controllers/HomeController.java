@@ -22,6 +22,8 @@ public class HomeController {
         Admin adminColumn = adminRepo.findById(1L).get();
         details.setRecipient(adminColumn.getAdminEmail());
         int viewCount = adminColumn.getViewCount() + 1;
+        adminColumn.setViewCount(viewCount);
+        adminRepo.save(adminColumn);
         details.setViewCount(viewCount);
         details.setSubject("Project Was Viewed!");
         emailController.sendBookItAppViewNotificiation(details);
