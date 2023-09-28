@@ -64,7 +64,7 @@
 					<label class="profile-label">Email</label>
 					<input class="profile-input" th:name="email" type="text" th:value="${user.email}">
 				</div>
-				<div th:if="${!user.emailVerified}" class="invalid-feedback">
+				<div th:if="${!user.emailVerified}">
 					<span>Email has not been verified yet. <a id="resend-email-verification-a" href="#">Resend verification email</a>.</span>
 				</div>
 
@@ -140,7 +140,7 @@
 
     (function ($) {
         //resend email verification
-		$("#resend-email-verification-a").setAttribute("href", "https://book-it-app-58bb29028f24.herokuapp.com/");
+		$("#resend-email-verification-a").attr("href", "https://book-it-app-58bb29028f24.herokuapp.com/resendVerificationEmail");
 
         // get current dog info
         let currentDogButton;

@@ -34,12 +34,13 @@ public class EmailController {
         emailService.sendEmailWithHtmlTemplate(details, "email/verification-email", context);
     }
 
-    @PostMapping("/resendVerificationEmail/{userId}")
-    public void resendVerificationEmail(@PathVariable(name = "userId") Long userId) {
-        Context context = new Context();
-        context.setVariable("userId", userId);
+    @PostMapping("/resendVerificationEmail")
+    public void resendVerificationEmail() {
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User actualLoggedInUser = userRepo.findById(loggedInUser.getId()).get();
 
-        User loggedInUser = userRepo.findById(userId).get();
+        Context context = new Context();
+        context.setVariable("userId", actualLoggedInUser.getId());
 
         EmailDetails details = new EmailDetails();
         details.setRecipient(loggedInUser.getEmail());
