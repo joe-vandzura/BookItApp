@@ -3,13 +3,39 @@
 	  xmlns:th="http://www.thymeleaf.org">
 <head>
 	<title>Email Template</title>
-	<link rel="stylesheet" href="../../static/css/email/email.css">
+	<style>
+
+        #email-container {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: darkgreen 8px solid;
+            border-radius: 3%;
+            background-color: #e4ffb5;
+            width: 40%;
+            height: 80vh;
+        }
+
+        p {
+            color: black;
+            font-size: xx-large;
+            align-self: center;
+            margin: 10px;
+        }
+
+		h1 {
+			align-self: center;
+		}
+	</style>
 </head>
 <body>
 
 <div id="email-container">
 
-	<a target="_blank" id="email-logo-a" href="http://localhost:8080/"><img id="email-logo-img" src="../../static/img/olis_pet_stuff_logo.png"/></a>
+	<h1>Oli's Pet Stuff Grooming</h1>
 
 <!--	<p>Please verify your email by clicking <a th:href="@{'http://localhost:8080/email-verified/' + ${message}}">here.</a></p>-->
 
