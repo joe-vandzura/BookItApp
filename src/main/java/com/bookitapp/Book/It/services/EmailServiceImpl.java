@@ -16,8 +16,6 @@ public class EmailServiceImpl {
     private final JavaMailSender javaMailSender;
     private final TemplateEngine templateEngine;
 
-    @Value("${spring.mail.username}") private String sender;
-
     public EmailServiceImpl(JavaMailSender javaMailSender, TemplateEngine templateEngine) {
         this.javaMailSender = javaMailSender;
         this.templateEngine = templateEngine;
@@ -28,7 +26,7 @@ public class EmailServiceImpl {
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "UTF-8");
 
         try {
-            helper.setFrom(sender);
+            helper.setFrom("book.it.grooming@gmail.com");
             helper.setTo(details.getRecipient());
             helper.setSubject(details.getSubject());
             String htmlContent = templateEngine.process(templateName, context);
