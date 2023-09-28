@@ -20,35 +20,35 @@
 
     <form class="needs-validation" th:action="@{/register}" method="POST" th:object="${new_user}">
 
-      <div class="input-group mb-3">
+      <div class="input-group mb-3 register-input-group">
         <span class="input-group-text">Username</span>
-        <input id="username-input" type="text" th:field="*{username}" class="form-control" required>
+        <input id="username-input" type="text" th:field="*{username}" class="register-input" required>
       </div>
       <div id="username-exists-div" class="invalid-feedback">
         <span>Username already exists.</span>
       </div>
 
-      <div class="input-group mb-3">
+      <div class="input-group mb-3 register-input-group">
         <span class="input-group-text">First Name</span>
-        <input id="first-name-input" type="text" th:field="*{firstName}" class="form-control" required>
+        <input id="first-name-input" type="text" th:field="*{firstName}" class="register-input" required>
       </div>
 
-      <div class="input-group mb-3">
+      <div class="input-group mb-3 register-input-group">
         <span class="input-group-text">Last Name</span>
-        <input id="last-name-input" type="text" th:field="*{lastName}" class="form-control" required>
+        <input id="last-name-input" type="text" th:field="*{lastName}" class="register-input" required>
       </div>
 
-      <div class="input-group mb-3">
+      <div class="input-group mb-3 register-input-group">
         <span class="input-group-text">Email</span>
-        <input id="email-input" type="text" th:field="*{email}" class="form-control" required>
+        <input id="email-input" type="text" th:field="*{email}" class="register-input" required>
       </div>
       <div id="email-exists-div" class="invalid-feedback">
         Email already used.
       </div>
 
-      <div class="input-group mb-3">
+      <div class="input-group mb-3 register-input-group">
         <span class="input-group-text">Password</span>
-        <input id="password-input" type="password" th:field="*{password}" class="form-control" required>
+        <input id="password-input" type="password" th:field="*{password}" class="register-input" required>
       </div>
       <div id="password-invalid-div" class="invalid-feedback">
         Password needs:

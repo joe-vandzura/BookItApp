@@ -41,14 +41,14 @@
 
 		<form th:action="@{/login}" method="POST">
 
-			<div class="input-group mb-3">
+			<div class="input-group mb-3 login-input-group">
 				<span class="input-group-text">Username</span>
-				<input type="text" name="username" class="form-control">
+				<input type="text" name="username" class="login-input">
 			</div>
 
-			<div class="input-group mb-3">
+			<div class="input-group mb-3 login-input-group">
 				<span class="input-group-text">Password</span>
-				<input type="password" name="password" class="form-control">
+				<input type="password" name="password" class="login-input">
 			</div>
 
 			<input class="btn btn-success w-100" type="submit" value="Log in"/>

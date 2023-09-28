@@ -53,3 +53,33 @@ body {
     color: #0d9413;
     text-decoration: underline;
 }
+
+@media screen and (min-width: 674px) {
+
+    .regsiter-input-group {
+        flex-direction: row;
+    }
+
+    .register-input {
+        border: none;
+    }
+}
+
+@media screen and (max-width: 675px) {
+
+    .register-input-group {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .input-group-text {
+        width: 100%;
+    }
+
+    .register-input {
+        width: 100%;
+        border: none;
+    }
+
+
+}

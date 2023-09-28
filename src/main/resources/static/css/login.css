@@ -57,3 +57,33 @@ body {
     z-index: 1000;
     top: 72%;
 }
+
+@media screen and (min-width: 674px) {
+
+    .login-input-group {
+        flex-direction: row;
+    }
+
+    .login-input {
+        border: none;
+    }
+}
+
+@media screen and (max-width: 675px) {
+
+    .login-input-group {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .input-group-text {
+        width: 100%;
+    }
+
+    .login-input {
+        width: 100%;
+        border: none;
+    }
+
+
+}
