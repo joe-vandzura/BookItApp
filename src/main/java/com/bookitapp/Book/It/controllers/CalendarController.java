@@ -13,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import java.util.List;
 
 @Controller
@@ -24,7 +26,9 @@ public class CalendarController {
     private final AppointmentRepository appointmentRepo;
 
     @GetMapping
-    String calendarPage(Model model) {
+    String calendarPage(
+            Model model,
+            @RequestParam(name = "groomerId") @Nullable Long groomerId) {
         boolean userIsAuthenticated = AuthService.isLoggedIn();
 
         if (userIsAuthenticated) {
@@ -34,6 +38,9 @@ public class CalendarController {
                 return "redirect:/my-profile/account?dogless";
             }
             model.addAttribute("dogs", dogs);
+            if (groomerId != null) {
+                model.addAttribute("groomerId", groomerId);
+            }
             return "calendar";
         } else {
             return "redirect:/login";
