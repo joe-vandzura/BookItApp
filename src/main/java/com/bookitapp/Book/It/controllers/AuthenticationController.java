@@ -73,9 +73,9 @@ public class AuthenticationController {
         return "reset-password";
     }
 
-    @PostMapping("/reset-password/{userId}")
+    @PostMapping("/reset-password")
     String resetPassword(
-            @PathVariable(name = "userId") Long userId,
+            @RequestParam(name = "user-id") Long userId,
             @RequestParam(name = "password") String password,
             @RequestParam(name = "confirm-password") String confirmPassword) {
 
@@ -83,9 +83,10 @@ public class AuthenticationController {
             User user = userRepo.findById(userId).get();
             String hash = passwordEncoder.encode(password);
             user.setPassword(hash);
+            userRepo.save(user);
+            System.out.println("---------------- CHANGED THE USERS PASSWORD NOW -----------------");
         }
-
-        return "login?passwordreset";
+        return "redirect:/login?passwordreset";
     }
 
 }

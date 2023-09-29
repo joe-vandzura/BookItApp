@@ -55,6 +55,7 @@ public class SecurityConfiguration {
                                 "/bookItAppViewNotificiation",
                                 "/resendVerificationEmail",
                                 "/forgot-password",
+                                "/reset-password",
                                 "/reset-password/{userId}")
                         .permitAll()
                         .anyRequest().authenticated()
