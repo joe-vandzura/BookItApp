@@ -6,14 +6,6 @@
     min-height: 80vh;;
 }
 
-#tab-container {
-    background-color: white;
-    display: flex;
-    justify-content: space-evenly;
-    padding: 2em;
-    border: #e4ffb5 5px solid;
-    width: 100%;
-}
 
 .tab-pane {
     min-height: 50vh;
@@ -33,10 +25,6 @@
 
 #dogs-group-header {
     align-items: center;
-}
-
-.settings-container {
-    width: 50%;
 }
 
 #profile-form {
@@ -87,10 +75,6 @@
     min-width: 87px;
 }
 
-.profile-input {
-    min-width: 275px;
-}
-
 #resend-email-verification-span {
     color: #304e18;
 }
@@ -99,4 +83,56 @@
     cursor: pointer;
     color: #0dbc12;
     text-decoration: underline;
+}
+
+@media screen and (min-width: 671px) {
+
+    #tab-container {
+        background-color: white;
+        display: flex;
+        justify-content: space-evenly;
+        padding: 2em;
+        border: #e4ffb5 5px solid;
+        width: 100%;
+    }
+
+    .settings-container {
+        width: 50%;
+    }
+
+    .profile-input {
+        min-width: 275px;
+    }
+
+    #edit-profile-save-btn {
+        max-width: 380px;
+    }
+
+}
+
+@media screen and (max-width: 670px) {
+
+    #tab-container {
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        padding: 1em;
+        border: #e4ffb5 5px solid;
+        width: 100%;
+        overflow: scroll;
+    }
+
+    .settings-container {
+        width: 100%;
+    }
+
+    .profile-input {
+        min-width: 203px;
+    }
+
+    #edit-profile-save-btn {
+        max-width: 308px;
+    }
+
 }

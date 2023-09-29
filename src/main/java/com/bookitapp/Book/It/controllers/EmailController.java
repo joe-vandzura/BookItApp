@@ -81,4 +81,11 @@ public class EmailController {
         emailService.sendEmailWithHtmlTemplate(details, "email/view-notification-email", context);
     }
 
+    @PostMapping("/resetPassword")
+    public void sendResetPasswordEmail(@RequestBody EmailDetails details) {
+        Context context = new Context();
+        context.setVariable("userId", details.getUserId());
+        emailService.sendEmailWithHtmlTemplate(details, "email/reset-password-email", context);
+    }
+
 }

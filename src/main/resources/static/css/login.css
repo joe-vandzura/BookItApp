@@ -48,7 +48,17 @@ body {
     text-decoration: none;
 }
 
+#password-reset-anchor {
+    color: #0dbc12;
+    text-decoration: none;
+}
+
 #register-anchor:hover {
+    color: #0d9413;
+    text-decoration: underline;
+}
+
+#password-reset-anchor:hover {
     color: #0d9413;
     text-decoration: underline;
 }
