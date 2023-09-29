@@ -49,7 +49,7 @@ public class AuthenticationController {
 
         User user = userRepo.findByUsername(username);
 
-        if (user != null || !user.getEmail().equals(email)) {
+        if (user != null && !user.getEmail().equals(email)) {
             EmailDetails details = new EmailDetails();
             details.setRecipient(user.getEmail());
             details.setUserId((user.getId()));
