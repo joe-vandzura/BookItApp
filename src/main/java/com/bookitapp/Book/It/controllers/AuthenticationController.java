@@ -1,7 +1,9 @@
 package com.bookitapp.Book.It.controllers;
 
 import com.bookitapp.Book.It.models.EmailDetails;
+import com.bookitapp.Book.It.models.Token;
 import com.bookitapp.Book.It.models.User;
+import com.bookitapp.Book.It.repositories.TokenRepository;
 import com.bookitapp.Book.It.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -9,7 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.Map;
+import java.util.UUID;
 
 
 @Controller
@@ -19,6 +23,7 @@ public class AuthenticationController {
     private final UserRepository userRepo;
     private final EmailController emailController;
     private final PasswordEncoder passwordEncoder;
+    private final TokenRepository tokenRepo;
 
     @GetMapping("/login")
     String loginPage() {
@@ -48,11 +53,6 @@ public class AuthenticationController {
     void submitForgotPasswordForm(@RequestBody Map<String, String> request) {
         String username = request.get("username");
         String email = request.get("email");
-
-        System.out.println("----------------- sOUTING USERNAME AND EMAIL HERE ------------------");
-        System.out.println(username);
-        System.out.println(email);
-
         User user = userRepo.findByUsername(username);
 
         if (user != null && user.getEmail().equals(email)) {
@@ -60,6 +60,16 @@ public class AuthenticationController {
             EmailDetails details = new EmailDetails();
             details.setRecipient(user.getEmail());
             details.setUserId((user.getId()));
+            String securityToken = UUID.randomUUID().toString();
+            Token token = tokenRepo.findByUserId(user.getId());
+            if (token == null) {
+                token = new Token();
+                token.setUser(user);
+            }
+            token.setToken(securityToken);
+            token.setTimestamp(LocalDateTime.now());
+            tokenRepo.save(token);
+            details.setSecurityToken(securityToken);
             details.setSubject("Reset Your Password");
             emailController.sendResetPasswordEmail(details);
         }
@@ -68,8 +78,18 @@ public class AuthenticationController {
     @GetMapping("/reset-password/{userId}")
     String showResetPasswordPage(
             Model model,
-            @PathVariable(name = "userId") Long userId) {
+            @PathVariable(name = "userId") Long userId,
+            @RequestParam(name = "secToken") String securityTokenString) {
+        Token token = tokenRepo.findByToken(securityTokenString);
+        if (token == null) {
+            return "/error"; // need to add custom error page
+        } else if (token.getTimestamp().isAfter(LocalDateTime.now().plusMinutes(3))) {
+            tokenRepo.delete(token);
+            return "link-expired";
+        }
+        tokenRepo.delete(token);
         model.addAttribute("userId", userId);
+        model.addAttribute("secTokenStr", securityTokenString);
         return "reset-password";
     }
 
@@ -84,7 +104,6 @@ public class AuthenticationController {
             String hash = passwordEncoder.encode(password);
             user.setPassword(hash);
             userRepo.save(user);
-            System.out.println("---------------- CHANGED THE USERS PASSWORD NOW -----------------");
         }
         return "redirect:/login?passwordreset";
     }

@@ -85,6 +85,7 @@ public class EmailController {
     public void sendResetPasswordEmail(@RequestBody EmailDetails details) {
         Context context = new Context();
         context.setVariable("userId", details.getUserId());
+        context.setVariable("securityToken", details.getSecurityToken());
         emailService.sendEmailWithHtmlTemplate(details, "email/reset-password-email", context);
     }
 

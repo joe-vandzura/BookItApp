@@ -19,4 +19,5 @@ public class EmailDetails {
     private String groomerName;
     private String dogName;
     private int viewCount;
+    private String securityToken;
 }

@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.util.List;
 
 @Entity
@@ -44,14 +43,19 @@ public class User {
     @Column(name = "email_verified")
     private boolean emailVerified;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Token> tokens;
+
     public User(User copy) {
-        id = copy.id; // This line is SUPER important! Many things won't work if it's absent
+        id = copy.id;
         username = copy.username;
         email = copy.email;
         password = copy.password;
         firstName = copy.firstName;
         lastName = copy.lastName;
         appointments = copy.appointments;
+        dogs = copy.dogs;
         emailVerified = copy.emailVerified;
+        tokens = copy.tokens;
     }
 }
