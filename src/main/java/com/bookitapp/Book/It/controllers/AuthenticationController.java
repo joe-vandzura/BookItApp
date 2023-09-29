@@ -47,9 +47,14 @@ public class AuthenticationController {
         String username = request.get("username");
         String email = request.get("email");
 
+        System.out.println("----------------- sOUTING USERNAME AND EMAIL HERE ------------------");
+        System.out.println(username);
+        System.out.println(email);
+
         User user = userRepo.findByUsername(username);
 
-        if (user != null && !user.getEmail().equals(email)) {
+        if (user != null && user.getEmail().equals(email)) {
+            user.getEmail();
             EmailDetails details = new EmailDetails();
             details.setRecipient(user.getEmail());
             details.setUserId((user.getId()));
