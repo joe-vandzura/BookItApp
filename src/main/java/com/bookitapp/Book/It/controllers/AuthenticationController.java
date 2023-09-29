@@ -4,6 +4,7 @@ import com.bookitapp.Book.It.models.EmailDetails;
 import com.bookitapp.Book.It.models.User;
 import com.bookitapp.Book.It.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,7 @@ public class AuthenticationController {
 
     private final UserRepository userRepo;
     private final EmailController emailController;
+    private final PasswordEncoder passwordEncoder;
 
     @GetMapping("/login")
     String loginPage() {
@@ -69,6 +71,21 @@ public class AuthenticationController {
             @PathVariable(name = "userId") Long userId) {
         model.addAttribute("userId", userId);
         return "reset-password";
+    }
+
+    @PostMapping("/reset-password/{userId}")
+    String resetPassword(
+            @PathVariable(name = "userId") Long userId,
+            @RequestParam(name = "password") String password,
+            @RequestParam(name = "confirm-password") String confirmPassword) {
+
+        if (password.equals(confirmPassword)) {
+            User user = userRepo.findById(userId).get();
+            String hash = passwordEncoder.encode(password);
+            user.setPassword(hash);
+        }
+
+        return "login?passwordreset";
     }
 
 }

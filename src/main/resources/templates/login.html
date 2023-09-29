@@ -39,6 +39,17 @@
 			</div>
 		</div>
 
+		<div id="password-reset-toast" th:if="${param.passwordreset}" class="toast text-bg-success border-0 mb-3 me-1 position-fixed p-0"
+			 role="alert">
+			<div class="d-flex">
+				<div class="toast-body">
+					Password has been reset.
+				</div>
+				<button type="button" class="close-toast-btn btn-close btn-close-white me-2 m-auto"
+						data-bs-dismiss="toast"></button>
+			</div>
+		</div>
+
 		<form th:action="@{/login}" method="POST">
 
 			<div class="input-group mb-3 login-input-group">

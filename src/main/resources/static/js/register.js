@@ -10,11 +10,9 @@ let passwordInvalidDiv = $("#password-invalid-div");
 let registerButton = $("#register-btn");
 
 function formIsValid() {
-    if ((passwordInput.hasClass("invalid") || passwordInput.val().trim() === "") || (emailInput.hasClass("invalid") || passwordInput.val().trim() === "") || usernameInput.hasClass("invalid")) {
+    if ((passwordInput.hasClass("invalid") || passwordInput.val().trim() === "") || (emailInput.hasClass("invalid") || emailInput.val().trim() === "") || (usernameInput.hasClass("invalid") || usernameInput.val().trim() === "")) {
         registerButton.addClass("disabled");
     } else {
-        console.log(passwordInput.val() === "");
-        console.log(emailInput.val());
         registerButton.removeClass("disabled");
     }
 }
