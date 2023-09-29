@@ -53,13 +53,9 @@ public class GroomerController {
             LocalDateTime currentTimeSlot = utcCurrentDateTime.toLocalDateTime().with(LocalTime.of(9, 0)).minusDays(1); // Starting from 9:00 AM
 
             // generate the appointment times for the week being displayed
-            System.out.println(currentTimeSlot);
             for (int i = 0; i < 7; i++) {
                 List<String> dayOfTimes = new ArrayList<>();
                 for (int j = 0; j < 10; j++) {
-                    System.out.println("------------------- SOUTING HERE ------------------");
-                    System.out.println(currentTimeSlot);
-                    System.out.println(LocalDateTime.now().plusHours(2));
 
                     if (currentTimeSlot.isAfter(LocalDateTime.now().plusHours(2))) {
                         String dateString = currentTimeSlot.toString();
