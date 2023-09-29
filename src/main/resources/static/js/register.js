@@ -10,7 +10,7 @@ let passwordInvalidDiv = $("#password-invalid-div");
 let registerButton = $("#register-btn");
 
 function formIsValid() {
-    if ((passwordInput.hasClass("is-invalid") || passwordInput.val().trim() === "") || (emailInput.hasClass("is-invalid") || passwordInput.val().trim() === "") || usernameInput.hasClass("is-invalid")) {
+    if ((passwordInput.hasClass("invalid") || passwordInput.val().trim() === "") || (emailInput.hasClass("invalid") || passwordInput.val().trim() === "") || usernameInput.hasClass("invalid")) {
         registerButton.addClass("disabled");
     } else {
         console.log(passwordInput.val() === "");
@@ -28,7 +28,7 @@ function isValidEmail(email) {
 usernameInput.on("input", async function() {
     let usernameInputValue = usernameInput.val();
     if (usernameInputValue.trim() === "") {
-        usernameInput.addClass("is-invalid");
+        usernameInput.addClass("invalid");
     } else {
         let response = await fetch("/username-check/" + usernameInputValue, {
             method: 'GET',
@@ -39,11 +39,11 @@ usernameInput.on("input", async function() {
         });
         if (response.ok) {
             if (await response.json()) {
-                usernameInput.addClass("is-invalid");
+                usernameInput.addClass("invalid");
                 usernameInvalidFeedbackDiv.show();
                 usernameInvalidFeedbackDiv.prev().removeClass("mb-3");
             } else {
-                usernameInput.removeClass("is-invalid");
+                usernameInput.removeClass("invalid");
                 usernameInvalidFeedbackDiv.hide();
                 usernameInvalidFeedbackDiv.prev().addClass("mb-3");
             }
@@ -58,7 +58,7 @@ emailInput.on("input", async function() {
     const email = emailInput.val();
 
     if (isValidEmail(email)) {
-        emailInput.removeClass("is-invalid");
+        emailInput.removeClass("invalid");
         let response = await fetch("/email-check/" + email , {
             method: 'GET',
             headers: {
@@ -69,18 +69,18 @@ emailInput.on("input", async function() {
 
         if (response.ok) {
             if (await response.json()) {
-                emailInput.addClass("is-invalid");
+                emailInput.addClass("invalid");
                 emailInvalidFeedbackDiv.show();
                 emailInvalidFeedbackDiv.prev().removeClass("mb-3");
             } else {
-                emailInput.removeClass("is-invalid");
+                emailInput.removeClass("invalid");
                 emailInvalidFeedbackDiv.hide();
                 emailInvalidFeedbackDiv.prev().addClass("mb-3");
             }
         }
 
     } else {
-        emailInput.addClass("is-invalid");
+        emailInput.addClass("invalid");
     }
     formIsValid();
 });
@@ -94,7 +94,7 @@ passwordInput.on("input", function() {
     let hasSymbol = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\-]/.test(password);
 
     if (password.length < 8 || !hasCapitalLetter || !hasNumber || !hasSymbol) {
-        passwordInput.addClass("is-invalid");
+        passwordInput.addClass("invalid");
         if (password.length < 8) {
             $("#password-characters-p").show();
         } else {
@@ -118,7 +118,7 @@ passwordInput.on("input", function() {
         passwordInvalidDiv.show();
         passwordInvalidDiv.prev().removeClass("mb-3");
     } else {
-        passwordInput.removeClass("is-invalid");
+        passwordInput.removeClass("invalid");
         passwordInvalidDiv.hide();
         passwordInvalidDiv.prev().addClass("mb-3");
     }

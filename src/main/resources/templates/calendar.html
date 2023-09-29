@@ -55,7 +55,8 @@
 				<input hidden id="selected-time-input" name="selected-time" type="text">
 				<p>Select your dog:
 					<span><select name="dog-id" required>
-					<option th:each="dog : ${dogs}" th:value="${dog.id}" th:selected="${selectedDog != null} and ${dog.id} == ${selectedDog.id}">
+					<option th:each="dog : ${dogs}" th:value="${dog.id}"
+							th:selected="${selectedDog != null} and ${dog.id} == ${selectedDog.id}">
 						<span th:text="${dog.name}"></span>
 					</option>
 				</select></span>
@@ -81,32 +82,21 @@
 <script type="text/javascript">
 
     let amountOfWeekOffset = 0;
-    let groomerId = null;
-    let groomerIdFromIndexSet = false;
-    if ($("#groomer-id-hidden-input").val() != null) {
-		groomerId = $("#groomer-id-hidden-input").val();
-        groomerIdFromIndexSet = true;
-	}
+    let groomerId = "";
 
-    if (groomerId === null) {
+    (function ($) {
 
-        $(document).ready(function () {
-            $("#groomerModal").modal('show');
-        });
+        $("#groomer-select-btn").on("click", async function () {
 
-        $("#groomer1").on("change", function () {
-            $("#groomer-select-btn").removeClass("disabled");
-            groomerId = 1;
-        });
+            // set hidden input values in confirm modal form
+            $("#groomer-id").val(groomerId);
 
-        $("#groomer2").on("change", function () {
-            $("#groomer-select-btn").removeClass("disabled");
-            groomerId = 2;
-        });
-    }
-
-    (async function ($) {
-        if (groomerIdFromIndexSet) {
+            // display selected groomer name in confirm modal
+            if (groomerId == 1) {
+                $("#span-groomer-name").text("Lorena");
+            } else if (groomerId == 2) {
+                $("#span-groomer-name").text("Kara");
+            }
 
             try {
                 let response = await fetch("/groomers/" + groomerId + "/availability?amountOfWeekOffset=" + amountOfWeekOffset, {
@@ -137,55 +127,9 @@
             } catch (error) {
                 console.log("Error fetching availability data:", error);
             }
-
-        } else {
-
-            $("#groomer-select-btn").on("click", async function () {
-                $("#groomerModal").modal('show');
-                // set hidden input values in confirm modal form
-                $("#groomer-id").val(groomerId);
-
-                // display selected groomer name in confirm modal
-                if (groomerId === 1) {
-                    $("#span-groomer-name").text("Lorena");
-                } else if (groomerId === 2) {
-                    $("#span-groomer-name").text("Kara");
-                }
-
-                try {
-                    let response = await fetch("/groomers/" + groomerId + "/availability?amountOfWeekOffset=" + amountOfWeekOffset, {
-                        method: 'GET',
-                        headers: {
-                            'Accept': 'application/json',
-                            'Content-Type': 'application/json'
-                        }
-                    });
-
-                    if (response.ok) {
-                        let availabilityData = await response.json();
-                        for (let i = 0; i < availabilityData.length; i++) {
-                            for (let j = 0; j < availabilityData[i].length; j++) {
-                                if (parseInt(availabilityData[i][j].substring(11, 13)) > 12) {
-                                    availabilityData[i][j] = (parseInt(availabilityData[i][j].substring(11, 13)) - 12) + availabilityData[i][j].substring(13) + " PM";
-                                } else if (parseInt(availabilityData[i][j].substring(11, 13)) === 12) {
-                                    availabilityData[i][j] = availabilityData[i][j].substring(11) + " PM";
-                                } else {
-                                    availabilityData[i][j] = availabilityData[i][j].substring(11) + " AM";
-                                }
-                            }
-                        }
-                        setupMarkYourCalendar(availabilityData);
-                    } else {
-                        console.log("Failed to fetch availability data");
-                    }
-                } catch (error) {
-                    console.log("Error fetching availability data:", error);
-                }
-            });
-        }
+        });
 
         function setupMarkYourCalendar(availabilityData) {
-
             $('#picker').markyourcalendar({
                 availability: availabilityData,
                 startDate: new Date(),
@@ -231,6 +175,25 @@
             });
         }
     })(jQuery);
+
+    $(document).ready(function () {
+        if ($("#groomer-id-hidden-input").val() !== "") {
+            groomerId = $("#groomer-id-hidden-input").val();
+            $("#groomer-select-btn").click();
+        } else {
+            $("#groomerModal").modal('show');
+        }
+    });
+
+    $("#groomer1").on("change", function () {
+        $("#groomer-select-btn").removeClass("disabled");
+        groomerId = 1;
+    });
+
+    $("#groomer2").on("change", function () {
+        $("#groomer-select-btn").removeClass("disabled");
+        groomerId = 2;
+    });
 
 
 </script>

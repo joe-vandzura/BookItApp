@@ -26,7 +26,7 @@ public class CalendarController {
     private final AppointmentRepository appointmentRepo;
 
     @GetMapping
-    String calendarPage(
+    String calendarPageFromIndex(
             Model model,
             @RequestParam(name = "groomerId") @Nullable Long groomerId) {
         boolean userIsAuthenticated = AuthService.isLoggedIn();
