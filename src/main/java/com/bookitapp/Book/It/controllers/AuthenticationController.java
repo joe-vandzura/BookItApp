@@ -61,7 +61,6 @@ public class AuthenticationController {
             details.setRecipient(user.getEmail());
             details.setUserId((user.getId()));
             String securityToken = UUID.randomUUID().toString();
-            tokenRepo.deleteAllByUserId(user.getId());
             Token token = new Token();
             token.setUser(user);
             token.setToken(securityToken);
