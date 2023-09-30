@@ -1,10 +1,9 @@
 <th:block th:fragment="big-navbar">
 
-	<nav class="navbar navbar-expand-lg bg-body-tertiary p-0" style="flex-wrap: nowrap">
-		<a id="navbar-logo" th:href="@{/}"><img id="navbar-img" th:src="@{/img/olis_pet_stuff_logo.png}"/></a>
+	<nav class="navbar navbar-expand-lg bg-body-tertiary p-0">
 		<div class="container-fluid d-flex justify-content-between align-items-center">
-			<button id="hamburger-btn" class="navbar-toggler" type="button" data-bs-toggle="collapse"
-					data-bs-target="#navbarSupportedContent">
+			<a id="navbar-logo" th:href="@{/}" class="navbar-brand"><img id="navbar-img" th:src="@{/img/olis_pet_stuff_logo.png}" /></a>
+			<button id="hamburger-btn" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">

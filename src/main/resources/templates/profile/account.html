@@ -11,7 +11,8 @@
 <body>
 <th:block th:insert="~{partials/big-navbar :: big-navbar}"></th:block>
 
-<div id="dogless-toast" th:if="${param.dogless}" class="toast text-bg-warning position-fixed bottom-0 end-0 p-1 me-2 mb-2" style="z-index: 11"
+<div id="dogless-toast" th:if="${param.dogless}"
+	 class="toast text-bg-warning position-fixed bottom-0 end-0 p-1 me-2 mb-2" style="z-index: 11"
 	 role="alert">
 	<div class="d-flex">
 		<div type="button" class="ms-2 m-auto"><i id="warning-icon" class="fa-solid fa-circle-exclamation"></i></div>
@@ -35,7 +36,8 @@
 				</button>
 			</div>
 			<div id="dogs-list-group" class="list-group">
-				<button th:if="${!dogs.isEmpty()}" th:id="${dog.id}" th:each="dog : ${dogs}" type="button" class="dog-button btn btn-success m-1">
+				<button th:if="${!dogs.isEmpty()}" th:id="${dog.id}" th:each="dog : ${dogs}" type="button"
+						class="dog-button btn btn-success m-1">
 					<span th:text="${dog.name}"></span>
 				</button>
 				<h4 th:if="${dogs.isEmpty()}">No dogs to display.</h4>
@@ -62,7 +64,10 @@
 
 				<div class="profile-form-input">
 					<label class="profile-label">Email</label>
-					<input class="profile-input" th:name="email" type="text" th:value="${user.email}">
+					<span>
+						<input class="profile-input" th:name="email" type="text" th:value="${user.email}">
+						<i th:if="${user.emailVerified}" class="fa-regular fa-square-check"></i>
+					</span>
 				</div>
 				<div th:if="${!user.emailVerified}">
 					<span>Email has not been verified yet. <span id="resend-email-verification-span">Resend verification email</span>.</span>
@@ -94,7 +99,7 @@
 					<input id="edit-id-input" hidden type="number">
 
 					<label>Name</label>
-					<input id="edit-name-input" type="text" name="name">
+					<input id="edit-name-input" type="text" name="name" maxlength="30">
 
 					<label>Breed</label>
 					<select id="edit-breed-input" name="breed">
@@ -141,10 +146,12 @@
 <script>
 
     (function ($) {
+
+
         //resend email verification
-		$("#resend-email-verification-span").on("click", function() {
+        $("#resend-email-verification-span").on("click", function () {
             try {
-				fetch("/resendVerificationEmail", {
+                fetch("/resendVerificationEmail", {
                     method: 'POST',
                     headers: {
                         'Accept': 'application/json',
@@ -155,7 +162,7 @@
             } catch (error) {
                 console.log("Error sending verification email");
             }
-		});
+        });
 
         // get current dog info
         let currentDogButton;

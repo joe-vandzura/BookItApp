@@ -76,7 +76,8 @@
 }
 
 #resend-email-verification-span {
-    color: #304e18;
+    color: #0d9413;
+    text-decoration: underline;
 }
 
 #resend-email-verification-span:hover {
