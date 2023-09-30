@@ -80,7 +80,7 @@ public class AuthenticationController {
         Token token = tokenRepo.findByToken(securityTokenString);
         if (token == null) {
             return "/error"; // need to add custom error page
-        } else if (token.getTimestamp().isBefore(LocalDateTime.now().plusMinutes(15))) {
+        } else if (token.getTimestamp().isBefore(LocalDateTime.now().minusMinutes(15))) {
             tokenRepo.delete(token);
             return "link-expired";
         }
