@@ -61,11 +61,9 @@ public class AuthenticationController {
             details.setRecipient(user.getEmail());
             details.setUserId((user.getId()));
             String securityToken = UUID.randomUUID().toString();
-            Token token = tokenRepo.findByUserId(user.getId());
-            if (token == null) {
-                token = new Token();
-                token.setUser(user);
-            }
+            tokenRepo.deleteAllByUserId(user.getId());
+            Token token = new Token();
+            token.setUser(user);
             token.setToken(securityToken);
             token.setTimestamp(LocalDateTime.now());
             tokenRepo.save(token);
@@ -83,11 +81,10 @@ public class AuthenticationController {
         Token token = tokenRepo.findByToken(securityTokenString);
         if (token == null) {
             return "/error"; // need to add custom error page
-        } else if (token.getTimestamp().isAfter(LocalDateTime.now().plusMinutes(3))) {
+        } else if (token.getTimestamp().isBefore(LocalDateTime.now().plusMinutes(15))) {
             tokenRepo.delete(token);
             return "link-expired";
         }
-        tokenRepo.delete(token);
         model.addAttribute("userId", userId);
         model.addAttribute("secTokenStr", securityTokenString);
         return "reset-password";
