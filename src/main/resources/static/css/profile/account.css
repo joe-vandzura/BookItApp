@@ -64,6 +64,19 @@
     flex-direction: row;
 }
 
+.invalid {
+    background-color: #ffebeb;
+}
+
+.invalid[type="text"] {
+    background-color: #ffebeb;
+}
+
+/* Set the background color for the active state (when the input is focused) */
+.invalid[type="text"]:focus {
+    background-color: #ffebeb;
+}
+
 @media screen and (min-width: 671px) {
     #tab-container {
         flex-direction: row;

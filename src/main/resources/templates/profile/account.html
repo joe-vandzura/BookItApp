@@ -114,14 +114,17 @@
 							<form th:method="POST" th:action="@{/my-profile/account}">
 								<div class="mb-3">
 									<label class="form-label">Username:</label>
-									<input type="text" th:name="username" class="form-control" th:value="${user.username}">
+									<input id="edit-username-input" type="text" th:name="username" class="form-control" th:value="${user.username}">
+									<div id="username-exists-div" class="invalid-feedback">
+										<span>Username already exists.</span>
+									</div>
 								</div>
 								<input hidden th:name="first-name" th:value="${user.firstName}">
 								<input hidden th:name="last-name" th:value="${user.lastName}">
 								<input hidden th:name="email" th:value="${user.email}">
 								<div class="modal-footer">
 									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-									<button type="submit" class="btn btn-success">Save changes</button>
+									<button id="edit-username-submit-btn" type="submit" class="btn btn-success">Save changes</button>
 								</div>
 							</form>
 						</div>
@@ -141,14 +144,17 @@
 							<form th:method="POST" th:action="@{/my-profile/account}">
 								<div class="mb-3">
 									<label class="form-label">Email:</label>
-									<input type="text" th:name="email" class="form-control" th:value="${user.email}">
+									<input id="edit-email-input" type="text" th:name="email" class="form-control" th:value="${user.email}">
+									<div id="email-exists-div" class="invalid-feedback">
+										Email already used.
+									</div>
 								</div>
 								<input hidden th:name="first-name" th:value="${user.firstName}">
 								<input hidden th:name="last-name" th:value="${user.lastName}">
 								<input hidden th:name="username" th:value="${user.username}">
 								<div class="modal-footer">
 									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-									<button type="submit" class="btn btn-success">Save changes</button>
+									<button id="edit-email-submit-btn" type="submit" class="btn btn-success">Save changes</button>
 								</div>
 							</form>
 						</div>
@@ -224,7 +230,82 @@
 <script src="https://kit.fontawesome.com/556c276549.js" crossorigin="anonymous"></script>
 <script>
 
+	let emailInput = $("#edit-email-input");
+    let usernameInput = $("#edit-username-input");
+    let editEmailSubmitButton = $("#edit-email-submit-btn");
+    let editUsernameSubmitButton = $("#edit-username-submit-btn");
+    let usernameInvalidFeedbackDiv = $("#username-exists-div");
+    let emailInvalidFeedbackDiv = $("#email-exists-div");
+
+    function isValidEmail(email) {
+        const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+        return emailRegex.test(email);
+    }
+
     (function ($) {
+
+        usernameInput.on("input", async function() {
+            let usernameInputValue = usernameInput.val();
+            if (usernameInputValue.trim() === "") {
+                usernameInput.addClass("invalid");
+            } else {
+                let response = await fetch("/username-check/" + usernameInputValue, {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                });
+                if (response.ok) {
+                    if (await response.json()) {
+                        usernameInput.addClass("invalid");
+                        usernameInvalidFeedbackDiv.show();
+                    } else {
+                        usernameInput.removeClass("invalid");
+                        usernameInvalidFeedbackDiv.hide();
+                    }
+                }
+            }
+            if (usernameInput.hasClass("invalid") || usernameInput.val().trim() === "") {
+                editUsernameSubmitButton.addClass("disabled");
+			} else {
+                editUsernameSubmitButton.removeClass("disabled");
+			}
+        });
+
+        emailInput.on("input", async function() {
+            const email = emailInput.val();
+
+            if (isValidEmail(email)) {
+                emailInput.removeClass("invalid");
+                let response = await fetch("/email-check/" + email , {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    if (await response.json()) {
+                        emailInput.addClass("invalid");
+                        emailInvalidFeedbackDiv.show();
+                    } else {
+                        emailInput.removeClass("invalid");
+                        emailInvalidFeedbackDiv.hide();
+                    }
+                }
+
+            } else {
+                emailInput.addClass("invalid");
+            }
+
+            if (emailInput.hasClass("invalid") || emailInput.val().trim() === "") {
+                editEmailSubmitButton.addClass("disabled");
+            } else {
+                editEmailSubmitButton.removeClass("disabled");
+            }
+        });
 
 
         //resend email verification
