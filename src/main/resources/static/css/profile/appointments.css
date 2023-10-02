@@ -1,108 +1,124 @@
-@media screen and (max-width: 480px) {
-
-
-    #appointments-container {
-        padding: 1.5em;
-        min-height: 80vh;
-        background-image: url('../../img/bones_background.jpeg');
-        background-repeat: repeat;
-    }
-
-    .appointment-box {
-        background-color: white;
-        border: #e4ffb5 5px solid;
-        min-height: 35vh;
-        padding: 1em;
-        margin: 1em;
-    }
-
-    .appointment-list-item {
-        list-style: none;
-        border: transparent solid 5px;
-        width: 80%;
-        overflow: clip;
-    }
-
-    .appointment-list-item:hover {
-        list-style: none;
-        border: #e4ffb5 solid 5px;
-    }
-
-    .appointment-a {
-        color: black;
-        text-decoration: none;
-    }
-
-    .appointment-a:hover {
-        color: #0d9413;
-    }
-
-    #google-calendar-link {
-        color: #0dbc12;
-    }
-
-    #google-calendar-link:hover {
-        color: #304e18;
-    }
-
-    #card-btn-group {
-        flex-direction: column;
-    }
-
-    #cancel-btn {
-        color: white;
-        margin-bottom: 10px;
-    }
-
+/* Common Styles */
+body {
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
 }
 
-@media screen and (min-width: 481px) {
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
 
-    #appointments-container {
-        padding: 1.5em;
-        min-height: 80vh;
-        background-image: url('../../img/bones_background.jpeg');
-        background-repeat: repeat;
-    }
+h2 {
+    color: #333;
+}
 
+/* Appointment Box Styles */
+.appointment-box {
+    background-color: #ffffff;
+    border: 5px solid #e4ffb5;
+    border-radius: 8px;
+    min-height: 300px;
+    margin: 20px;
+    padding: 20px;
+}
+
+.appointment-box h2 {
+    margin-bottom: 10px;
+}
+
+.no-appointments {
+    text-align: center;
+    color: #777;
+}
+
+/* Appointment List Styles */
+.appointment-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.appointment-item {
+    border: transparent solid 5px;
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease;
+}
+
+.appointment-item:hover {
+    border: 5px solid #e4ffb5;
+}
+
+.appointment-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.appointment-details h3 {
+    margin: 0;
+    font-size: 24px;
+    color: #333;
+}
+
+.appointment-details h4 {
+    margin: 0;
+    font-size: 16px;
+    color: #555;
+}
+
+.appointment-details p {
+    margin: 0;
+    font-size: 14px;
+    color: #777;
+}
+
+.appointment-actions {
+    text-align: right;
+}
+
+.appointment-actions a.btn {
+    padding: 10px 20px;
+    background-color: #0dbc12;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-left: 10px;
+    margin-bottom: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.appointment-actions a.btn:hover {
+    background-color: #a7ff7d;
+}
+
+#edit-appointment-btn {
+    background-color: #dcdc09;
+}
+
+#cancel-appointment-form {
+    display: inline;
+    border: none;
+    background: none;
+    padding: 0;
+}
+
+#cancel-appointment-btn {
+    background-color: indianred;
+    padding: 10px 20px;
+    margin-left: 10px;
+    margin-bottom: 5px;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 480px) {
     .appointment-box {
-        background-color: white;
-        border: #e4ffb5 5px solid;
-        min-height: 35vh;
-        padding: 1em;
-        margin: 1em;
+        margin: 10px;
     }
-
-    .appointment-list-item {
-        list-style: none;
-        border: transparent solid 5px;
-
-    }
-
-    .appointment-list-item:hover {
-        list-style: none;
-        border: #e4ffb5 solid 5px;
-    }
-
-    .appointment-a {
-        color: black;
-        text-decoration: none;
-    }
-
-    .appointment-a:hover {
-        color: #0d9413;
-    }
-
-    #google-calendar-link {
-        color: #0dbc12;
-    }
-
-    #google-calendar-link:hover {
-        color: #304e18;
-    }
-
-    #card {
-        width: 18em;
-    }
-
 }

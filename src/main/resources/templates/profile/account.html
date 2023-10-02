@@ -3,8 +3,10 @@
 	  xmlns:th="http://www.thymeleaf.org"
 	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-	<th:block th:insert="~{partials/meta-header :: meta-header}"></th:block>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>BookIt - My Account</title>
+	<th:block th:insert="~{partials/meta-header :: meta-header}"></th:block>
 	<th:block th:insert="~{partials/header-links :: header-links}"></th:block>
 	<link rel="stylesheet" th:href="@{/css/profile/account.css}">
 </head>
@@ -28,24 +30,26 @@
 	<div id="tab-container">
 
 		<div id="my-dogs-group" class="settings-container">
-			<div id="dogs-group-header" class="d-flex">
-				<h3>My Dogs</h3>
+			<div id="dogs-group-header" class="d-flex align-items-center justify-content-between">
+				<h2>My Dogs</h2>
 				<button id="add-dog-button" type="button" data-bs-toggle="modal"
 						data-bs-target="#addDogModal">
-					+
+					Add Dog
 				</button>
 			</div>
 			<div id="dogs-list-group" class="list-group">
-				<button th:if="${!dogs.isEmpty()}" th:id="${dog.id}" th:each="dog : ${dogs}" type="button"
-						class="dog-button btn btn-success m-1">
-					<span th:text="${dog.name}"></span>
-				</button>
 				<h4 th:if="${dogs.isEmpty()}">No dogs to display.</h4>
+				<div th:each="dog : ${dogs}">
+					<button th:id="${dog.id}" type="button"
+							class="dog-button btn btn-success m-1">
+						<span th:text="${dog.name}"></span>
+					</button>
+				</div>
 			</div>
 		</div>
 
 		<div id="profile-info-group" class="settings-container">
-			<h3>Profile Info <span id="save-param" th:if="${param.saved}">Profile saved!</span></h3>
+			<h2>Profile Info <span id="save-param" th:if="${param.saved}">Profile saved!</span></h2>
 			<form id="profile-form" th:method="POST" th:action="@{/my-profile/account}">
 				<div class="profile-form-input">
 					<label class="profile-label">First Name</label>
@@ -64,10 +68,8 @@
 
 				<div class="profile-form-input">
 					<label class="profile-label">Email</label>
-					<span>
-						<input class="profile-input" th:name="email" type="text" th:value="${user.email}">
-						<i th:if="${user.emailVerified}" class="fa-regular fa-square-check"></i>
-					</span>
+					<input class="profile-input" th:name="email" type="text" th:value="${user.email}">
+					<i th:if="${user.emailVerified}" class="fa-regular fa-square-check"></i>
 				</div>
 				<div th:if="${!user.emailVerified}">
 					<span>Email has not been verified yet. <span id="resend-email-verification-span">Resend verification email</span>.</span>
@@ -76,16 +78,15 @@
 				<button id="edit-profile-save-btn" class="btn btn-success" type="submit">Save</button>
 			</form>
 		</div>
-
 	</div>
 </div>
 
-<!--      edit dog modal  -->
+<!-- Edit Dog Modal -->
 <div class="modal fade" id="editDogModal" tabindex="-1">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h1 class="modal-title fs-5">Edit Dog</h1>
+				<h2 class="modal-title fs-5">Edit Dog</h2>
 				<form class="btn btn-danger" id="delete-dog-form" th:method="POST">
 					<input hidden th:name="_method" th:value="DELETE">
 					<button id="delete-dog-btn" type="submit">Delete Dog</button>
@@ -93,14 +94,10 @@
 				<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 			</div>
 			<div class="modal-body">
-
 				<form class="dog-form">
-
 					<input id="edit-id-input" hidden type="number">
-
 					<label>Name</label>
 					<input id="edit-name-input" type="text" name="name" maxlength="30">
-
 					<label>Breed</label>
 					<select id="edit-breed-input" name="breed">
 						<option th:each="breed : ${dogBreeds}"
@@ -109,23 +106,16 @@
 							<span th:text="${#strings.capitalize(breed.toString())}"></span>
 						</option>
 					</select>
-
 					<label>Age</label>
 					<input id="edit-age-input" type="number" name="age">
-
 					<label>Sex</label>
 					<select id="edit-sex-input" th:name="sex" required>
 						<option value="M">Male</option>
 						<option value="F">Female</option>
 					</select>
-
-					<span>
 					<label>Has Rabies Vaccination?</label>
 					<input id="edit-rabies-input" type="checkbox" name="rabiesVaccinationStatus">
-					</span>
-
 				</form>
-
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
@@ -135,12 +125,12 @@
 	</div>
 </div>
 
-
 <th:block th:insert="~{partials/add-dog-modal :: add-dog-modal}"></th:block>
 
 <th:block th:insert="~{partials/footer :: footer}"></th:block>
 
 <th:block th:insert="~{partials/footer-links :: footer-links}"></th:block>
+
 <script type="text/javascript" th:src="@{/js/profile/account.js}"></script>
 <script src="https://kit.fontawesome.com/556c276549.js" crossorigin="anonymous"></script>
 <script>

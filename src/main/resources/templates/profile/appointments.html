@@ -3,8 +3,10 @@
 	  xmlns:th="http://www.thymeleaf.org"
 	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-	<th:block th:insert="~{partials/meta-header :: meta-header}"></th:block>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>BookIt - My Appointments</title>
+	<th:block th:insert="~{partials/meta-header :: meta-header}"></th:block>
 	<th:block th:insert="~{partials/header-links :: header-links}"></th:block>
 	<link rel="stylesheet" th:href="@{/css/profile/appointments.css}">
 </head>
@@ -13,31 +15,29 @@
 
 <div id="appointments-container">
 	<div class="appointment-box">
-		<h3>Upcoming Appointments</h3>
+		<h2>Upcoming Appointments</h2>
 
-		<h4 th:if="${upcomingAppointments.isEmpty()}">No upcoming appointments.</h4>
+		<div th:if="${upcomingAppointments.isEmpty()}" class="no-appointments">
+			<p>No upcoming appointments.</p>
+		</div>
 
-		<ul th:if="${!upcomingAppointments.isEmpty()}" class="d-flex flex-wrap">
-			<li th:each="appointment : ${upcomingAppointments}" class="appointment-list-item m-3">
-				<div id="card" class="card">
-					<div class="card-body">
-						<a class="appointment-a" th:href="@{/appointments/{appointmentId}(appointmentId=${appointment.id})}">
-							<h5 class="card-title"
-								th:text="${#temporals.format(appointment.appointmentTime, 'MMMM d, uuuu')}"></h5>
-							<h4 th:text="${#temporals.format(appointment.appointmentTime, 'h:mm a')}"></h4>
-							<a id="google-calendar-link" target="_blank" th:href="@{'https://www.google.com/calendar/render?action=TEMPLATE&text=Grooming%20Appointment%20With%20' + ${appointment.groomer.name} + '&dates=' + ${#temporals.format(appointment.appointmentTime, 'yyyyMMdd')} + 'T' + ${#temporals.format(appointment.appointmentTime.plusHours(5), 'HHmmss')} + 'Z/' + ${#temporals.format(appointment.appointmentTime, 'yyyyMMdd')} + 'T' + ${#temporals.format(appointment.appointmentTime.plusHours(6), 'HHmmss')} + 'Z&details=Grooming%20appointment%20with%20' + ${appointment.groomer.name} + '%20for%20' + ${appointment.dog.name} + '.&location=Event+Location&sf=true&output=xml'}">Add to Google Calendar</a>
-							<p class="card-text" th:text="${'Appointment with ' + appointment.groomer.name}"></p>
-							<p class="card-text" th:text="${'For ' + appointment.dog.name}"></p>
-						</a>
-						<div id="card-btn-group" class="d-flex justify-content-evenly">
-							<div><a id="cancel-btn" th:href="@{/calendar/{appointmentId}(appointmentId=${appointment.id})}"
-							   class="btn btn-warning rounded-pill">Change</a></div>
-							<form th:method="POST"
-								  th:action="@{/appointments/{appointmentId}(appointmentId=${appointment.id})}">
-								<input hidden th:name="_method" th:value="DELETE">
-								<button th:type="submit" class="btn btn-danger rounded-pill">Cancel</button>
-							</form>
-						</div>
+		<ul th:if="${!upcomingAppointments.isEmpty()}" class="appointment-list">
+			<li th:each="appointment : ${upcomingAppointments}" class="appointment-item">
+				<div class="appointment-card">
+					<div class="appointment-details">
+						<h3 th:text="${#temporals.format(appointment.appointmentTime, 'MMMM d, uuuu')}"></h3>
+						<h4 th:text="${#temporals.format(appointment.appointmentTime, 'h:mm a')}"></h4>
+						<p th:text="${'Appointment with ' + appointment.groomer.name}"></p>
+						<p th:text="${'For ' + appointment.dog.name}"></p>
+						<a th:href="@{'https://www.google.com/calendar/render?action=TEMPLATE&text=Grooming%20Appointment%20With%20' + ${appointment.groomer.name} + '&dates=' + ${#temporals.format(appointment.appointmentTime, 'yyyyMMdd')} + 'T' + ${#temporals.format(appointment.appointmentTime.plusHours(5), 'HHmmss')} + 'Z/' + ${#temporals.format(appointment.appointmentTime, 'yyyyMMdd')} + 'T' + ${#temporals.format(appointment.appointmentTime.plusHours(6), 'HHmmss')} + 'Z&details=Grooming%20appointment%20with%20' + ${appointment.groomer.name} + '%20for%20' + ${appointment.dog.name} + '.&location=Event+Location&sf=true&output=xml'}" target="_blank">Add to Google Calendar</a>
+					</div>
+					<div class="appointment-actions">
+						<a class="btn" th:href="@{/calendar/{appointmentId}(appointmentId=${appointment.id})}" id="edit-appointment-btn">Edit</a>
+						<form th:method="POST" th:action="@{/appointments/{appointmentId}(appointmentId=${appointment.id})}" id="cancel-appointment-form">
+							<input hidden th:name="_method" th:value="DELETE">
+							<button th:type="submit" class="btn" id="cancel-appointment-btn">Cancel</button>
+						</form>
+						<a class="btn" th:href="@{/appointments/{appointmentId}(appointmentId=${appointment.id})}">View</a>
 					</div>
 				</div>
 			</li>
@@ -45,19 +45,20 @@
 	</div>
 
 	<div class="appointment-box">
-		<h3>Past Appointments</h3>
+		<h2>Past Appointments</h2>
 
-		<h4 th:if="${prevAppointments.isEmpty()}">No past appointments.</h4>
+		<div th:if="${prevAppointments.isEmpty()}" class="no-appointments">
+			<p>No past appointments.</p>
+		</div>
 
-		<ul th:if="${!prevAppointments.isEmpty()}" class="d-flex flex-wrap">
-			<li th:each="appointment : ${prevAppointments}" class="appointment-list-item m-3">
-				<div class="card">
-					<div class="card-body">
-						<h5 class="card-title"
-							th:text="${#temporals.format(appointment.appointmentTime, 'MMMM d, uuuu')}"></h5>
+		<ul th:if="${!prevAppointments.isEmpty()}" class="appointment-list">
+			<li th:each="appointment : ${prevAppointments}" class="appointment-item">
+				<div class="appointment-card">
+					<div class="appointment-details">
+						<h3 th:text="${#temporals.format(appointment.appointmentTime, 'MMMM d, uuuu')}"></h3>
 						<h4 th:text="${#temporals.format(appointment.appointmentTime, 'h:mm a')}"></h4>
-						<p class="card-text" th:text="${'Appointment with ' + appointment.groomer.name}"></p>
-						<p class="card-text" th:text="${'For ' + appointment.dog.name}"></p>
+						<p th:text="${'Appointment with ' + appointment.groomer.name}"></p>
+						<p th:text="${'For ' + appointment.dog.name}"></p>
 					</div>
 				</div>
 			</li>
@@ -66,7 +67,6 @@
 </div>
 
 <th:block th:insert="~{partials/footer :: footer}"></th:block>
-
 <th:block th:insert="~{partials/footer-links :: footer-links}"></th:block>
 </body>
 </html>

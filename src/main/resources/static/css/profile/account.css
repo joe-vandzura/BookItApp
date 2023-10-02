@@ -1,78 +1,57 @@
-#page-container {
+/* Common Styles */
+.page-container {
     border: solid 1px #304e18;
     padding: 2em;
     background-image: url('../../img/bones_background.jpeg');
     background-repeat: repeat;
-    min-height: 80vh;;
+    min-height: 80vh;
 }
-
 
 .tab-pane {
     min-height: 50vh;
     margin: 1em;
 }
 
-.dog-form {
-    display: flex;
-    flex-direction: column;
+/* My Dogs Styles */
+.settings-container {
+    border: #e4ffb5 5px solid;
+    background-color: white;
+    margin: 1em;
+    padding: 2em;
 }
 
-#dogs-list-group {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+#my-dogs-group {
+    width: 97%;
 }
 
 #dogs-group-header {
-    align-items: center;
-}
-
-#profile-form {
     display: flex;
-    flex-direction: column;
-}
-
-.profile-form-input {
-    margin: 10px;
-}
-
-#save-param {
-    font-size: small;
-    font-style: italic;
+    align-items: center;
+    justify-content: space-between;
 }
 
 #add-dog-button {
-    width: 30px;
+    width: 100px;
     height: 30px;
     text-align: center;
     background-color: #0d9413;
     color: white;
     border: none;
-    border-radius: 20%;
-    margin-left: 10px;
+    border-radius: 10px;
 }
 
-.toast {
-    z-index: 1000;
+/* Profile Info Styles */
+#profile-info-group {
+    width: 97%;
 }
 
-#warning-icon {
-    width: 20px;
+.profile-form-input {
+    margin: 10px 0;
 }
 
-#delete-dog-form {
-    margin-left: 3px;
-    padding: 3px;
-}
-
-#delete-dog-btn {
-    background: none;
-    border: none;
-    color: white;
-}
-
-.profile-label {
-    min-width: 87px;
+#save-param {
+    font-size: small;
+    font-style: italic;
 }
 
 #resend-email-verification-span {
@@ -87,18 +66,14 @@
 }
 
 @media screen and (min-width: 671px) {
-
     #tab-container {
-        background-color: white;
-        display: flex;
-        justify-content: space-evenly;
+        flex-direction: row;
+        justify-content: space-between;
         padding: 2em;
-        border: #e4ffb5 5px solid;
-        width: 100%;
     }
 
     .settings-container {
-        width: 50%;
+        width: 48%;
     }
 
     .profile-input {
@@ -108,19 +83,12 @@
     #edit-profile-save-btn {
         max-width: 380px;
     }
-
 }
 
 @media screen and (max-width: 670px) {
-
     #tab-container {
-        background-color: white;
-        display: flex;
         flex-direction: column;
-        justify-content: space-evenly;
         padding: 1em;
-        border: #e4ffb5 5px solid;
-        width: 100%;
         overflow: scroll;
     }
 
@@ -135,5 +103,4 @@
     #edit-profile-save-btn {
         max-width: 308px;
     }
-
 }
