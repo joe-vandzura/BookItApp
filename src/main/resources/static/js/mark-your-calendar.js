@@ -95,7 +95,11 @@
                 if (settings.availability[i].length === 0) {
                     tmp += `
                     <div class="myc-day-time-container" id="myc-day-time-container-` + i + `">
-                        <h4>No available times.</h4>
+                        <h4>No</h4>
+                        <br>
+                        <h4>available</h4>
+                        <br>
+                        <h4>times.</h4>
                         <div style="clear:both;"></div>
                     </div>
                 `;

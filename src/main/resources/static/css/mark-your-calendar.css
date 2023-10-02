@@ -1,5 +1,20 @@
+
+#picker-container {
+    min-height: 90vh;
+    padding: 2em;
+    background-image: url('../img/bones_background.jpeg');
+    background-repeat: repeat;
+    overflow: scroll;
+    max-width: 100%;
+}
+
+#myc-nav-container {
+    background-color: #0d9413;
+}
+
 #picker {
     background-color: white;
+    min-width: 1000px;
 }
 
 #myc-container {
@@ -10,7 +25,7 @@
     padding-top: 5px;
     margin-bottom: 15px;
     width: inherit;
-    background-color: #bdbdbd;
+    background-color: #e4ffb5;
 }
 
 #myc-current-month-year-container {
@@ -26,6 +41,7 @@
 #myc-prev-week-container {
     display: inline-block;
     width: 15%;
+    margin-left: 5px;
 }
 
 #myc-next-week-container {
@@ -34,9 +50,9 @@
 }
 
 #myc-prev-week {
-    border: 1px solid #e0e0e0;
+    border: 1px solid black;
     border-radius: 80px;
-    color: #e0e0e0;
+    color: black;
     cursor: pointer;
     float: left;
     font-size: 1.6em;
@@ -47,9 +63,9 @@
 }
 
 #myc-next-week {
-    border: 1px solid #e0e0e0;
+    border: 1px solid black;
     border-radius: 80px;
-    color: #e0e0e0;
+    color: black;
     cursor: pointer;
     float: right;
     font-size: 1.6em;
@@ -70,6 +86,7 @@
 
 #myc-dates-container {
     background-color: #fafafa;
+    white-space: nowrap;
 }
 
 .myc-date-header {
@@ -85,14 +102,11 @@
     padding-left: 15px;
 }
 
-.myc-date-header:last-of-type {
-    border-right: none;
-    width: 13%;
-}
 
 #myc-available-time-container {
     border-top: 1px solid #e0e0e0;
     min-height: 150px;
+    white-space: nowrap;
 }
 
 .myc-day-time-container {
@@ -102,6 +116,7 @@
     padding: 15px 15px 15px 15px;
     vertical-align: top;
     width: 13.77%;
+    min-width: 100px;
 }
 
 .myc-day-time-container:first-of-type {
@@ -110,7 +125,6 @@
 
 .myc-day-time-container:last-of-type {
     border-right: none;
-    width: 13%;
 }
 
 .myc-date-number {
@@ -127,6 +141,7 @@
     padding: 10px 0px 10px 0px;
     text-align: center;
     text-decoration: none;
+    min-width: 50px;
 }
 
 .myc-available-time.selected, .myc-available-time:hover {
@@ -137,11 +152,8 @@
     font-weight: lighter;
 }
 
-@media only screen and (max-width: 768px) {
-    .myc-date-header, .myc-day-time-container {
-        width: 13.5%;
-    }
-    /*.myc-date-header:last-of-type, .myc-day-time-container:last-of-type {
-        width: 12%;
-    }*/
+h4 {
+    display: inline-block; /* or display: inline-block; */
+    max-width: 100%; /* Optional: control the maximum width for wrapping */
+    word-wrap: break-word; /* Optional: force long words to wrap */
 }

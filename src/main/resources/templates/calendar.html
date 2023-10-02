@@ -17,54 +17,67 @@
 <div class="modal fade" id="groomerModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
 	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
-			<div class="modal-header">
-				<h1 class="modal-title fs-5">Select Your Groomer!</h1>
+			<div class="modal-header bg-success text-white">
+				<h1 class="modal-title fs-4">Select Your Groomer!</h1>
 			</div>
 			<form class="modal-body">
-				<input type="radio" id="groomer1" name="groomer" value="1">
-				<label for="groomer1">Lorena</label><br>
-				<input type="radio" id="groomer2" name="groomer" value="2">
-				<label for="groomer2">Kara</label>
+				<div class="mb-3">
+					<input type="radio" id="groomer1" name="groomer" value="1">
+					<label for="groomer1">Lorena</label><br>
+				</div>
+				<div class="mb-3">
+					<input type="radio" id="groomer2" name="groomer" value="2">
+					<label for="groomer2">Kara</label>
+				</div>
 				<div class="modal-footer">
 					<a th:href="@{/}" class="btn btn-secondary">Go Back</a>
-					<button id="groomer-select-btn" type="button" class="btn btn-success disabled"
-							data-bs-dismiss="modal">Select
-					</button>
+					<button id="groomer-select-btn" type="button" class="btn btn-success disabled" data-bs-dismiss="modal">Select</button>
 				</div>
 			</form>
 		</div>
 	</div>
 </div>
 
+
 <div id="picker-container">
 	<div id="picker"></div>
 </div>
 
 <div class="modal fade" id="selectionModal" tabindex="-1">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
-			<div class="modal-header">
-				<h1 class="modal-title fs-5">Confirm Appointment</h1>
+			<div class="modal-header bg-success text-white">
+				<h1 class="modal-title fs-4">Confirm Appointment</h1>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
 			<form class="modal-body" id="appointment-form" th:action="@{/appointments}" th:method="POST">
-				<p>Groomer: <span id="span-groomer-name"></span></p>
-				<input hidden id="groomer-id" name="groomer-id" type="number">
-				<p>Selected date: <span id="selected-date"></span></p>
-				<input hidden id="selected-date-input" name="selected-date" type="text">
-				<p>Selected time: <span id="selected-time"></span></p>
-				<input hidden id="selected-time-input" name="selected-time" type="text">
-				<p>Select your dog:
-					<span><select name="dog-id" required>
-					<option th:each="dog : ${dogs}" th:value="${dog.id}"
-							th:selected="${selectedDog != null} and ${dog.id} == ${selectedDog.id}">
-						<span th:text="${dog.name}"></span>
-					</option>
-				</select></span>
+				<div class="mb-3">
+					<label for="span-groomer-name" class="form-label">Groomer:</label>
+					<span id="span-groomer-name"></span>
+					<input hidden id="groomer-id" name="groomer-id" type="number">
+				</div>
+				<div class="mb-3">
+					<label for="selected-date" class="form-label">Selected date:</label>
+					<span id="selected-date"></span>
+					<input hidden id="selected-date-input" name="selected-date" type="text">
+				</div>
+				<div class="mb-3">
+					<label for="selected-time" class="form-label">Selected time:</label>
+					<span id="selected-time"></span>
+					<input hidden id="selected-time-input" name="selected-time" type="text">
+				</div>
+				<div class="mb-3">
+					<label for="dog-select" class="form-label">Select your dog:</label>
+					<select name="dog-id" id="dog-select" class="form-select" required>
+						<option th:each="dog : ${dogs}" th:value="${dog.id}" th:selected="${selectedDog != null} and ${dog.id} == ${selectedDog.id}">
+							<span th:text="${dog.name}"></span>
+						</option>
+					</select>
 					<input hidden name="change-appointment-id" type="number" th:value="${changeAppointmentId}">
+				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-					<button id="appointment-select-btn" th:type="submit" class="btn btn-success">Make Appointment
-					</button>
+					<button id="appointment-select-btn" th:type="submit" class="btn btn-success">Make Appointment</button>
 				</div>
 			</form>
 		</div>
@@ -83,6 +96,20 @@
 
     let amountOfWeekOffset = 0;
     let groomerId = "";
+
+    function formatDate(inputDateStr) {
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        const inputDate = new Date(inputDateStr);
+        return inputDate.toLocaleDateString(undefined, options);
+    }
+
+    function formatTimeWithAMPM(timeStr) {
+        const [hours, minutes] = timeStr.split(':').map(Number);
+        const ampm = hours >= 9 && hours < 12 ? 'AM' : 'PM';
+        const formattedHours = hours % 12 === 0 ? 12 : hours % 12;
+        const formattedTime = `${formattedHours}:${minutes.toString().padStart(2, '0')} ${ampm}`;
+        return formattedTime;
+    }
 
     (function ($) {
 
@@ -136,8 +163,8 @@
                 onClick: function (ev, data) {
                     var d = data[0].split(' ')[0];
                     var t = data[0].split(' ')[1];
-                    $('#selected-date').html(d);
-                    $('#selected-time').html(t);
+                    $('#selected-date').html(formatDate(d));
+                    $('#selected-time').html(formatTimeWithAMPM(t));
                     $("#selected-date-input").val(d);
                     $("#selected-time-input").val(t);
                 },

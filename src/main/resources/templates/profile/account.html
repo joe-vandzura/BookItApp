@@ -32,7 +32,7 @@
 		<div id="my-dogs-group" class="settings-container">
 			<div id="dogs-group-header" class="d-flex align-items-center justify-content-between">
 				<h2>My Dogs</h2>
-				<button id="add-dog-button" type="button" data-bs-toggle="modal"
+				<button class="btn btn-success" type="button" data-bs-toggle="modal"
 						data-bs-target="#addDogModal">
 					Add Dog
 				</button>
@@ -83,38 +83,46 @@
 
 <!-- Edit Dog Modal -->
 <div class="modal fade" id="editDogModal" tabindex="-1">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
-			<div class="modal-header">
-				<h2 class="modal-title fs-5">Edit Dog</h2>
+			<div class="modal-header bg-success text-white">
+				<h2 class="modal-title fs-4">Edit Dog</h2>
 				<form class="btn btn-danger" id="delete-dog-form" th:method="POST">
 					<input hidden th:name="_method" th:value="DELETE">
-					<button id="delete-dog-btn" type="submit">Delete Dog</button>
+					<button id="delete-dog-btn" type="submit" class="btn btn-sm btn-danger">Delete Dog</button>
 				</form>
-				<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
 			<div class="modal-body">
 				<form class="dog-form">
 					<input id="edit-id-input" hidden type="number">
-					<label>Name</label>
-					<input id="edit-name-input" type="text" name="name" maxlength="30">
-					<label>Breed</label>
-					<select id="edit-breed-input" name="breed">
-						<option th:each="breed : ${dogBreeds}"
-								th:value="${#strings.capitalize(breed.toString())}"
-								th:selected="${dog.breed == #strings.capitalize(breed.toString())}">
-							<span th:text="${#strings.capitalize(breed.toString())}"></span>
-						</option>
-					</select>
-					<label>Age</label>
-					<input id="edit-age-input" type="number" name="age">
-					<label>Sex</label>
-					<select id="edit-sex-input" th:name="sex" required>
-						<option value="M">Male</option>
-						<option value="F">Female</option>
-					</select>
-					<label>Has Rabies Vaccination?</label>
-					<input id="edit-rabies-input" type="checkbox" name="rabiesVaccinationStatus">
+					<div class="mb-3">
+						<label for="edit-name-input" class="form-label">Name</label>
+						<input id="edit-name-input" type="text" name="name" maxlength="20" class="form-control">
+					</div>
+					<div class="mb-3">
+						<label for="edit-breed-input" class="form-label">Breed</label>
+						<select id="edit-breed-input" name="breed" class="form-select">
+							<option th:each="breed : ${dogBreeds}" th:value="${#strings.capitalize(breed.toString())}" th:selected="${dog.breed == #strings.capitalize(breed.toString())}">
+								<span th:text="${#strings.capitalize(breed.toString())}"></span>
+							</option>
+						</select>
+					</div>
+					<div class="mb-3">
+						<label for="edit-age-input" class="form-label">Age</label>
+						<input id="edit-age-input" type="number" name="age" class="form-control">
+					</div>
+					<div class="mb-3">
+						<label for="edit-sex-input" class="form-label">Sex</label>
+						<select id="edit-sex-input" th:name="sex" required class="form-select">
+							<option value="M">Male</option>
+							<option value="F">Female</option>
+						</select>
+					</div>
+					<div class="mb-3 form-check">
+						<input id="edit-rabies-input" type="checkbox" name="rabiesVaccinationStatus" class="form-check-input">
+						<label for="edit-rabies-input" class="form-check-label">Has Rabies Vaccination?</label>
+					</div>
 				</form>
 			</div>
 			<div class="modal-footer">
@@ -124,6 +132,7 @@
 		</div>
 	</div>
 </div>
+
 
 <th:block th:insert="~{partials/add-dog-modal :: add-dog-modal}"></th:block>
 
