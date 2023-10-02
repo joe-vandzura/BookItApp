@@ -20,4 +20,5 @@ public class EmailDetails {
     private String dogName;
     private int viewCount;
     private String securityToken;
+    private String userFirstName;
 }

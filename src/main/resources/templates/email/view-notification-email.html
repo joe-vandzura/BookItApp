@@ -2,45 +2,29 @@
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>View Notification Email</title>
-  <style>
-
-    #email-container {
-      display: flex;
-      flex-direction: column;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      border: darkgreen 8px solid;
-      border-radius: 3%;
-      background-color: #e4ffb5;
-      width: 40%;
-      height: 80vh;
-    }
-
-    p {
-      color: black;
-      font-size: xx-large;
-      align-self: center;
-      margin: 10px;
-    }
-
-    h1 {
-      align-self: center;
-    }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>View Count Email</title>
 </head>
 <body>
-
-<div id="email-container">
-
-  <h1>Project Was Viewed!</h1>
-
-
-  <p>View count number is now: <span th:text="${viewCount}"></span></p>
-
-</div>
-
+<table cellpadding="0" cellspacing="0" width="100%">
+  <tr>
+    <td align="center" style="background-color: #f4f4f4; padding: 20px;">
+      <table cellpadding="0" cellspacing="0" width="600" style="background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+        <tr>
+          <td style="text-align: center; padding: 20px;">
+            <h1>Project Was Viewed!</h1>
+            <p>View count number is now: <span th:text="${viewCount}"></span></p>
+          </td>
+        </tr>
+        <tr>
+          <td style="text-align: center; padding: 20px;">
+            <a href="https://book-it-app-58bb29028f24.herokuapp.com/" style="background-color: #0dbc12; color: #ffffff; text-decoration: none; padding: 10px 20px; border-radius: 5px; font-weight: bold;">Visit Our Website</a>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
 </body>
 </html>

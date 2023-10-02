@@ -89,4 +89,6 @@ public class EmailController {
         emailService.sendEmailWithHtmlTemplate(details, "email/reset-password-email", context);
     }
 
+
+
 }

@@ -26,11 +26,11 @@ public class Appointment {
     @Column(name = "time", nullable = false)
     private LocalDateTime appointmentTime;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn (name = "groomer_id")
     private Groomer groomer;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn (name = "user_id")
     private User user;
 
@@ -38,7 +38,7 @@ public class Appointment {
         return String.valueOf(appointmentTime);
     }
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     private Dog dog;
 
 }
