@@ -50,33 +50,113 @@
 
 		<div id="profile-info-group" class="settings-container">
 			<h2>Profile Info <span id="save-param" th:if="${param.saved}">Profile saved!</span></h2>
-			<form id="profile-form" th:method="POST" th:action="@{/my-profile/account}">
-				<div class="profile-form-input">
-					<label class="profile-label">First Name</label>
-					<input class="profile-input" th:name="first-name" type="text" th:value="${user.firstName}">
-				</div>
 
-				<div class="profile-form-input">
-					<label class="profile-label">Last Name</label>
-					<input class="profile-input" th:name="last-name" type="text" th:value="${user.lastName}">
-				</div>
+			<div>
+				<label>Name:</label>
+				<span th:text="${user.firstName}"></span> <span th:text="${user.lastName}"></span>
+				<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalInput1"><i class="fa-solid fa-pen-to-square"></i></button>
+			</div>
 
-				<div class="profile-form-input">
-					<label class="profile-label">Username</label>
-					<input class="profile-input" th:name="username" type="text" th:value="${user.username}">
-				</div>
+			<div>
+				<label>Username:</label>
+				<span th:text="${user.username}"></span>
+				<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalInput2"><i class="fa-solid fa-pen-to-square"></i></button>
+			</div>
 
-				<div class="profile-form-input">
-					<label class="profile-label">Email</label>
-					<input class="profile-input" th:name="email" type="text" th:value="${user.email}">
-					<i th:if="${user.emailVerified}" class="fa-regular fa-square-check"></i>
-				</div>
+			<div>
+				<label>Email:</label>
+				<span th:text="${user.email}"></span>
+				<i th:if="${user.emailVerified}" class="fa-regular fa-square-check"></i>
+				<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalInput3"><i class="fa-solid fa-pen-to-square"></i></button>
 				<div th:if="${!user.emailVerified}">
 					<span>Email has not been verified yet. <span id="resend-email-verification-span">Resend verification email</span>.</span>
 				</div>
+			</div>
 
-				<button id="edit-profile-save-btn" class="btn btn-success" type="submit">Save</button>
-			</form>
+			<div class="modal fade" id="modalInput1" tabindex="-1" role="dialog">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header bg-success text-white">
+							<h5 class="modal-title fs-4">Edit Name</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+						</div>
+						<div class="modal-body">
+							<form id="profile-form" th:method="POST" th:action="@{/my-profile/account}">
+								<div class="mb-3">
+									<label class="form-label">First Name:</label>
+									<input type="text" th:name="first-name" class="form-control" th:value="${user.firstName}">
+								</div>
+								<div class="mb-3">
+									<label class="form-label">Last Name:</label>
+									<input type="text" th:name="last-name" class="form-control" th:value="${user.lastName}">
+								</div>
+								<input hidden th:name="username" th:value="${user.username}">
+								<input hidden th:name="email" th:value="${user.email}">
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+									<button type="submit" class="btn btn-success">Save changes</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="modal fade" id="modalInput2" tabindex="-1" role="dialog">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header bg-success text-white">
+							<h5 class="modal-title fs-4">Edit Username</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+						</div>
+						<div class="modal-body">
+							<form th:method="POST" th:action="@{/my-profile/account}">
+								<div class="mb-3">
+									<label class="form-label">Username:</label>
+									<input type="text" th:name="username" class="form-control" th:value="${user.username}">
+								</div>
+								<input hidden th:name="first-name" th:value="${user.firstName}">
+								<input hidden th:name="last-name" th:value="${user.lastName}">
+								<input hidden th:name="email" th:value="${user.email}">
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+									<button type="submit" class="btn btn-success">Save changes</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="modal fade" id="modalInput3" tabindex="-1" role="dialog">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header bg-success text-white">
+							<h5 class="modal-title fs-4">Edit Email</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+						</div>
+						<div class="modal-body">
+							<form th:method="POST" th:action="@{/my-profile/account}">
+								<div class="mb-3">
+									<label class="form-label">Email:</label>
+									<input type="text" th:name="email" class="form-control" th:value="${user.email}">
+								</div>
+								<input hidden th:name="first-name" th:value="${user.firstName}">
+								<input hidden th:name="last-name" th:value="${user.lastName}">
+								<input hidden th:name="username" th:value="${user.username}">
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+									<button type="submit" class="btn btn-success">Save changes</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
 		</div>
 	</div>
 </div>

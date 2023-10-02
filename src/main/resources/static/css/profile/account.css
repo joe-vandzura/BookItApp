@@ -22,6 +22,8 @@
 
 #my-dogs-group {
     width: 97%;
+    overflow: scroll;
+    min-width: 250px;
 }
 
 #dogs-group-header {
@@ -33,6 +35,8 @@
 /* Profile Info Styles */
 #profile-info-group {
     width: 97%;
+    overflow: scroll;
+    min-width: 250px;
 }
 
 .profile-form-input {
@@ -53,6 +57,11 @@
     cursor: pointer;
     color: #0dbc12;
     text-decoration: underline;
+}
+
+#dogs-list-group {
+    display: flex;
+    flex-direction: row;
 }
 
 @media screen and (min-width: 671px) {

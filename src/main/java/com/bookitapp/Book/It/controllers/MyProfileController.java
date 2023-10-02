@@ -10,6 +10,7 @@ import com.bookitapp.Book.It.services.AuthService;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.lang.Nullable;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -106,13 +107,15 @@ public class MyProfileController {
             @RequestParam("username") String username,
             @RequestParam("email") String email
     ) {
-        System.out.println("INSIDE OF POST MAPPING");
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User actualUser = userRepo.findById(loggedInUser.getId()).get();
+        if (!actualUser.getEmail().equals(email)) {
+            actualUser.setEmailVerified(false);
+            actualUser.setEmail(email);
+        }
         actualUser.setFirstName(firstName);
         actualUser.setLastName(lastName);
         actualUser.setUsername(username);
-        actualUser.setEmail(email);
         userRepo.save(actualUser);
 
         return "redirect:/my-profile/account?saved";
