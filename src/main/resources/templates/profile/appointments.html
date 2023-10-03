@@ -32,10 +32,10 @@
 						<a th:href="@{'https://www.google.com/calendar/render?action=TEMPLATE&text=Grooming%20Appointment%20With%20' + ${appointment.groomer.name} + '&dates=' + ${#temporals.format(appointment.appointmentTime, 'yyyyMMdd')} + 'T' + ${#temporals.format(appointment.appointmentTime.plusHours(5), 'HHmmss')} + 'Z/' + ${#temporals.format(appointment.appointmentTime, 'yyyyMMdd')} + 'T' + ${#temporals.format(appointment.appointmentTime.plusHours(6), 'HHmmss')} + 'Z&details=Grooming%20appointment%20with%20' + ${appointment.groomer.name} + '%20for%20' + ${appointment.dog.name} + '.&location=Event+Location&sf=true&output=xml'}" target="_blank">Add to Google Calendar</a>
 					</div>
 					<div class="appointment-actions">
-						<a class="btn" th:href="@{/calendar/{appointmentId}(appointmentId=${appointment.id})}" id="edit-appointment-btn">Edit</a>
+						<a class="btn" th:href="@{/calendar/{appointmentId}(appointmentId=${appointment.id})}" id="edit-appointment-btn"><i class="fa-solid fa-pen-to-square"></i></a>
 						<form th:method="POST" th:action="@{/appointments/{appointmentId}(appointmentId=${appointment.id})}" id="cancel-appointment-form">
 							<input hidden th:name="_method" th:value="DELETE">
-							<button th:type="submit" class="btn" id="cancel-appointment-btn">Cancel</button>
+							<button th:type="submit" class="btn" id="cancel-appointment-btn"><i class="fa-solid fa-trash"></i></button>
 						</form>
 						<a class="btn" th:href="@{/appointments/{appointmentId}(appointmentId=${appointment.id})}">View</a>
 					</div>
@@ -68,5 +68,6 @@
 
 <th:block th:insert="~{partials/footer :: footer}"></th:block>
 <th:block th:insert="~{partials/footer-links :: footer-links}"></th:block>
+<script src="https://kit.fontawesome.com/556c276549.js" crossorigin="anonymous"></script>
 </body>
 </html>

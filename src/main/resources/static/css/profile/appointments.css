@@ -95,11 +95,15 @@ h2 {
 }
 
 .appointment-actions a.btn:hover {
-    background-color: #a7ff7d;
+    background-color: rgba(13, 188, 18, 0.57);
 }
 
 #edit-appointment-btn {
-    background-color: #dcdc09;
+    background-color: #00BFFF;
+}
+
+#edit-appointment-btn:hover {
+    background-color: rgba(0, 191, 255, 0.5);
 }
 
 #cancel-appointment-form {
@@ -111,6 +115,13 @@ h2 {
 
 #cancel-appointment-btn {
     background-color: indianred;
+    padding: 10px 20px;
+    margin-left: 10px;
+    margin-bottom: 5px;
+}
+
+#cancel-appointment-btn:hover {
+    background-color: rgba(205, 92, 92, 0.63);
     padding: 10px 20px;
     margin-left: 10px;
     margin-bottom: 5px;
