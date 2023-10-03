@@ -2,23 +2,16 @@
 
 	<nav class="navbar navbar-expand-lg bg-body-tertiary p-0">
 		<div class="container-fluid d-flex justify-content-between align-items-center">
-			<a id="navbar-logo" th:href="@{/}" class="navbar-brand"><img id="navbar-img" th:src="@{/img/olis_pet_stuff_logo.png}" /></a>
-			<button id="hamburger-btn" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+			<a id="navbar-logo" th:href="@{/}" class="navbar-brand"><img id="navbar-img"
+																		 th:src="@{/img/olis_pet_stuff_logo.png}"/></a>
+			<button id="hamburger-btn" class="navbar-toggler" type="button" data-bs-toggle="collapse"
+					data-bs-target="#navbarSupportedContent">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<div class="collapse navbar-collapse">
 				<ul class="navbar-nav mb-2 mb-lg-0">
 					<li class="nav-item normal-btn">
 						<a class="nav-link active" th:href="@{/}">Home</a>
-					</li>
-					<li sec:authorize="!isAuthenticated()" class="nav-item normal-btn">
-						<a class="nav-link" th:href="@{/login}">Log In</a>
-					</li>
-					<li sec:authorize="!isAuthenticated()" class="nav-item normal-btn">
-						<a class="nav-link" th:href="@{/register}">Register</a>
-					</li>
-					<li sec:authorize="isAuthenticated()" class="nav-item normal-btn">
-						<form th:action="@{/logout}" method="POST"><input class="nav-link" type="submit" value="Logout"></form>
 					</li>
 					<li sec:authorize="isAuthenticated()" class="nav-item normal-btn dropdown">
 						<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
@@ -36,10 +29,21 @@
 						<a class="nav-link" id="book-appt-btn" th:href="@{/calendar}">Book an Appointment</a>
 					</li>
 				</ul>
+				<div style="margin-left: auto">
+					<ul class="navbar-nav">
+						<li sec:authorize="!isAuthenticated()" class="nav-item normal-btn">
+							<a class="nav-link" th:href="@{/login}">Log In</a>
+						</li>
+						<li sec:authorize="!isAuthenticated()" class="nav-item normal-btn">
+							<a class="nav-link" th:href="@{/register}">Register</a>
+						</li>
+						<li sec:authorize="isAuthenticated()" class="nav-item normal-btn">
+							<form th:action="@{/logout}" method="POST"><input class="nav-link" type="submit"
+																			  value="Logout"></form>
+						</li>
+					</ul>
+				</div>
 			</div>
 		</div>
 	</nav>
-
-	<th:block th:insert="~{partials/modal :: modal}"></th:block>
-
 </th:block>

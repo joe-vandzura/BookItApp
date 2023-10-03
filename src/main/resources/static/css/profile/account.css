@@ -2,8 +2,6 @@
 .page-container {
     border: solid 1px #304e18;
     padding: 2em;
-    background-image: url('../../img/bones_background.jpeg');
-    background-repeat: repeat;
     min-height: 80vh;
 }
 
@@ -82,6 +80,8 @@
         flex-direction: row;
         justify-content: space-between;
         padding: 2em;
+        background-image: url('../../img/bones_background.jpeg');
+        background-repeat: repeat;
     }
 
     .settings-container {
@@ -102,6 +102,8 @@
         flex-direction: column;
         padding: 1em 2em 1em 1em;
         overflow: scroll;
+        background-image: url('../../img/bones_background.jpeg');
+        background-repeat: repeat;
     }
 
     .settings-container {

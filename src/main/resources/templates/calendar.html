@@ -30,7 +30,7 @@
 					<label for="groomer2">Kara</label>
 				</div>
 				<div class="modal-footer">
-					<a th:href="@{/}" class="btn btn-secondary">Go Back</a>
+					<button type="button" onclick="goBack()" class="btn btn-secondary">Go Back</button>
 					<button id="groomer-select-btn" type="button" class="btn btn-success disabled" data-bs-dismiss="modal">Select</button>
 				</div>
 			</form>
@@ -96,6 +96,10 @@
 
     let amountOfWeekOffset = 0;
     let groomerId = "";
+
+    function goBack() {
+        window.history.back();
+    }
 
     function formatDate(inputDateStr) {
         const options = { year: 'numeric', month: 'long', day: 'numeric' };

@@ -5,6 +5,13 @@ body {
     padding: 0;
 }
 
+#appointments-container {
+    background-image: url('../../img/bones_background.jpeg');
+    background-repeat: repeat;
+    height: 80vh;
+    padding: 20px;
+}
+
 .container {
     max-width: 800px;
     margin: 0 auto;
@@ -21,7 +28,7 @@ h2 {
     border: 5px solid #e4ffb5;
     border-radius: 8px;
     min-height: 300px;
-    margin: 20px;
+    margin-bottom: 20px;
     padding: 20px;
 }
 
@@ -131,5 +138,30 @@ h2 {
 @media screen and (max-width: 480px) {
     .appointment-box {
         margin: 10px;
+    }
+}
+
+@media screen and (max-width: 560px) {
+    #appointments-container {
+        height: 115vh;
+    }
+}
+
+@media screen and (min-width: 559px) {
+    #appointments-container {
+        height: 100vh;
+    }
+}
+
+@media screen and (max-width: 567px) {
+    .appointment-actions {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+@media screen and (min-width: 566px) {
+    .appointment-actions {
+        display: flex;
     }
 }

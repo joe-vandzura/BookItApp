@@ -4,21 +4,6 @@ body {
     background-repeat: no-repeat;
 }
 
-#login-form-container {
-    border: darkgreen 8px solid;
-    border-radius: 3%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 60vh;
-    width: 55%;
-    margin: auto;
-    background-color: #cadfbc;
-    color: #304e18;
-    padding: 20px 20px 20px 20px;
-}
-
 #page-container {
     display: flex;
     height: 100vh;
@@ -66,6 +51,7 @@ body {
 .toast {
     z-index: 1000;
     top: 72%;
+    width: 35%;
 }
 
 @media screen and (min-width: 674px) {
@@ -96,4 +82,38 @@ body {
     }
 
 
+}
+
+@media screen and (min-width: 481px) {
+    #login-form-container {
+        border: darkgreen 8px solid;
+        border-radius: 3%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 60vh;
+        width: 55%;
+        margin: auto;
+        background-color: #cadfbc;
+        color: #304e18;
+        padding: 20px 20px 20px 20px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    #login-form-container {
+        border: darkgreen 8px solid;
+        border-radius: 3%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 60vh;
+        width: 95%;
+        margin: auto;
+        background-color: #cadfbc;
+        color: #304e18;
+        padding: 20px 20px 20px 20px;
+    }
 }
