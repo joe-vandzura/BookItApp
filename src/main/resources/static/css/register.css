@@ -1,27 +1,51 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
 body {
     background-image: url('../img/login_background.webp');
     background-size: cover;
     background-repeat: no-repeat;
 }
 
-
 #page-container {
     display: flex;
+    justify-content: center;
+    align-items: center;
     height: 100vh;
+}
+
+#register-form-container {
+    border: 8px solid darkgreen;
+    border-radius: 3%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 85vh;
+    width: 55%;
+    max-width: 500px;
+    margin: auto;
+    background-color: #cadfbc;
+    color: #304e18;
+    padding: 20px;
+    overflow: scroll;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 #register-img {
     border-radius: 50%;
     width: 110px;
-    border: solid 3px #e4ffb5;
+    border: 3px solid #e4ffb5;
 }
 
 #register-header {
-    padding-top: 20px;
-    padding-bottom: 30px;
+    padding: 20px 0 30px;
     text-align: center;
+    font-size: 1.5rem;
 }
-
 
 .input-group-text {
     color: #304e18;
@@ -29,9 +53,25 @@ body {
     min-width: 110px;
 }
 
+.register-input-group {
+    margin: 10px 0;
+}
+
+.register-input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.invalid-feedback {
+    color: red;
+    margin-top: 5px;
+}
+
 #register-anchor {
     color: #0dbc12;
     text-decoration: none;
+    transition: color 0.3s;
 }
 
 #register-anchor:hover {
@@ -39,23 +79,15 @@ body {
     text-decoration: underline;
 }
 
+#register-btn {
+    margin-top: 20px;
+}
+
 .invalid {
     background-color: #ffebeb;
 }
 
-@media screen and (min-width: 674px) {
-
-    .regsiter-input-group {
-        flex-direction: row;
-    }
-
-    .register-input {
-        border: none;
-    }
-}
-
 @media screen and (max-width: 675px) {
-
     .register-input-group {
         flex-direction: column;
         align-items: center;
@@ -64,47 +96,10 @@ body {
     .input-group-text {
         width: 100%;
     }
-
-    .register-input {
-        width: 100%;
-        border: none;
-    }
-
-
-}
-
-@media screen and (min-width: 481px) {
-    #register-form-container {
-        border: darkgreen 8px solid;
-        border-radius: 3%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        height: 85vh;
-        width: 55%;
-        margin: auto;
-        background-color: #cadfbc;
-        color: #304e18;
-        padding: 20px;
-        overflow: scroll;
-    }
 }
 
 @media screen and (max-width: 480px) {
     #register-form-container {
-        border: darkgreen 8px solid;
-        border-radius: 3%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        height: 85vh;
         width: 95%;
-        margin: auto;
-        background-color: #cadfbc;
-        color: #304e18;
-        padding: 20px;
-        overflow: scroll;
     }
 }
