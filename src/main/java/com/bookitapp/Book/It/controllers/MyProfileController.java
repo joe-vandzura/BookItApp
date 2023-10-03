@@ -121,4 +121,13 @@ public class MyProfileController {
         return "redirect:/my-profile/account?saved";
     }
 
+    @GetMapping("/account/change-password")
+    public String changePassword(Model model) {
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User actualUser = userRepo.findById(loggedInUser.getId()).get();
+        model.addAttribute("userId", actualUser.getId());
+        model.addAttribute("isLoggedIn", true);
+        return "reset-password";
+    }
+
 }

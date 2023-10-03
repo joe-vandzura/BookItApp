@@ -6,6 +6,7 @@ import com.bookitapp.Book.It.models.User;
 import com.bookitapp.Book.It.repositories.TokenRepository;
 import com.bookitapp.Book.It.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.lang.Nullable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -85,7 +86,6 @@ public class AuthenticationController {
             return "link-expired";
         }
         model.addAttribute("userId", userId);
-        model.addAttribute("secTokenStr", securityTokenString);
         return "reset-password";
     }
 
@@ -93,13 +93,17 @@ public class AuthenticationController {
     String resetPassword(
             @RequestParam(name = "user-id") Long userId,
             @RequestParam(name = "password") String password,
-            @RequestParam(name = "confirm-password") String confirmPassword) {
+            @RequestParam(name = "confirm-password") String confirmPassword,
+            @RequestParam(name = "is-logged-in") @Nullable Boolean isLoggedIn) {
 
         if (password.equals(confirmPassword)) {
             User user = userRepo.findById(userId).get();
             String hash = passwordEncoder.encode(password);
             user.setPassword(hash);
             userRepo.save(user);
+            if (isLoggedIn != null && isLoggedIn == true) {
+                return "redirect:/my-profile/account?saved";
+            }
         }
         return "redirect:/login?passwordreset";
     }
