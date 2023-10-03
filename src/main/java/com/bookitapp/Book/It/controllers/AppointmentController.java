@@ -68,57 +68,64 @@ public class AppointmentController {
 
         if (userIsAuthenticated) {
 
-            Appointment newAppointment = new Appointment();
-            Groomer selectedGroomer = groomerRepo.findById(groomerId).get();
-            User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            User loggedInUserWithCurrentProps = userRepo.findById(loggedInUser.getId()).get();
-            Dog dog = dogRepo.findById(dogId).get();
+            Appointment futureAppointment = appointmentRepo.findAFutureAppointment();
+            if (futureAppointment == null) {
 
-            if (timeInput.length() == 4 && Integer.parseInt(timeInput.substring(0, 1)) < 9) {
-                int hour = Integer.parseInt(timeInput.substring(0, 1)) + 12;
-                timeInput = hour + timeInput.substring(1);
-            }
 
-            String dateTimeString = dateInput + "T" + timeInput;
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
-            LocalDateTime dateTime = LocalDateTime.parse(dateTimeString, formatter);
-            Long newAppointmentId = 0L;
+                Appointment newAppointment = new Appointment();
+                Groomer selectedGroomer = groomerRepo.findById(groomerId).get();
+                User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+                User loggedInUserWithCurrentProps = userRepo.findById(loggedInUser.getId()).get();
+                Dog dog = dogRepo.findById(dogId).get();
 
-            if (changeAppointmentId != null) {
-                Appointment appointmentToChange = appointmentRepo.findById(changeAppointmentId).get();
-                appointmentToChange.setAppointmentTime(dateTime);
-                appointmentToChange.setGroomer(selectedGroomer);
-                appointmentToChange.setDog(dog);
-                appointmentRepo.save(appointmentToChange);
-                if (loggedInUserWithCurrentProps.isEmailVerified()) {
-                    EmailDetails details = new EmailDetails();
-                    details.setRecipient(loggedInUserWithCurrentProps.getEmail());
-                    details.setAppointmentTime(dateTime);
-                    details.setGroomerName(selectedGroomer.getName());
-                    details.setDogName(dog.getName());
-                    details.setSubject("Change of Appointment Confirmation");
-                    emailController.sendChangeAppointmentConfirmationEmail(details);
+                if (timeInput.length() == 4 && Integer.parseInt(timeInput.substring(0, 1)) < 9) {
+                    int hour = Integer.parseInt(timeInput.substring(0, 1)) + 12;
+                    timeInput = hour + timeInput.substring(1);
                 }
-                return "redirect:/appointments/" + changeAppointmentId;
+
+                String dateTimeString = dateInput + "T" + timeInput;
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+                LocalDateTime dateTime = LocalDateTime.parse(dateTimeString, formatter);
+                Long newAppointmentId = 0L;
+
+                if (changeAppointmentId != null) {
+                    Appointment appointmentToChange = appointmentRepo.findById(changeAppointmentId).get();
+                    appointmentToChange.setAppointmentTime(dateTime);
+                    appointmentToChange.setGroomer(selectedGroomer);
+                    appointmentToChange.setDog(dog);
+                    appointmentRepo.save(appointmentToChange);
+                    if (loggedInUserWithCurrentProps.isEmailVerified()) {
+                        EmailDetails details = new EmailDetails();
+                        details.setRecipient(loggedInUserWithCurrentProps.getEmail());
+                        details.setAppointmentTime(dateTime);
+                        details.setGroomerName(selectedGroomer.getName());
+                        details.setDogName(dog.getName());
+                        details.setSubject("Change of Appointment Confirmation");
+                        emailController.sendChangeAppointmentConfirmationEmail(details);
+                    }
+                    return "redirect:/appointments/" + changeAppointmentId;
+                } else {
+                    newAppointment.setGroomer(selectedGroomer);
+                    newAppointment.setUser(loggedInUserWithCurrentProps);
+                    newAppointment.setAppointmentTime(dateTime);
+                    newAppointment.setDog(dog);
+                    appointmentRepo.save(newAppointment);
+                    if (loggedInUserWithCurrentProps.isEmailVerified()) {
+                        EmailDetails details = new EmailDetails();
+                        details.setRecipient(loggedInUserWithCurrentProps.getEmail());
+                        details.setAppointmentTime(dateTime);
+                        details.setGroomerName(selectedGroomer.getName());
+                        details.setDogName(dog.getName());
+                        details.setSubject("Appointment Confirmation");
+                        emailController.sendConfirmationEmail(details);
+                    }
+                    newAppointmentId = appointmentRepo.findByAppointmentTimeAndGroomer(dateTime, selectedGroomer).getId();
+                }
+
+                return "redirect:/appointments/" + newAppointmentId;
             } else {
-                newAppointment.setGroomer(selectedGroomer);
-                newAppointment.setUser(loggedInUserWithCurrentProps);
-                newAppointment.setAppointmentTime(dateTime);
-                newAppointment.setDog(dog);
-                appointmentRepo.save(newAppointment);
-                if (loggedInUserWithCurrentProps.isEmailVerified()) {
-                    EmailDetails details = new EmailDetails();
-                    details.setRecipient(loggedInUserWithCurrentProps.getEmail());
-                    details.setAppointmentTime(dateTime);
-                    details.setGroomerName(selectedGroomer.getName());
-                    details.setDogName(dog.getName());
-                    details.setSubject("Appointment Confirmation");
-                    emailController.sendConfirmationEmail(details);
-                }
-                newAppointmentId = appointmentRepo.findByAppointmentTimeAndGroomer(dateTime, selectedGroomer).getId();
+                return "redirect:calendar?scheduled";
             }
-
-            return "redirect:/appointments/" + newAppointmentId;
         } else {
             return "redirect:/login";
         }

@@ -25,7 +25,10 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
     @Query(nativeQuery = true, value = "SELECT * FROM appointments WHERE user_id = :userId AND time < :currentDate ORDER BY time ASC")
     List<Appointment> getPastAppointmentsByUserId(@Param("userId") Long id, @Param("currentDate") ZonedDateTime currentDate);
 
-    @Query(nativeQuery = true, value = "SELECT * FROM appointments WHERE time >= NOW() AND time <= DATE_ADD(NOW(), INTERVAL 36 HOUR);\n")
+    @Query(nativeQuery = true, value = "SELECT * FROM appointments WHERE time >= NOW() AND time <= DATE_ADD(NOW(), INTERVAL 36 HOUR);")
     List<Appointment> findUpcomingAppointments();
+
+    @Query(nativeQuery = true, value = "SELECT * FROM appointments WHERE time >= NOW() LIMIT 1;")
+    Appointment findAFutureAppointment();
 
 }

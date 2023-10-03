@@ -36,6 +36,18 @@
 			</form>
 		</div>
 	</div>
+	<div id="scheduled-toast" th:if="${param.scheduled}"
+		 class="toast text-bg-warning position-fixed bottom-0 end-0 p-1 me-2 mb-2" style="z-index: 11"
+		 role="alert">
+		<div class="d-flex">
+			<div type="button" class="ms-2 m-auto"><i id="warning-icon" class="fa-solid fa-circle-exclamation"></i></div>
+			<div class="toast-body">
+				Select a dog that is not already scheduled.
+			</div>
+			<button type="button" class="close-toast-btn btn-close btn-close-white me-2 m-auto"
+					data-bs-dismiss="toast"></button>
+		</div>
+	</div>
 </div>
 
 
@@ -100,6 +112,14 @@
     function goBack() {
         window.history.back();
     }
+
+    $(document).ready(function () {
+        $("#scheduled-toast").show();
+
+        $(".close-toast-btn").on("click", function () {
+            $(this).closest(".toast").hide();
+        })
+    });
 
     function formatDate(inputDateStr) {
         const options = { year: 'numeric', month: 'long', day: 'numeric' };
