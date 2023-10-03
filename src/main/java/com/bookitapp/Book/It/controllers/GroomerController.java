@@ -50,7 +50,7 @@ public class GroomerController {
                     .map(LocalDateTime::toString) // Convert to LocalDateTime for display
                     .toList();
 
-            LocalDateTime currentTimeSlot = utcCurrentDateTime.toLocalDateTime().with(LocalTime.of(9, 0)); // Starting from 9:00 AM
+            LocalDateTime currentTimeSlot = utcCurrentDateTime.toLocalDateTime().with(LocalTime.of(9, 0)).minusDays(1); // Starting from 9:00 AM
 
             // generate the appointment times for the week being displayed
             for (int i = 0; i < 7; i++) {
