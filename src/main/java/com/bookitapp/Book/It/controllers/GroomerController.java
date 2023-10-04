@@ -77,7 +77,6 @@ public class GroomerController {
 
             availabilityForWeek.forEach(listOfDateTimeStrings ->
                     listOfDateTimeStrings.removeIf(appointmentTimes::contains));
-
             return availabilityForWeek;
         } else {
             System.out.println("User is not logged in");
