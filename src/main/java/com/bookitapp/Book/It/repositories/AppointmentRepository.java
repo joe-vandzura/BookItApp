@@ -28,7 +28,7 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
     @Query(nativeQuery = true, value = "SELECT * FROM appointments WHERE time >= NOW() AND time <= DATE_ADD(NOW(), INTERVAL 36 HOUR);")
     List<Appointment> findUpcomingAppointments();
 
-    @Query(nativeQuery = true, value = "SELECT * FROM appointments WHERE time >= NOW() LIMIT 1;")
-    Appointment findAFutureAppointment();
+    @Query(nativeQuery = true, value = "SELECT * FROM appointments WHERE time >= NOW() AND user_id = :userId AND dog_id = :dogId LIMIT 1;")
+    Appointment findAFutureAppointment(@Param("userId") Long userId, @Param("dogId") Long dogId);
 
 }

@@ -68,14 +68,15 @@ public class AppointmentController {
 
         if (userIsAuthenticated) {
 
-            Appointment futureAppointment = appointmentRepo.findAFutureAppointment();
+            User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            User loggedInUserWithCurrentProps = userRepo.findById(loggedInUser.getId()).get();
+
+            Appointment futureAppointment = appointmentRepo.findAFutureAppointment(loggedInUserWithCurrentProps.getId(), dogId);
             if (futureAppointment == null) {
 
 
                 Appointment newAppointment = new Appointment();
                 Groomer selectedGroomer = groomerRepo.findById(groomerId).get();
-                User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-                User loggedInUserWithCurrentProps = userRepo.findById(loggedInUser.getId()).get();
                 Dog dog = dogRepo.findById(dogId).get();
 
                 if (timeInput.length() == 4 && Integer.parseInt(timeInput.substring(0, 1)) < 9) {
