@@ -46,6 +46,10 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Token> tokens;
 
+    public String toString() {
+        return this.firstName;
+    }
+
     public User(User copy) {
         id = copy.id;
         username = copy.username;

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+	<th:block th:insert="~{partials/meta-header :: meta-header}"></th:block>
+	<title>BookIt - Review</title>
+	<th:block th:insert="~{partials/header-links :: header-links}"></th:block>
+</head>
+<body>
+<th:block th:insert="~{partials/big-navbar :: big-navbar}"></th:block>
+
+<h1>Appointment Info:</h1>
+	<p>Groomer: <span th:text="${appointment.groomer.toString()}"></span></p>
+	<p>Dog: <span th:text="${appointment.dog.toString()}"></span></p>
+	<p>Date: <span th:text="${appointment.appointmentTime}"></span></p>
+
+<th:block th:insert="~{partials/footer :: footer}"></th:block>
+
+<th:block th:insert="~{partials/footer-links :: footer-links}"></th:block>
+</body>
+</html>

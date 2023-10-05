@@ -37,4 +37,8 @@ public class Dog {
     @JoinColumn (name = "user_id")
     private User owner;
 
+    public String toString() {
+        return this.name;
+    }
+
 }

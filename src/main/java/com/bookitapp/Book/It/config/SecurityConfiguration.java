@@ -56,7 +56,8 @@ public class SecurityConfiguration {
                                 "/resendVerificationEmail",
                                 "/forgot-password",
                                 "/reset-password",
-                                "/reset-password/{userId}")
+                                "/reset-password/{userId},",
+                                "/reviews")
                         .permitAll()
                         .anyRequest().authenticated()
                 )

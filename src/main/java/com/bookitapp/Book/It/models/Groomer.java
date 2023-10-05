@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.util.List;
 
 @Entity
@@ -25,5 +24,9 @@ public class Groomer {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "groomer")
     private List<Appointment> appointments;
+
+    public String toString() {
+        return this.name;
+    }
 
 }

@@ -5,10 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.cglib.core.Local;
-
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Entity
@@ -40,5 +37,8 @@ public class Appointment {
 
     @OneToOne(fetch = FetchType.EAGER)
     private Dog dog;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "appointment")
+    private List<Review> reviews;
 
 }
