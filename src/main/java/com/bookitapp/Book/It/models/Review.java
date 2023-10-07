@@ -19,4 +19,10 @@ public class Review {
     @JoinColumn (name = "appointment_id")
     private Appointment appointment;
 
+    @Column(name = "rating")
+    private int rating;
+
+    @Column(name = "description")
+    private String description;
+
 }
