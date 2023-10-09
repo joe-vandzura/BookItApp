@@ -1,0 +1,22 @@
+#page-container {
+    background-image: url('../../img/bones_background.jpeg');
+    background-repeat: repeat;
+    height: 80vh;
+    padding: 20px;
+}
+
+@media screen and (max-width: 567px) {
+
+    #content-container {
+        display: flex;
+    }
+
+}
+
+@media screen and (min-width: 566px) {
+
+    #content-container {
+        display: flex;
+    }
+
+}
