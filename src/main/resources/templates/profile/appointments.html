@@ -67,8 +67,11 @@
 						<p th:text="${'For ' + appointment.dog.name}"></p>
 					</div>
 					<div class="appointment-actions">
-						<a class="btn" th:href="@{/reviews/{appointmentId}(appointmentId=${appointment.id})}"
-						   id="review-btn">Leave a Review</a>
+						<form class="btn" th:method="GET" th:action="@{/reviews}"
+						   id="review-btn">
+							<input hidden type="number" th:value="${appointment.id}">
+							<button type="submit">Leave a Review</button>
+						</form>
 					</div>
 				</div>
 			</li>

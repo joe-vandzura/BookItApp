@@ -46,6 +46,9 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Token> tokens;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "reviewer")
+    private List<Review> reviews;
+
     public String toString() {
         return this.firstName;
     }
@@ -61,5 +64,6 @@ public class User {
         dogs = copy.dogs;
         emailVerified = copy.emailVerified;
         tokens = copy.tokens;
+        reviews = copy.reviews;
     }
 }
