@@ -69,7 +69,7 @@
 					<div class="appointment-actions">
 						<form class="btn" th:method="GET" th:action="@{/reviews}"
 						   id="review-btn">
-							<input hidden type="number" th:value="${appointment.id}">
+							<input hidden type="number" th:name="appointment-id" th:value="${appointment.id}">
 							<button type="submit">Leave a Review</button>
 						</form>
 					</div>

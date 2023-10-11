@@ -26,7 +26,7 @@
 
 		<div id="review-form-container" class="review-container">
 
-			<form th:method="POST" th:action="@{/reviews/{appointmentId}(appointmentId=${appointment.id})}" id="review-form">
+			<form th:method="POST" th:action="@{/reviews}" id="review-form">
 
 				<h3>Review</h3>
 
@@ -43,6 +43,8 @@
 					<input type="radio" id="star1" name="rating" value="1">
 					<label for="star1"></label>
 				</div>
+
+				<input hidden th:name="appointment-id" th:value="${appointment.id}">
 
 				<label>Description</label>
 				<textarea name="description"></textarea>

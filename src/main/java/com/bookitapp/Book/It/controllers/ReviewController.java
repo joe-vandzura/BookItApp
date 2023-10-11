@@ -23,7 +23,7 @@ public class ReviewController {
     @GetMapping
     public String showReviewPage(
             Model model,
-            @RequestParam(name = "appointmentId") Long appointmentId) {
+            @RequestParam(name = "appointment-id") Long appointmentId) {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Review review = reviewRepo.findByAppointmentIdAndReviewerId(appointmentId, loggedInUser.getId());
 
@@ -38,7 +38,7 @@ public class ReviewController {
 
     @PostMapping
     public String createReview(
-            @RequestParam(name = "appointmentId") Long appointmentId,
+            @RequestParam(name = "appointment-id") Long appointmentId,
             @RequestParam(name = "rating") Integer rating,
             @RequestParam(name = "description") String description) {
         Appointment appointment = appointmentRepo.findById(appointmentId).get();
