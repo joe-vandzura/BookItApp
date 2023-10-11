@@ -5,7 +5,7 @@ import com.bookitapp.Book.It.models.Review;
 import com.bookitapp.Book.It.models.User;
 import com.bookitapp.Book.It.repositories.AppointmentRepository;
 import com.bookitapp.Book.It.repositories.ReviewRepository;
-import lombok.Getter;
+import com.bookitapp.Book.It.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -19,6 +19,7 @@ public class ReviewController {
 
     private final AppointmentRepository appointmentRepo;
     private final ReviewRepository reviewRepo;
+    private final UserRepository userRepo;
 
     @GetMapping
     public String showReviewPage(
@@ -27,13 +28,14 @@ public class ReviewController {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Review review = reviewRepo.findByAppointmentIdAndReviewerId(appointmentId, loggedInUser.getId());
 
+        System.out.println("------------------- SOUTING HERE ----------------------");
+        System.out.println(review);
         if (review != null) {
-            return "redirect:/reviews/" + review.getId();
-        } else {
-            Appointment appointment = appointmentRepo.findById(appointmentId).get();
-            model.addAttribute("appointment", appointment);
-            return "review";
+            model.addAttribute("existingReview", review);
         }
+        Appointment appointment = appointmentRepo.findById(appointmentId).get();
+        model.addAttribute("appointment", appointment);
+        return "review";
     }
 
     @PostMapping
@@ -41,18 +43,16 @@ public class ReviewController {
             @RequestParam(name = "appointment-id") Long appointmentId,
             @RequestParam(name = "rating") Integer rating,
             @RequestParam(name = "description") String description) {
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User actualLoggedInUser = userRepo.findById(loggedInUser.getId()).get();
         Appointment appointment = appointmentRepo.findById(appointmentId).get();
         Review newReview = new Review();
         newReview.setAppointment(appointment);
         newReview.setRating(rating);
         newReview.setDescription(description);
+        newReview.setReviewer(actualLoggedInUser);
         reviewRepo.save(newReview);
         return "redirect:/my-profile/account";
-    }
-
-    @GetMapping("/{reviewId}")
-    public String showReviewPage(@PathVariable(name = "reviewId") Long reviewId) {
-        return "review";
     }
 
 }

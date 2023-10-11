@@ -31,23 +31,35 @@
 				<h3>Review</h3>
 
 				<label>Rating</label>
+
 				<div class="star-rating">
-					<input type="radio" id="star5" name="rating" value="5">
+
+					<input type="radio" id="star5" name="rating" value="5" th:checked="${existingReview != null and existingReview.rating == 5}">
 					<label for="star5"></label>
-					<input type="radio" id="star4" name="rating" value="4">
+
+					<!-- Rating 4 -->
+					<input type="radio" id="star4" name="rating" value="4" th:checked="${existingReview != null and existingReview.rating == 4}">
 					<label for="star4"></label>
-					<input type="radio" id="star3" name="rating" value="3">
+
+					<!-- Rating 3 -->
+					<input type="radio" id="star3" name="rating" value="3" th:checked="${existingReview != null and existingReview.rating == 3}">
 					<label for="star3"></label>
-					<input type="radio" id="star2" name="rating" value="2">
+
+					<!-- Rating 2 -->
+					<input type="radio" id="star2" name="rating" value="2" th:checked="${existingReview != null and existingReview.rating == 2}">
 					<label for="star2"></label>
-					<input type="radio" id="star1" name="rating" value="1">
+
+					<!-- Rating 1 -->
+					<input type="radio" id="star1" name="rating" value="1" th:checked="${existingReview != null and existingReview.rating == 1}">
 					<label for="star1"></label>
+
 				</div>
 
 				<input hidden th:name="appointment-id" th:value="${appointment.id}">
 
 				<label>Description</label>
-				<textarea name="description"></textarea>
+				<textarea th:if="${existingReview != null}" th:text="${existingReview.description}" th:value="${existingReview.description}" name="description"></textarea>
+				<textarea th:if="${existingReview == null}" name="description"></textarea>
 
 				<button type="submit" class="btn btn-success">Submit</button>
 
