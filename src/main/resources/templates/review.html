@@ -17,10 +17,12 @@
 
 		<div id="review-info-container" class="review-container">
 
-			<h1>Appointment Info:</h1>
-			<p>Groomer: <span th:text="${appointment.groomer.toString()}"></span></p>
-			<p>Dog: <span th:text="${appointment.dog.toString()}"></span></p>
-			<p>Date: <span th:text="${appointment.appointmentTime}"></span></p>
+			<h2>Appointment Info:</h2>
+			<br>
+			<h5>Groomer: <span th:text="${appointment.groomer.toString()}"></span></h5>
+			<h5>Dog: <span th:text="${appointment.dog.toString()}"></span></h5>
+			<h5>Date: <span th:text="${#temporals.format(appointment.appointmentTime, 'MMMM d, uuuu')}"></span></h5>
+			<h5>Time: <span th:text="${#temporals.format(appointment.appointmentTime, 'h:mm a')}"></span></h5>
 
 		</div>
 
@@ -58,8 +60,8 @@
 				<input hidden th:name="appointment-id" th:value="${appointment.id}">
 
 				<label>Description</label>
-				<textarea th:if="${existingReview != null}" th:text="${existingReview.description}" th:value="${existingReview.description}" name="description"></textarea>
-				<textarea th:if="${existingReview == null}" name="description"></textarea>
+				<textarea rows="4" cols="50" th:if="${existingReview != null}" th:text="${existingReview.description}" th:value="${existingReview.description}" name="description"></textarea>
+				<textarea rows="4" cols="50" th:if="${existingReview == null}" name="description"></textarea>
 
 				<button type="submit" class="btn btn-success">Submit</button>
 
