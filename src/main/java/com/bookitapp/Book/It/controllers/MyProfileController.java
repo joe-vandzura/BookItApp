@@ -2,9 +2,11 @@ package com.bookitapp.Book.It.controllers;
 
 import com.bookitapp.Book.It.models.Appointment;
 import com.bookitapp.Book.It.models.Dog;
+import com.bookitapp.Book.It.models.Review;
 import com.bookitapp.Book.It.models.User;
 import com.bookitapp.Book.It.repositories.AppointmentRepository;
 import com.bookitapp.Book.It.repositories.DogRepository;
+import com.bookitapp.Book.It.repositories.ReviewRepository;
 import com.bookitapp.Book.It.repositories.UserRepository;
 import com.bookitapp.Book.It.services.AuthService;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -33,6 +35,7 @@ public class MyProfileController {
     private final AppointmentRepository appointmentRepo;
     private final UserRepository userRepo;
     private final DogRepository dogRepo;
+    private final ReviewRepository reviewRepo;
 
     @GetMapping("/appointments")
     public String myAppointmentsPage(Model model) {
@@ -128,6 +131,14 @@ public class MyProfileController {
         model.addAttribute("userId", actualUser.getId());
         model.addAttribute("isLoggedIn", true);
         return "reset-password";
+    }
+
+    @GetMapping("/reviews")
+    public String showMyReviewsPage(Model model) {
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        List<Review> listOfUsersReviews = reviewRepo.findByReviewerId(loggedInUser.getId());
+        model.addAttribute("reviews", listOfUsersReviews);
+        return "profile/reviews";
     }
 
 }
