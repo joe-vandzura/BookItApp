@@ -20,18 +20,27 @@
 		<table class="styled-table">
 			<thead>
 			<tr>
+				<th>Date</th>
+				<th>Time</th>
 				<th>Groomer</th>
 				<th>Dog</th>
 				<th>Rating</th>
 				<th>Description</th>
+				<th></th>
 			</tr>
 			</thead>
 			<tbody>
 			<tr th:each="review : ${reviews}">
+				<td th:text="${#temporals.format(review.appointment.appointmentTime, 'MMMM d, uuuu')}"></td>
+				<td th:text="${#temporals.format(review.appointment.appointmentTime, 'h:mm a')}"></td>
 				<td th:text="${review.appointment.groomer}"></td>
 				<td th:text="${review.appointment.dog}"></td>
 				<td th:text="${review.rating}"></td>
 				<td th:text="${review.description}"></td>
+				<td><form th:method="GET" th:action="@{/reviews}">
+					<input hidden type="number" th:name="appointment-id" th:value="${review.appointment.id}">
+					<button id="edit-btn" class="link-success" type="submit">Edit</button>
+				</form></td>
 			</tr>
 			</tbody>
 		</table>

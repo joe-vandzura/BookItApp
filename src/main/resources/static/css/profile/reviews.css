@@ -48,3 +48,9 @@
 .styled-table tr:hover {
     background-color: #d3d3d3;
 }
+
+#edit-btn {
+    border: none;
+    text-decoration: underline;
+    background-color: transparent;
+}

@@ -67,6 +67,11 @@
 
 			</form>
 
+			<form th:if="${existingReview != null}" th:method="DELETE" th:action="@{/reviews/delete}">
+				<input hidden th:name="review-id" th:value="${existingReview.id}">
+				<button type="submit" class="btn btn-danger">Delete Review</button>
+			</form>
+
 		</div>
 
 	</div>

@@ -27,9 +27,6 @@ public class ReviewController {
             @RequestParam(name = "appointment-id") Long appointmentId) {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Review review = reviewRepo.findByAppointmentIdAndReviewerId(appointmentId, loggedInUser.getId());
-
-        System.out.println("------------------- SOUTING HERE ----------------------");
-        System.out.println(review);
         if (review != null) {
             model.addAttribute("existingReview", review);
         }
@@ -53,6 +50,13 @@ public class ReviewController {
         newReview.setReviewer(actualLoggedInUser);
         reviewRepo.save(newReview);
         return "redirect:/my-profile/account";
+    }
+
+    @PostMapping("/delete")
+    public String deleteReview(@RequestParam(name = "review-id") Long reviewId) {
+        Review review = reviewRepo.findById(reviewId).get();
+        reviewRepo.delete(review);
+        return "redirect:/my-profile/reviews";
     }
 
 }
