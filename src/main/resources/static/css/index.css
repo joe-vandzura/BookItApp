@@ -259,4 +259,9 @@
         bottom: 30px;
         right: 30px;
     }
+
+    carousel-item {
+        height: 500px;
+    }
+
 }

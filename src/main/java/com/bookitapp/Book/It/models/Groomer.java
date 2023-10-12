@@ -25,6 +25,9 @@ public class Groomer {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "groomer")
     private List<Appointment> appointments;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "groomer")
+    private List<Review> reviews;
+
     public String toString() {
         return this.name;
     }

@@ -23,6 +23,10 @@ public class Review {
     @JoinColumn (name = "user_id")
     private User reviewer;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn (name = "groomer_id")
+    private Groomer groomer;
+
     @Column(name = "rating")
     private int rating;
 

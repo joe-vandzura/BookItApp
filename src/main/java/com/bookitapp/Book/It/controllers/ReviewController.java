@@ -45,6 +45,7 @@ public class ReviewController {
         Appointment appointment = appointmentRepo.findById(appointmentId).get();
         Review newReview = new Review();
         newReview.setAppointment(appointment);
+        newReview.setGroomer(appointment.getGroomer());
         newReview.setRating(rating);
         newReview.setDescription(description);
         newReview.setReviewer(actualLoggedInUser);
