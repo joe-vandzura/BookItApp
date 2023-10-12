@@ -49,14 +49,14 @@ public class ReviewController {
         newReview.setDescription(description);
         newReview.setReviewer(actualLoggedInUser);
         reviewRepo.save(newReview);
-        return "redirect:/my-profile/account";
+        return "redirect:/my-profile/reviews";
     }
 
     @PostMapping("/delete")
     public String deleteReview(@RequestParam(name = "review-id") Long reviewId) {
         Review review = reviewRepo.findById(reviewId).get();
         reviewRepo.delete(review);
-        return "redirect:/my-profile/reviews";
+        return "redirect:/my-profile/reviews?deleted";
     }
 
 }

@@ -11,6 +11,19 @@
 <body>
 <th:block th:insert="~{partials/big-navbar :: big-navbar}"></th:block>
 
+<div id="deleted-toast" th:if="${param.deleted}"
+	 class="toast text-bg-warning position-fixed bottom-0 end-0 p-1 me-2 mb-2" style="z-index: 11"
+	 role="alert">
+	<div class="d-flex">
+		<div type="button" class="ms-2 m-auto"></div>
+		<div class="toast-body">
+			Review has been deleted.
+		</div>
+		<button type="button" class="close-toast-btn btn-close btn-close-white me-2 m-auto"
+				data-bs-dismiss="toast"></button>
+	</div>
+</div>
+
 <div id="page-container">
 
 	<div id="table-container">
@@ -51,5 +64,6 @@
 <th:block th:insert="~{partials/footer :: footer}"></th:block>
 
 <th:block th:insert="~{partials/footer-links :: footer-links}"></th:block>
+<script type="text/javascript" th:src="@{/js/reviews.js}"></script>
 </body>
 </html>
