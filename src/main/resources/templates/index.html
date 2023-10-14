@@ -45,7 +45,10 @@
 					<div class="carousel-inner">
 						<h2>Reviews</h2>
 						<div th:each="review, iterStat : ${lorenasReviews}" th:classappend="${iterStat.index == 0} ? 'carousel-item active' : 'carousel-item'">
-							<p th:text="${review.rating}"></p>
+							<p>
+								<span th:each="star: ${#numbers.sequence(1, review.rating)}" class="star">★</span>
+								<span th:each="star: ${#numbers.sequence(review.rating + 1, 5)}" class="star-empty">☆</span>
+							</p>
 						</div>
 					</div>
 					<button class="carousel-control-prev" type="button" data-bs-target="#lorenasCarousel" data-bs-slide="prev">
