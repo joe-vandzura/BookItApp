@@ -24,9 +24,6 @@ public class HomeController {
     String homePage(Model model) {
         List<Review> lorenasReviews = reviewRepo.findByGroomerId(1L);
         List<Review> karasReviews = reviewRepo.findByGroomerId(2L);
-        System.out.println("---------------- SOUTING HERE ---------------");
-        System.out.println(lorenasReviews);
-        System.out.println(karasReviews);
         model.addAttribute("lorenasReviews", lorenasReviews);
         model.addAttribute("karasReviews", karasReviews);
         return "index";
