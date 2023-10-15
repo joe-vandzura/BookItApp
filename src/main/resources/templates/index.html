@@ -41,25 +41,25 @@
 				<p class="card-text">
 					Our talented and passionate dog groomer, here at Oli's. With a heart full of love for our four-legged friends and a skilled touch, Lorena transforms every grooming session into a pampering experience for your beloved pets. With years of expertise and a natural connection with dogs, she ensures your furry companions leave our salon not only looking their best but feeling their best too. Lorena's dedication to the well-being and happiness of your pets makes her the perfect choice for your dog grooming needs. Trust her to make your furry family members shine and prance with joy after each visit.
 				</p>
-				<div id="lorenasCarousel" class="carousel slide" data-bs-ride="carousel">
-					<div class="carousel-inner">
-						<h2>Reviews</h2>
-						<div th:each="review, iterStat : ${lorenasReviews}" th:classappend="${iterStat.index == 0} ? 'carousel-item active' : 'carousel-item'">
-							<p>
-								<span th:each="star: ${#numbers.sequence(1, review.rating)}" class="star">★</span>
-								<span th:each="star: ${#numbers.sequence(review.rating + 1, 5)}" class="star-empty">☆</span>
-							</p>
-						</div>
-					</div>
-					<button class="carousel-control-prev" type="button" data-bs-target="#lorenasCarousel" data-bs-slide="prev">
-						<span class="carousel-control-prev-icon"></span>
-						<span class="visually-hidden">Previous</span>
-					</button>
-					<button class="carousel-control-next" type="button" data-bs-target="#lorenasCarousel" data-bs-slide="next">
-						<span class="carousel-control-next-icon"></span>
-						<span class="visually-hidden">Next</span>
-					</button>
-				</div>
+<!--				<div id="lorenasCarousel" class="carousel slide" data-bs-ride="carousel">-->
+<!--					<div class="carousel-inner">-->
+<!--						<h2>Reviews</h2>-->
+<!--						<div th:each="review, iterStat : ${lorenasReviews}" th:classappend="${iterStat.index == 0} ? 'carousel-item active' : 'carousel-item'">-->
+<!--							<p>-->
+<!--								<span th:each="star: ${#numbers.sequence(1, review.rating)}" class="star">★</span>-->
+<!--								<span th:each="star: ${#numbers.sequence(review.rating + 1, 5)}" class="star-empty">☆</span>-->
+<!--							</p>-->
+<!--						</div>-->
+<!--					</div>-->
+<!--					<button class="carousel-control-prev" type="button" data-bs-target="#lorenasCarousel" data-bs-slide="prev">-->
+<!--						<span class="carousel-control-prev-icon"></span>-->
+<!--						<span class="visually-hidden">Previous</span>-->
+<!--					</button>-->
+<!--					<button class="carousel-control-next" type="button" data-bs-target="#lorenasCarousel" data-bs-slide="next">-->
+<!--						<span class="carousel-control-next-icon"></span>-->
+<!--						<span class="visually-hidden">Next</span>-->
+<!--					</button>-->
+<!--				</div>-->
 				<a id="book-with-anchor-1" class="btn btn-success" th:href="@{/calendar?groomerId=1}">Book an Appointment with Lorena</a>
 			</div>
 			<img id="emp-1-img" class="emp-img" th:src="@{/img/lorena_pic.png}">
@@ -74,22 +74,22 @@
 				<p class="card-text">
 					Another delightful dog groomer at Oli's. Kara's boundless enthusiasm for dogs shines through in every grooming session she undertakes. With a gentle touch and a keen eye for detail, she provides a grooming experience that leaves your furry companions looking and feeling their absolute best. Kara's extensive experience and innate connection with dogs ensure that each visit to our salon is a comfortable and enjoyable one for your beloved pets. Choose Kara for her expertise, her dedication to their well-being, and her commitment to making your furry family members exude confidence and charm with every pampering session.
 				</p>
-				<div id="karasCarousel" class="carousel slide" data-bs-ride="carousel">
-					<div class="carousel-inner">
-						<h2>Reviews</h2>
-						<div th:each="review, iterStat : ${karasReviews}" th:classappend="${iterStat.index == 0} ? 'carousel-item active' : 'carousel-item'">
-							<p th:text="${review.rating}"></p>
-						</div>
-					</div>
-					<button class="carousel-control-prev" type="button" data-bs-target="#karasCarousel" data-bs-slide="prev">
-						<span class="carousel-control-prev-icon"></span>
-						<span class="visually-hidden">Previous</span>
-					</button>
-					<button class="carousel-control-next" type="button" data-bs-target="#karasCarousel" data-bs-slide="next">
-						<span class="carousel-control-next-icon"></span>
-						<span class="visually-hidden">Next</span>
-					</button>
-				</div>
+<!--				<div id="karasCarousel" class="carousel slide" data-bs-ride="carousel">-->
+<!--					<div class="carousel-inner">-->
+<!--						<h2>Reviews</h2>-->
+<!--						<div th:each="review, iterStat : ${karasReviews}" th:classappend="${iterStat.index == 0} ? 'carousel-item active' : 'carousel-item'">-->
+<!--							<p th:text="${review.rating}"></p>-->
+<!--						</div>-->
+<!--					</div>-->
+<!--					<button class="carousel-control-prev" type="button" data-bs-target="#karasCarousel" data-bs-slide="prev">-->
+<!--						<span class="carousel-control-prev-icon"></span>-->
+<!--						<span class="visually-hidden">Previous</span>-->
+<!--					</button>-->
+<!--					<button class="carousel-control-next" type="button" data-bs-target="#karasCarousel" data-bs-slide="next">-->
+<!--						<span class="carousel-control-next-icon"></span>-->
+<!--						<span class="visually-hidden">Next</span>-->
+<!--					</button>-->
+<!--				</div>-->
 				<a id="book-with-anchor-2" class="btn btn-success" th:href="@{/calendar?groomerId=2}">Book an Appointment with Kara</a>
 			</div>
 		</div>
