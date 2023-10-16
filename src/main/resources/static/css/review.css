@@ -27,11 +27,11 @@
 }
 
 .star-rating label::before {
-    content: '\2605'; /* Unicode star character */
+    content: '\2605';
 }
 
 .star-rating input[type="radio"]:checked ~ label {
-    color: #ffdb58; /* Change the color of the selected stars */
+    color: #ffdb58;
 }
 
 textarea {
