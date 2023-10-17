@@ -43,14 +43,14 @@
 				</p>
 				<div id="lorenasCarousel" class="carousel slide" data-bs-ride="carousel">
 					<div class="carousel-inner">
-						<h2>Reviews</h2>
+						<h4><a class="reviews-header" th:href="@{/reviews}">Reviews</a></h4>
 						<div th:each="review, iterStat : ${lorenasReviews}" th:classappend="${iterStat.index == 0} ? 'carousel-item active' : 'carousel-item'">
 							<div class="star-rating">
 								<span th:each="star : ${#numbers.sequence(1, 5)}">
 								<input type="radio" th:id="${review.id}+'star'+${star}" th:checked="${star <= review.rating}">
 								<label th:for="${review.id}+'star'+${star}"></label>
 								</span>
-								<span th:text="${review.description}"></span>
+								<span class="review-description" th:text="${review.description}"></span>
 							</div>
 						</div>
 					</div>
@@ -79,14 +79,14 @@
 				</p>
 				<div id="karasCarousel" class="carousel slide" data-bs-ride="carousel">
 					<div class="carousel-inner">
-						<h2>Reviews</h2>
+						<h4><a class="reviews-header" th:href="@{/reviews}">Reviews</a></h4>
 						<div th:each="review, iterStat : ${karasReviews}" th:classappend="${iterStat.index == 0} ? 'carousel-item active' : 'carousel-item'">
 							<div class="star-rating">
 								<span th:each="star : ${#numbers.sequence(1, 5)}">
 								<input type="radio" th:id="${review.id}+'star'+${star}" th:checked="${star <= review.rating}">
 								<label th:for="${review.id}+'star'+${star}"></label>
 								</span>
-								<span th:text="${review.description}"></span>
+								<span class="review-description" th:text="${review.description}"></span>
 							</div>
 						</div>
 					</div>
