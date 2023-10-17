@@ -288,3 +288,8 @@
 .star-rating input[type="radio"]:checked ~ label {
     color: #ffdb58;
 }
+
+.star-rating span label {
+    cursor: not-allowed;
+    pointer-events: none;
+}
