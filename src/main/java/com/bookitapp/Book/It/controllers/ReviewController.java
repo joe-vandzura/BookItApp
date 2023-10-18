@@ -12,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/reviews")
 @RequiredArgsConstructor
@@ -22,14 +24,9 @@ public class ReviewController {
     private final UserRepository userRepo;
 
     @GetMapping
-    public String showReviewsPage() {
-        return "";
-    }
-
-    @GetMapping("/{appointmentId}")
-    public String showReviewFormPage(
+    public String showReviewPage(
             Model model,
-            @PathVariable(name = "appointmentId") Long appointmentId) {
+            @RequestParam(name = "appointment-id") Long appointmentId) {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Review review = reviewRepo.findByAppointmentIdAndReviewerId(appointmentId, loggedInUser.getId());
         if (review != null) {
@@ -38,6 +35,15 @@ public class ReviewController {
         Appointment appointment = appointmentRepo.findById(appointmentId).get();
         model.addAttribute("appointment", appointment);
         return "review";
+    }
+
+    @GetMapping("/{groomerId}")
+    public String showReviewsPage(
+            Model model,
+            @PathVariable("groomerId") Long groomerId) {
+        List<Review> reviews = reviewRepo.findByGroomerId(groomerId);
+        model.addAttribute("reviews", reviews);
+        return "groomers-reviews";
     }
 
     @PostMapping

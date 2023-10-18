@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+	<th:block th:insert="~{partials/meta-header :: meta-header}"></th:block>
+	<title>BookIt - </title>
+	<th:block th:insert="~{partials/header-links :: header-links}"></th:block>
+</head>
+<body>
+<th:block th:insert="~{partials/big-navbar :: big-navbar}"></th:block>
+
+<div class="list-group">
+	<a th:each="review : ${reviews}" href="#" class="list-group-item list-group-item-action active">
+		<div class="d-flex w-100 justify-content-between">
+			<h5 class="mb-1" th:text="${review.rating}"></h5>
+			<small>3 days ago</small>
+		</div>
+		<p class="mb-1" th:text="${review.description}"></p>
+		<small th:text="${'@'+review.reviewer.username}"></small>
+	</a>
+</div>
+
+<th:block th:insert="~{partials/footer :: footer}"></th:block>
+
+<th:block th:insert="~{partials/footer-links :: footer-links}"></th:block>
+</body>
+</html>
