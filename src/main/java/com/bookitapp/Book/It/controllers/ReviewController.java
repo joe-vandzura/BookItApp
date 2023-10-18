@@ -22,9 +22,14 @@ public class ReviewController {
     private final UserRepository userRepo;
 
     @GetMapping
-    public String showReviewPage(
+    public String showReviewsPage() {
+        return "";
+    }
+
+    @GetMapping("/{appointmentId}")
+    public String showReviewFormPage(
             Model model,
-            @RequestParam(name = "appointment-id") Long appointmentId) {
+            @PathVariable(name = "appointmentId") Long appointmentId) {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Review review = reviewRepo.findByAppointmentIdAndReviewerId(appointmentId, loggedInUser.getId());
         if (review != null) {

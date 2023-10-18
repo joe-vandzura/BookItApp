@@ -50,8 +50,7 @@
 				<td th:text="${review.appointment.dog}"></td>
 				<td th:text="${review.rating}"></td>
 				<td th:text="${review.description}"></td>
-				<td><form th:method="GET" th:action="@{/reviews}">
-					<input hidden type="number" th:name="appointment-id" th:value="${review.appointment.id}">
+				<td><form th:method="GET" th:action="@{/reviews/{appointmentId}(appointmentId=${review.appointment.id})}">
 					<button id="edit-btn" class="link-success" type="submit">Edit</button>
 				</form></td>
 			</tr>
