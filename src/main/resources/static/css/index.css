@@ -237,3 +237,8 @@
 .review-description {
     max-height: 50px;
 }
+
+.carousel-slide-btn {
+    height: 50px;
+    top: 50%;
+}

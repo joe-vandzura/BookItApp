@@ -4,21 +4,35 @@
 	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 	<th:block th:insert="~{partials/meta-header :: meta-header}"></th:block>
-	<title>BookIt - </title>
+	<title>BookIt - Reviews</title>
 	<th:block th:insert="~{partials/header-links :: header-links}"></th:block>
+	<link rel="stylesheet" th:href="@{/css/groomers-reviews.css}">
 </head>
 <body>
 <th:block th:insert="~{partials/big-navbar :: big-navbar}"></th:block>
 
-<div class="list-group">
-	<a th:each="review : ${reviews}" href="#" class="list-group-item list-group-item-action active">
-		<div class="d-flex w-100 justify-content-between">
-			<h5 class="mb-1" th:text="${review.rating}"></h5>
-			<small>3 days ago</small>
+<div id="page-container">
+
+	<div class="row row-cols-1 row-cols-md-3 g-4">
+		<div th:each="review : ${reviews}" class="col">
+			<div class="card">
+				<div class="star-rating">
+								<span th:each="star : ${#numbers.sequence(1, 5)}">
+								<input type="radio" th:id="${review.id}+'star'+${star}" th:checked="${star <= review.rating}">
+								<label th:for="${review.id}+'star'+${star}"></label>
+								</span>
+				</div>
+				<div class="card-body">
+					<h5 class="card-title" th:text="${review.appointment.dog.name+' - '+review.appointment.dog.breed}"></h5>
+					<p class="card-text" th:text="${review.description}"></p>
+				</div>
+				<div class="card-footer">
+					<small class="text-muted" th:text="${#temporals.format(review.appointment.appointmentTime, 'MMMM d, uuuu')}"></small>
+				</div>
+			</div>
 		</div>
-		<p class="mb-1" th:text="${review.description}"></p>
-		<small th:text="${'@'+review.reviewer.username}"></small>
-	</a>
+	</div>
+
 </div>
 
 <th:block th:insert="~{partials/footer :: footer}"></th:block>
