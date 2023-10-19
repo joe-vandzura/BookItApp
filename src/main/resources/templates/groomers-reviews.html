@@ -4,7 +4,7 @@
 	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 	<th:block th:insert="~{partials/meta-header :: meta-header}"></th:block>
-	<title>BookIt - Reviews</title>
+	<title th:text="${'BookIt - ' + groomer.name + '''s Reviews'}"></title>
 	<th:block th:insert="~{partials/header-links :: header-links}"></th:block>
 	<link rel="stylesheet" th:href="@{/css/groomers-reviews.css}">
 </head>
@@ -13,7 +13,7 @@
 
 <div id="page-container">
 
-	<div class="row row-cols-1 row-cols-md-3 g-4">
+	<div id="reviews-container" class="row row-cols-1 row-cols-md-3 g-4">
 		<div th:each="review : ${reviews}" class="col">
 			<div class="card">
 				<div class="star-rating">
@@ -27,7 +27,7 @@
 					<p class="card-text" th:text="${review.description}"></p>
 				</div>
 				<div class="card-footer">
-					<small class="text-muted" th:text="${#temporals.format(review.appointment.appointmentTime, 'MMMM d, uuuu')}"></small>
+					<small class="text-muted" th:text="${#temporals.format(review.appointment.appointmentTime, 'MMMM d, uuuu')+' | '+review.reviewer.firstName+' '+review.reviewer.lastName}"></small>
 				</div>
 			</div>
 		</div>

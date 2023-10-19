@@ -57,7 +57,8 @@ public class SecurityConfiguration {
                                 "/forgot-password",
                                 "/reset-password",
                                 "/reset-password/{userId},",
-                                "/reviews")
+                                "/reviews",
+                                "/reviews/{groomerId}")
                         .permitAll()
                         .anyRequest().authenticated()
                 )

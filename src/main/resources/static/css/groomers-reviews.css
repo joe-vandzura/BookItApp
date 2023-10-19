@@ -34,3 +34,12 @@
     cursor: not-allowed;
     pointer-events: none;
 }
+
+#reviews-container {
+    background-color: #ffffff;
+    border: 5px solid #e4ffb5;
+    border-radius: 8px;
+    min-height: 300px;
+    margin-bottom: 20px;
+    padding: 20px;
+}

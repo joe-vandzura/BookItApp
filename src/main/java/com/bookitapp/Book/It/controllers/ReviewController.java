@@ -1,9 +1,11 @@
 package com.bookitapp.Book.It.controllers;
 
 import com.bookitapp.Book.It.models.Appointment;
+import com.bookitapp.Book.It.models.Groomer;
 import com.bookitapp.Book.It.models.Review;
 import com.bookitapp.Book.It.models.User;
 import com.bookitapp.Book.It.repositories.AppointmentRepository;
+import com.bookitapp.Book.It.repositories.GroomerRepository;
 import com.bookitapp.Book.It.repositories.ReviewRepository;
 import com.bookitapp.Book.It.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +24,7 @@ public class ReviewController {
     private final AppointmentRepository appointmentRepo;
     private final ReviewRepository reviewRepo;
     private final UserRepository userRepo;
+    private final GroomerRepository groomerRepo;
 
     @GetMapping
     public String showReviewPage(
@@ -42,7 +45,9 @@ public class ReviewController {
             Model model,
             @PathVariable("groomerId") Long groomerId) {
         List<Review> reviews = reviewRepo.findByGroomerId(groomerId);
+        Groomer groomer = groomerRepo.findById(groomerId).get();
         model.addAttribute("reviews", reviews);
+        model.addAttribute("groomer", groomer);
         return "groomers-reviews";
     }
 
