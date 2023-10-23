@@ -13,21 +13,27 @@
 
 <div id="page-container">
 
-	<div id="reviews-container" class="row row-cols-1 row-cols-md-3 g-4">
-		<div th:each="review : ${reviews}" class="col">
-			<div class="card">
-				<div class="star-rating">
+	<div id="reviews-container">
+		<h2 id="groomer-header" th:text="${groomer.name+'''s Reviews'}"></h2>
+		<div class="row row-cols-1 row-cols-md-3 g-4">
+			<div th:each="review : ${reviews}" class="col">
+				<div class="card">
+					<div class="star-rating">
 								<span th:each="star : ${#numbers.sequence(1, 5)}">
-								<input type="radio" th:id="${review.id}+'star'+${star}" th:checked="${star <= review.rating}">
+								<input type="radio" th:id="${review.id}+'star'+${star}"
+									   th:checked="${star <= review.rating}">
 								<label th:for="${review.id}+'star'+${star}"></label>
 								</span>
-				</div>
-				<div class="card-body">
-					<h5 class="card-title" th:text="${review.appointment.dog.name+' - '+review.appointment.dog.breed}"></h5>
-					<p class="card-text" th:text="${review.description}"></p>
-				</div>
-				<div class="card-footer">
-					<small class="text-muted" th:text="${#temporals.format(review.appointment.appointmentTime, 'MMMM d, uuuu')+' | '+review.reviewer.firstName+' '+review.reviewer.lastName}"></small>
+					</div>
+					<div class="card-body">
+						<h5 class="card-title"
+							th:text="${review.appointment.dog.name+' - '+review.appointment.dog.breed}"></h5>
+						<p class="card-text" th:text="${review.description}"></p>
+					</div>
+					<div class="card-footer">
+						<small class="text-muted"
+							   th:text="${#temporals.format(review.appointment.appointmentTime, 'MMMM d, uuuu')+' | '+review.reviewer.firstName+' '+review.reviewer.lastName}"></small>
+					</div>
 				</div>
 			</div>
 		</div>
