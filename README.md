@@ -5,6 +5,7 @@ Welcome to the BookIt App! This application allows users to book dog grooming ap
 ## :construction: Project Status: STILL IN PROGRESS :construction:
 
 Here is the live site: https://book-it-app-58bb29028f24.herokuapp.com/
+
 Feel free to try it out!
 
 ## Features
