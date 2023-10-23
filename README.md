@@ -4,20 +4,14 @@ Welcome to the BookIt App! This application allows users to book dog grooming ap
 
 ## :construction: Project Status: STILL IN PROGRESS :construction:
 
-## Here is a demo of my current progress!
-
-![Demo Gif](src/main/resources/static/img/BookIt_demo.gif)
-
-
 ## Features
 
 - View available appointment slots for a groomer.
 - Book grooming appointments for specific dates and times.
 - Browse the grooming schedule for a week.
 - User-friendly interface for selecting available time slots.
+- Set Google Calendar events for your appointments.
+- Verify your email and reset your password, if needed.
+- Recieve email reminders for your appointments.
+- Leave reviews for previous appointments.
 
-## Getting Started
-
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/joe-vandzura/BookItApp.git
