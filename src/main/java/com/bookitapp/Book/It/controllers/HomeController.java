@@ -22,8 +22,8 @@ public class HomeController {
 
     @GetMapping
     String homePage(Model model) {
-        List<Review> lorenasReviews = reviewRepo.findByGroomerId(1L);
-        List<Review> karasReviews = reviewRepo.findByGroomerId(2L);
+        List<Review> lorenasReviews = reviewRepo.findByGroomerIdWhereRatingIsFourOrFive(1L);
+        List<Review> karasReviews = reviewRepo.findByGroomerIdWhereRatingIsFourOrFive(2L);
         model.addAttribute("lorenasReviews", lorenasReviews);
         model.addAttribute("karasReviews", karasReviews);
         return "index";
