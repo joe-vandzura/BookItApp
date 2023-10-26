@@ -1,9 +1,6 @@
 package com.bookitapp.Book.It.controllers;
 
-import com.bookitapp.Book.It.models.Admin;
-import com.bookitapp.Book.It.models.EmailDetails;
 import com.bookitapp.Book.It.models.Review;
-import com.bookitapp.Book.It.repositories.AdminRepository;
 import com.bookitapp.Book.It.repositories.ReviewRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
