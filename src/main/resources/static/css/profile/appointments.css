@@ -142,13 +142,15 @@ h2 {
 
 @media screen and (max-width: 560px) {
     #appointments-container {
-        height: 115vh;
+        min-height: 115vh;
+        overflow: scroll;
     }
 }
 
 @media screen and (min-width: 559px) {
     #appointments-container {
-        height: 100vh;
+        min-height: 100vh;
+        overflow: scroll;
     }
 }
 
