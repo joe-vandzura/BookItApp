@@ -133,6 +133,14 @@ h2 {
     margin-bottom: 5px;
 }
 
+#google-calendar-link {
+    color: #0dbc12;
+}
+
+#google-calendar-link:hover {
+    color: #c4ff26;
+}
+
 /* Responsive Styles */
 @media screen and (max-width: 480px) {
     .appointment-box {

@@ -29,7 +29,7 @@
 						<h4 th:text="${#temporals.format(appointment.appointmentTime, 'h:mm a')}"></h4>
 						<p th:text="${'Appointment with ' + appointment.groomer.name}"></p>
 						<p th:text="${'For ' + appointment.dog.name}"></p>
-						<a th:href="@{'https://www.google.com/calendar/render?action=TEMPLATE&text=Grooming%20Appointment%20With%20' + ${appointment.groomer.name} + '&dates=' + ${#temporals.format(appointment.appointmentTime, 'yyyyMMdd')} + 'T' + ${#temporals.format(appointment.appointmentTime.plusHours(5), 'HHmmss')} + 'Z/' + ${#temporals.format(appointment.appointmentTime, 'yyyyMMdd')} + 'T' + ${#temporals.format(appointment.appointmentTime.plusHours(6), 'HHmmss')} + 'Z&details=Grooming%20appointment%20with%20' + ${appointment.groomer.name} + '%20for%20' + ${appointment.dog.name} + '.&location=Event+Location&sf=true&output=xml'}"
+						<a id="google-calendar-link" th:href="@{'https://www.google.com/calendar/render?action=TEMPLATE&text=Grooming%20Appointment%20With%20' + ${appointment.groomer.name} + '&dates=' + ${#temporals.format(appointment.appointmentTime, 'yyyyMMdd')} + 'T' + ${#temporals.format(appointment.appointmentTime.plusHours(5), 'HHmmss')} + 'Z/' + ${#temporals.format(appointment.appointmentTime, 'yyyyMMdd')} + 'T' + ${#temporals.format(appointment.appointmentTime.plusHours(6), 'HHmmss')} + 'Z&details=Grooming%20appointment%20with%20' + ${appointment.groomer.name} + '%20for%20' + ${appointment.dog.name} + '.&location=Event+Location&sf=true&output=xml'}"
 						   target="_blank">Add to Google Calendar</a>
 					</div>
 					<div class="appointment-actions">
