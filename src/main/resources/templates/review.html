@@ -32,7 +32,7 @@
 
 				<h3>Review</h3>
 
-				<label>Rating</label>
+				<label>Rating<i> - please select a rating below</i></label>
 
 				<div class="star-rating">
 
@@ -55,7 +55,7 @@
 
 				<input hidden th:name="appointment-id" th:value="${appointment.id}">
 
-				<label>Description</label>
+				<label>Description<i> - please type your review below</i></label>
 				<textarea rows="4" cols="50" th:if="${existingReview != null}" th:text="${existingReview.description}" th:value="${existingReview.description}" name="description"></textarea>
 				<textarea rows="4" cols="50" th:if="${existingReview == null}" name="description"></textarea>
 
