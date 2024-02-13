@@ -2,8 +2,6 @@
 
 Welcome to the BookIt App! This application allows users to book dog grooming appointments for their pets easily and conveniently.
 
-Feel free to try it out!
-
 ## Features
 
 - View available appointment slots for a groomer.
